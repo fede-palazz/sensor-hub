@@ -1,1 +1,11 @@
-/* You can add global styles to this file, and also import other style files */
+/*
+  Bulma installation instructions
+
+  1. Setup Angular project with SCSS
+  2. Inside styles.scss, add: @import "bulma/sass/utilities/initial-variables";
+  3. Customize variables/colors
+  4. Import Bulma: @import "bulma/bulma";
+*/
+
+@import "variables.scss";
+@import "bulma/bulma";
