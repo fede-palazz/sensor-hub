@@ -1,20 +1,36 @@
 @import "../../../../styles/variables.scss";
+@import "bulma/sass/utilities/mixins";
 
 .navbar {
-  & .navbar-brand .title {
-    // border: 1px solid red;
-    color: white;
-    text-shadow: 2px 2px $primary-dark;
+  & .navbar-brand {
+    & .sidebar-menu {
+      @include until($navbar-breakpoint) {
+        display: none;
+      }
+    }
+
+    & .title {
+      color: white;
+      text-shadow: 2px 2px $primary-dark;
+    }
+
+    & .icons-wrapper {
+      position: relative;
+      // border: 1px solid red;
+      margin-left: auto;
+    }
   }
 
-  & .navbar-end > .navbar-item .material-icons {
-    margin-right: 0.75rem;
+  // & .navbar-end > .navbar-item .material-icons {
+  //   margin-right: 0.75rem;
+  // }
+  & .navbar-burger {
+    margin-left: 0;
   }
 }
 
 .material-icons {
   font-size: 28px;
-  // border: 1px solid red;
 
   &:hover {
     cursor: pointer;
