@@ -1,6 +1,22 @@
+@import "../../../../styles/variables.scss";
+
 .navbar {
+  & .navbar-brand .title {
+    // border: 1px solid red;
+    color: white;
+    text-shadow: 2px 2px $primary-dark;
+  }
+
+  & .navbar-end > .navbar-item .material-icons {
+    margin-right: 0.75rem;
+  }
 }
 
-.navbar-brand {
+.material-icons {
+  font-size: 28px;
   // border: 1px solid red;
+
+  &:hover {
+    cursor: pointer;
+  }
 }
