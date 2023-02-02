@@ -1,1 +1,8 @@
-<p>sidebar works!</p>
+<div class="container">
+  <div class="icons-wrapper">
+    <ng-container *ngFor="let elem of SIDEBAR_ELEMENTS | keyvalue">
+      <app-sidebar-elem [iconName]="elem.key" [iconText]="elem.value">
+      </app-sidebar-elem
+    ></ng-container>
+  </div>
+</div>

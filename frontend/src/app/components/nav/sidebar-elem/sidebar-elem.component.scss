@@ -1,0 +1,15 @@
+@import "../../../../styles/variables.scss";
+
+a {
+  display: flex;
+  color: $icon-inactive;
+  border: 1px solid red;
+
+  & .material-icons {
+    margin-left: 1em;
+  }
+
+  & span {
+    margin-left: 1em;
+  }
+}

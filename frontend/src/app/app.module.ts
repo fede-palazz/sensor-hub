@@ -5,15 +5,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/nav/navbar/navbar.component';
 import { SidebarComponent } from './components/nav/sidebar/sidebar.component';
-import { SmartNavComponent } from './components/nav/smart-nav/smart-nav.component';
+import { SidebarElemComponent } from './components/nav/sidebar-elem/sidebar-elem.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    NavbarComponent,
-    SidebarComponent,
-    SmartNavComponent,
-  ],
+  declarations: [AppComponent, NavbarComponent, SidebarComponent, SidebarElemComponent],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],
   bootstrap: [AppComponent],

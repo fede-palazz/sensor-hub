@@ -6,13 +6,12 @@ $icon-bg-color: rgba(0, 0, 0, 0.05);
 .navbar-brand {
   & .sidebar-menu {
     &:hover {
-      background-color: $icon-bg-color;
       cursor: pointer;
+      background-color: $icon-bg-color;
       & .material-icons {
         color: $icon-hover;
       }
     }
-
     // TODO: Move this to TS
     @include until($navbar-breakpoint) {
       display: none;
@@ -81,7 +80,6 @@ $icon-bg-color: rgba(0, 0, 0, 0.05);
 .navbar-burger {
   width: 3em;
   margin-left: 0;
-
   &:hover {
     color: $icon-hover;
     background-color: $icon-bg-color;
