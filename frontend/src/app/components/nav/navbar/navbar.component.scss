@@ -1,38 +1,83 @@
 @import "../../../../styles/variables.scss";
 @import "bulma/sass/utilities/mixins";
 
-.navbar {
-  & .navbar-brand {
-    & .sidebar-menu {
-      @include until($navbar-breakpoint) {
-        display: none;
-      }
-    }
+.icons-container {
+  display: flex;
+  justify-content: flex-end;
+  // width: 6em;
+  // margin-left: auto;
+  // border: 1px solid green;
+  padding: 0;
+}
 
-    & .title {
-      color: white;
-      text-shadow: 2px 2px $primary-dark;
-    }
-
-    & .icons-wrapper {
-      position: relative;
-      // border: 1px solid red;
-      margin-left: auto;
+.navbar-brand {
+  & .sidebar-menu {
+    @include until($navbar-breakpoint) {
+      display: none;
     }
   }
 
-  // & .navbar-end > .navbar-item .material-icons {
-  //   margin-right: 0.75rem;
-  // }
-  & .navbar-burger {
-    margin-left: 0;
+  & .navbar-title {
+    color: white;
+    font-size: 1.75em;
+    font-weight: 600;
+    line-height: 1.125;
+    text-shadow: 2px 2px $primary-dark;
+  }
+
+  & .icons-container {
+    border: 1px solid violet;
+    margin-left: auto;
+    @include from($navbar-breakpoint) {
+      display: none;
+    }
+
+    & .icon-wrapper {
+      display: block;
+      border: 1px solid green;
+    }
+  }
+
+  @include until($navbar-breakpoint) {
+    font-size: 0.9em;
+  }
+}
+
+.icon-wrapper {
+  border: 1px solid green;
+  margin-left: 1em;
+}
+
+.navbar-end .icons-container {
+  // border: 1px solid violet;
+  margin-right: 0.75em;
+}
+
+.navbar-burger {
+  border: 1px solid red;
+  width: 3rem;
+  // height: 3rem;
+  margin-left: 0;
+  // margin-right: 0.5em;
+  font-weight: bold;
+
+  &:hover {
+    // cursor: default;
+    // background-color: inherit;
+    background-color: rgba(0, 0, 0, 0.05);
   }
 }
 
 .material-icons {
-  font-size: 28px;
+  font-size: 1.75em;
+  // border: 1px solid red;
 
   &:hover {
     cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+
+  @include until($navbar-breakpoint) {
+    font-size: 1.5em;
   }
 }
