@@ -1,17 +1,19 @@
 @import "../../../../styles/variables.scss";
 @import "bulma/sass/utilities/mixins";
 
-.icons-container {
-  display: flex;
-  justify-content: flex-end;
-  // width: 6em;
-  // margin-left: auto;
-  // border: 1px solid green;
-  padding: 0;
-}
+$icon-bg-color: rgba(0, 0, 0, 0.05);
 
 .navbar-brand {
   & .sidebar-menu {
+    &:hover {
+      background-color: $icon-bg-color;
+      cursor: pointer;
+      & .material-icons {
+        color: $icon-hover;
+      }
+    }
+
+    // TODO: Move this to TS
     @include until($navbar-breakpoint) {
       display: none;
     }
@@ -26,58 +28,62 @@
   }
 
   & .icons-container {
-    border: 1px solid violet;
     margin-left: auto;
+    // TODO: Move this to TS
     @include from($navbar-breakpoint) {
       display: none;
     }
 
     & .icon-wrapper {
-      display: block;
-      border: 1px solid green;
+      width: 3.25em;
     }
   }
 
   @include until($navbar-breakpoint) {
-    font-size: 0.9em;
+    font-size: 0.85em;
   }
 }
 
-.icon-wrapper {
-  border: 1px solid green;
-  margin-left: 1em;
-}
+.icons-container {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0;
 
-.navbar-end .icons-container {
-  // border: 1px solid violet;
-  margin-right: 0.75em;
-}
+  & .icon-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
 
-.navbar-burger {
-  border: 1px solid red;
-  width: 3rem;
-  // height: 3rem;
-  margin-left: 0;
-  // margin-right: 0.5em;
-  font-weight: bold;
+    &:hover {
+      cursor: pointer;
+      background-color: $icon-bg-color;
 
-  &:hover {
-    // cursor: default;
-    // background-color: inherit;
-    background-color: rgba(0, 0, 0, 0.05);
+      & .material-icons {
+        color: $icon-hover;
+      }
+    }
   }
+}
+
+.navbar-end .icons-container .icon-wrapper {
+  width: 3.5em;
 }
 
 .material-icons {
   font-size: 1.75em;
-  // border: 1px solid red;
-
-  &:hover {
-    cursor: pointer;
-    background-color: rgba(0, 0, 0, 0.05);
-  }
 
   @include until($navbar-breakpoint) {
     font-size: 1.5em;
+  }
+}
+
+.navbar-burger {
+  width: 3em;
+  margin-left: 0;
+
+  &:hover {
+    color: $icon-hover;
+    background-color: $icon-bg-color;
   }
 }
