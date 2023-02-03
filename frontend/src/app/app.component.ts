@@ -6,6 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
+  isSideNavExpanded = true;
   ngOnInit() {
     // document.addEventListener('click', () => {
     //   const vw = Math.max(
@@ -14,5 +15,9 @@ export class AppComponent {
     //   );
     //   console.log(vw + 'px');
     // });
+  }
+
+  toggleSideNav(): void {
+    this.isSideNavExpanded = !this.isSideNavExpanded;
   }
 }

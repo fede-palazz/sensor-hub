@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-sidebar',
@@ -6,6 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./sidebar.component.scss'],
 })
 export class SidebarComponent {
+  @Input() isExpanded? = true;
   // SIDEBAR_ELEMENTS = new Map<string, string>([
   //   ['explore', 'Dashboard'],
   //   ['factory', 'Impianti'],
