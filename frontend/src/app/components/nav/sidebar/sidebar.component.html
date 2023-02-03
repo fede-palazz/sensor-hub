@@ -1,5 +1,8 @@
-<div class="container" [ngStyle]="{ width: isExpanded ? '200px' : '60px' }">
-  <div class="icons-wrapper">
+<div
+  class="sidebar-container"
+  [ngStyle]="{ width: isExpanded ? '200px' : '60px' }"
+>
+  <div class="icons-container">
     <a href="#">
       <i class="material-icons md-light">explore</i>
       <span class="is-size-5">Dashboard</span>
@@ -25,6 +28,7 @@
       <span class="is-size-5">Utenti</span>
     </a>
   </div>
+  <div class="logo-container"></div>
 </div>
 
 <!-- <ng-container *ngFor="let elem of SIDEBAR_ELEMENTS | keyvalue">

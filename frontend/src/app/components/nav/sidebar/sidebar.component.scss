@@ -1,7 +1,7 @@
 @import "../../../../styles/variables.scss";
 @import "bulma/sass/utilities/mixins";
 
-.container {
+.sidebar-container {
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -13,7 +13,7 @@
   overflow-x: hidden;
   z-index: 10;
 
-  & .icons-wrapper {
+  & .icons-container {
     display: flex;
     flex-direction: column;
   }
@@ -22,7 +22,10 @@
     color: $icon-inactive;
     display: flex;
     align-items: center;
-    padding-left: 16px;
+    padding-left: 1em;
+    // border: 1px solid red;
+    // margin-top: 3.5rem;
+    height: 3.75em;
 
     &:hover {
       background-color: rgba(0, 0, 0, 0.25);

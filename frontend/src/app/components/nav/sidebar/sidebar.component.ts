@@ -7,12 +7,4 @@ import { Component, Input } from '@angular/core';
 })
 export class SidebarComponent {
   @Input() isExpanded? = true;
-  // SIDEBAR_ELEMENTS = new Map<string, string>([
-  //   ['explore', 'Dashboard'],
-  //   ['factory', 'Impianti'],
-  //   ['warning', 'Allarmi'],
-  //   ['bar_chart', 'Storico'],
-  //   ['tune', 'Soglie'],
-  //   ['people', 'Utenti'],
-  // ]);
 }

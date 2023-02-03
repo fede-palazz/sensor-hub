@@ -2,14 +2,21 @@
 @import "bulma/sass/utilities/mixins";
 
 $icon-bg-color: rgba(0, 0, 0, 0.05);
+
 .navbar {
+  position: -webkit-sticky;
   position: sticky;
+  z-index: 40;
   top: 0;
   left: 0;
-  z-index: 10;
+  @include until($navbar-breakpoint) {
+    font-size: 0.85em;
+  }
 }
 .navbar-brand {
   & .sidebar-menu {
+    width: 3.75em;
+    padding-left: 1em;
     &:hover {
       cursor: pointer;
       background-color: $icon-bg-color;
@@ -46,10 +53,6 @@ $icon-bg-color: rgba(0, 0, 0, 0.05);
       width: 3.25em;
     }
   }
-
-  @include until($navbar-breakpoint) {
-    font-size: 0.85em;
-  }
 }
 
 .icons-container {
@@ -75,7 +78,7 @@ $icon-bg-color: rgba(0, 0, 0, 0.05);
 }
 
 .navbar-end .icons-container .icon-wrapper {
-  width: 3.5em;
+  width: 3.75em;
 }
 
 .material-icons {
