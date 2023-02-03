@@ -2,7 +2,12 @@
 @import "bulma/sass/utilities/mixins";
 
 $icon-bg-color: rgba(0, 0, 0, 0.05);
-
+.navbar {
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 10;
+}
 .navbar-brand {
   & .sidebar-menu {
     &:hover {
@@ -24,6 +29,10 @@ $icon-bg-color: rgba(0, 0, 0, 0.05);
     font-weight: 600;
     line-height: 1.125;
     text-shadow: 2px 2px $primary-dark;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
   }
 
   & .icons-container {

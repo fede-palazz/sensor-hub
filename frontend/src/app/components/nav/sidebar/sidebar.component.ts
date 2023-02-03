@@ -6,12 +6,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./sidebar.component.scss'],
 })
 export class SidebarComponent {
-  SIDEBAR_ELEMENTS = new Map<string, string>([
-    ['explore', 'Dashboard'],
-    ['factory', 'Impianti'],
-    ['warning', 'Allarmi'],
-    ['bar_chart', 'Storico'],
-    ['tune', 'Soglie'],
-    ['people', 'Utenti'],
-  ]);
+  // SIDEBAR_ELEMENTS = new Map<string, string>([
+  //   ['explore', 'Dashboard'],
+  //   ['factory', 'Impianti'],
+  //   ['warning', 'Allarmi'],
+  //   ['bar_chart', 'Storico'],
+  //   ['tune', 'Soglie'],
+  //   ['people', 'Utenti'],
+  // ]);
 }

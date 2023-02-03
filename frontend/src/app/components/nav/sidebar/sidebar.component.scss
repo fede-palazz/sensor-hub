@@ -5,12 +5,14 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  width: 200px;
-  position: fixed;
+  width: $side-navbar-width;
   background-color: $primary-dark;
+  // background-color: transparent;
   // z-index: 1;
-  top: 52;
+  position: fixed;
+  top: $top-navbar-height;
   left: 0;
+  overflow-x: hidden;
 
   & .icons-wrapper {
     display: flex;
