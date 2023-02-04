@@ -1,10 +1,7 @@
 <app-navbar></app-navbar>
 
-<app-sidebar [isExpanded]="isSideNavExpanded"></app-sidebar>
-<div
-  class="content"
-  [ngStyle]="{ 'margin-left': isSideNavExpanded ? '200px' : '60px' }"
->
+<app-sidebar></app-sidebar>
+<div class="content">
   <button (click)="toggleSideNav()">Toggle nav</button>
   <p>
     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent sit amet

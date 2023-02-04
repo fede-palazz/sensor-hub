@@ -5,13 +5,21 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  // width: $side-navbar-width;
+  width: $side-navbar-width;
   background-color: $primary-dark;
   position: fixed;
   top: $top-navbar-height;
   left: 0;
   overflow-x: hidden;
   z-index: 10;
+
+  @include mobile {
+    display: none;
+  }
+
+  @include tablet-only {
+    width: $side-navbar-collapsed-width;
+  }
 
   & .icons-container {
     display: flex;
@@ -23,10 +31,7 @@
     display: flex;
     align-items: center;
     padding-left: 1em;
-    // border: 1px solid red;
-    // margin-top: 3.5rem;
     height: 3.75em;
-
     &:hover {
       background-color: rgba(0, 0, 0, 0.25);
     }
