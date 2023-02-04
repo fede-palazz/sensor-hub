@@ -6,5 +6,5 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./sidebar.component.scss'],
 })
 export class SidebarComponent {
-  @Input() isExpanded? = true;
+  @Input() isExpanded!: boolean;
 }

@@ -3,35 +3,30 @@
   [ngStyle]="{ width: isExpanded ? '200px' : '60px' }"
 >
   <div class="icons-container">
-    <a href="#">
+    <a class="ripple" routerLink="">
       <i class="material-icons md-light">explore</i>
       <span class="is-size-5">Dashboard</span>
     </a>
-    <a href="#">
+    <a class="ripple" routerLink="">
       <i class="material-icons md-light">factory</i>
       <span class="is-size-5">Impianti</span>
     </a>
-    <a href="#">
+    <a class="ripple" routerLink="">
       <i class="material-icons md-light">warning</i>
       <span class="is-size-5">Allarmi</span>
     </a>
-    <a href="#">
+    <a class="ripple" routerLink="">
       <i class="material-icons md-light">bar_chart</i>
       <span class="is-size-5">Storico</span>
     </a>
-    <a href="#">
+    <a class="ripple" routerLink="">
       <i class="material-icons md-light">tune</i>
       <span class="is-size-5">Soglie</span>
     </a>
-    <a href="#">
+    <a class="ripple" routerLink="">
       <i class="material-icons md-light">people</i>
       <span class="is-size-5">Utenti</span>
     </a>
   </div>
   <div class="logo-container"></div>
 </div>
-
-<!-- <ng-container *ngFor="let elem of SIDEBAR_ELEMENTS | keyvalue">
-      <app-sidebar-elem [iconName]="elem.key" [iconText]="elem.value">
-      </app-sidebar-elem
-    ></ng-container> -->
