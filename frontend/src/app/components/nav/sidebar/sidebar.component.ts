@@ -7,4 +7,13 @@ import { Component, Input } from '@angular/core';
 })
 export class SidebarComponent {
   @Input() isExpanded!: boolean;
+  currentIndex?: number;
+
+  ngOnInit() {
+    // TODO: Initialise currentIndex based on current route
+  }
+
+  onLinkClick($elem: HTMLElement) {
+    this.currentIndex = Number($elem.getAttribute('data-index'));
+  }
 }

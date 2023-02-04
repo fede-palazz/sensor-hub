@@ -1,27 +1,63 @@
 <div class="sidebar-container">
   <div class="icons-container">
-    <a class="ripple" routerLink="">
-      <i class="material-icons md-light">explore</i>
+    <a
+      routerLink=""
+      #dashboard
+      data-index="0"
+      (click)="onLinkClick(dashboard)"
+      [ngClass]="currentIndex === 0 ? 'link-active' : 'link-inactive'"
+    >
+      <i class="material-icons">explore</i>
       <span class="is-size-5">Dashboard</span>
     </a>
-    <a class="ripple" routerLink="">
-      <i class="material-icons md-light">factory</i>
+    <a
+      routerLink=""
+      #factory
+      data-index="1"
+      (click)="onLinkClick(factory)"
+      [ngClass]="currentIndex === 1 ? 'link-active' : 'link-inactive'"
+    >
+      <i class="material-icons">factory</i>
       <span class="is-size-5">Impianti</span>
     </a>
-    <a class="ripple" routerLink="">
-      <i class="material-icons md-light">warning</i>
+    <a
+      routerLink=""
+      #alarms
+      data-index="2"
+      (click)="onLinkClick(alarms)"
+      [ngClass]="currentIndex === 2 ? 'link-active' : 'link-inactive'"
+    >
+      <i class="material-icons">warning</i>
       <span class="is-size-5">Allarmi</span>
     </a>
-    <a class="ripple" routerLink="">
-      <i class="material-icons md-light">bar_chart</i>
+    <a
+      routerLink=""
+      #history
+      data-index="3"
+      (click)="onLinkClick(history)"
+      [ngClass]="currentIndex === 3 ? 'link-active' : 'link-inactive'"
+    >
+      <i class="material-icons">bar_chart</i>
       <span class="is-size-5">Storico</span>
     </a>
-    <a class="ripple" routerLink="">
-      <i class="material-icons md-light">tune</i>
+    <a
+      routerLink=""
+      #rules
+      data-index="4"
+      (click)="onLinkClick(rules)"
+      [ngClass]="currentIndex === 4 ? 'link-active' : 'link-inactive'"
+    >
+      <i class="material-icons">tune</i>
       <span class="is-size-5">Soglie</span>
     </a>
-    <a class="ripple" routerLink="">
-      <i class="material-icons md-light">people</i>
+    <a
+      routerLink=""
+      #users
+      data-index="5"
+      (click)="onLinkClick(users)"
+      [ngClass]="currentIndex === 5 ? 'link-active' : 'link-inactive'"
+    >
+      <i class="material-icons">people</i>
       <span class="is-size-5">Utenti</span>
     </a>
   </div>
