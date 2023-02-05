@@ -4,15 +4,15 @@
 $icon-bg-color: rgba(0, 0, 0, 0.05);
 
 .navbar {
-  position: -webkit-sticky;
   position: sticky;
   z-index: 40;
   top: 0;
   left: 0;
-  @include until($navbar-breakpoint) {
+  @include mobile {
     font-size: 0.85em;
   }
 }
+
 .navbar-brand {
   & .sidebar-menu {
     width: 3.75em;
@@ -25,27 +25,24 @@ $icon-bg-color: rgba(0, 0, 0, 0.05);
       }
     }
     // TODO: Move this to TS
-    @include until($navbar-breakpoint) {
+    @include mobile {
       display: none;
     }
   }
 
   & .navbar-title {
-    color: white;
+    color: $icon-active;
     font-size: 1.75em;
     font-weight: 600;
     line-height: 1.125;
     text-shadow: 2px 2px $primary-dark;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
   }
 
+  // Mobile icons container
   & .icons-container {
     margin-left: auto;
     // TODO: Move this to TS
-    @include from($navbar-breakpoint) {
+    @include tablet {
       display: none;
     }
 
@@ -77,16 +74,13 @@ $icon-bg-color: rgba(0, 0, 0, 0.05);
   }
 }
 
+// Desktop icons container
 .navbar-end .icons-container .icon-wrapper {
   width: 3.75em;
 }
 
 .material-icons {
   font-size: 1.75em;
-
-  @include until($navbar-breakpoint) {
-    font-size: 1.5em;
-  }
 }
 
 .navbar-burger {
