@@ -1,6 +1,8 @@
 @import "../../../../styles/variables.scss";
 @import "bulma/sass/utilities/mixins";
 
+$link-bg-color: rgba(0, 0, 0, 0.25);
+
 .sidebar-container {
   display: flex;
   flex-direction: column;
@@ -13,9 +15,6 @@
   overflow-x: hidden;
   z-index: 10;
 
-  @include mobile {
-    display: none;
-  }
   @include tablet-only {
     width: $side-navbar-collapsed-width;
   }
@@ -32,10 +31,10 @@ a {
   height: 3.75em;
   &:hover:not(.active),
   &:focus:not(.active) {
-    background-color: rgba(0, 0, 0, 0.25);
+    background-color: $link-bg-color;
   }
   &:active {
-    background-color: rgba(0, 0, 0, 0.25);
+    background-color: $link-bg-color;
   }
 }
 
@@ -45,7 +44,7 @@ a {
 }
 
 .link-active {
-  background-color: rgba(0, 0, 0, 0.25);
+  background-color: $link-bg-color;
   color: $icon-active;
 }
 

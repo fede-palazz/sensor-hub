@@ -14,6 +14,7 @@ $icon-bg-color: rgba(0, 0, 0, 0.05);
 }
 
 .navbar-brand {
+  // Sidebar menu button
   & .sidebar-menu {
     width: 3.75em;
     padding-left: 1em;
@@ -23,10 +24,6 @@ $icon-bg-color: rgba(0, 0, 0, 0.05);
       & .material-icons {
         color: $icon-hover;
       }
-    }
-    // TODO: Move this to TS
-    @include mobile {
-      display: none;
     }
   }
 
@@ -41,10 +38,6 @@ $icon-bg-color: rgba(0, 0, 0, 0.05);
   // Mobile icons container
   & .icons-container {
     margin-left: auto;
-    // TODO: Move this to TS
-    @include tablet {
-      display: none;
-    }
 
     & .icon-wrapper {
       width: 3.25em;
