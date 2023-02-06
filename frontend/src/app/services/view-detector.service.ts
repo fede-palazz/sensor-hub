@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { debounceTime, fromEvent, map, Observable, startWith } from 'rxjs';
 
 const TABLET_BREAKPOINT = 700; // Must be equal to ($tablet + 1px) in variables.scss
-const MIN_VIEWPORT_HEIGHT = 412; // Minimun viewport height to properly display sidebar
+const MIN_VIEWPORT_HEIGHT = 475; // Minimun viewport height to properly display sidebar
 
 @Injectable({
   providedIn: 'root',

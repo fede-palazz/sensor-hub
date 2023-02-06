@@ -23,19 +23,19 @@ $link-bg-color: rgba(0, 0, 0, 0.25);
 .icons-container {
   display: flex;
   flex-direction: column;
-}
 
-a {
-  display: flex;
-  align-items: center;
-  padding-left: 1em;
-  height: 3.75em;
-  &:hover:not(.active),
-  &:focus:not(.active) {
-    background-color: $link-bg-color;
-  }
-  &:active {
-    background-color: $link-bg-color;
+  & a {
+    display: flex;
+    align-items: center;
+    padding-left: 1em;
+    height: 3.75em;
+    &:hover:not(.active),
+    &:focus:not(.active) {
+      background-color: $link-bg-color;
+    }
+    &:active {
+      background-color: $link-bg-color;
+    }
   }
 }
 
@@ -56,9 +56,17 @@ a {
 .logo-container {
   display: flex;
   justify-content: center;
-  padding-bottom: 75px;
+  align-items: self-start;
+  padding-bottom: 65px;
   @include tablet-only {
     display: none;
+  }
+
+  @media screen and (max-height: 570px) {
+    display: none;
+  }
+  & a:hover {
+    cursor: pointer;
   }
 
   & img {

@@ -10,7 +10,7 @@ $icon-bg-color: rgba(0, 0, 0, 0.05);
   left: 0;
   // Mobile view
   @media screen and ((max-height: $mobile-viewport-height) or (max-width: $tablet)) {
-    font-size: 0.85em;
+    font-size: 0.85rem;
   }
 }
 

@@ -64,8 +64,20 @@
       <i class="material-icons">people</i>
       <span class="is-size-5">Utenti</span>
     </a>
+    <a
+      routerLink=""
+      #diagnostic
+      data-index="6"
+      (click)="onLinkClick(diagnostic)"
+      [ngClass]="currentIndex === 6 ? 'link-active' : 'link-inactive'"
+    >
+      <i class="material-icons">monitor_heart</i>
+      <span class="is-size-5">Diagnostica</span>
+    </a>
   </div>
   <div class="logo-container" *ngIf="isExpanded">
-    <img src="assets/imgs/logo.png" />
+    <a href="https://www.idea-on-line.it/" target="_blank">
+      <img src="assets/imgs/logo.png" />
+    </a>
   </div>
 </div>

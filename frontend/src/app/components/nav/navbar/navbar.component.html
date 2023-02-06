@@ -1,6 +1,6 @@
 <nav
-  class="navbar is-primary"
   role="navigation"
+  class="navbar is-primary"
   aria-label="main navigation"
   [style.display]="isMobileView ? 'block' : 'flex'"
 >
@@ -25,9 +25,11 @@
       </span>
     </div>
     <button
-      class="navbar-burger ripple"
       aria-label="menu"
+      class="navbar-burger ripple"
       [style.display]="isMobileView ? 'block' : 'none'"
+      [class.is-active]="isMobileMenuOpen"
+      (click)="toggleMobileMenu()"
     >
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
@@ -35,7 +37,12 @@
     </button>
   </div>
 
-  <div class="navbar-menu">
+  <div class="navbar-menu" [class.is-active]="isMobileMenuOpen">
+    <div class="navbar-start" *ngIf="isMobileView">
+      <a class="navbar-item"> Home </a>
+
+      <a class="navbar-item"> Documentation </a>
+    </div>
     <div class="navbar-end" *ngIf="!isMobileView">
       <div class="navbar-item icons-container">
         <span class="icon-wrapper ripple"
