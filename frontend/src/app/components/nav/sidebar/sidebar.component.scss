@@ -6,6 +6,7 @@ $link-bg-color: rgba(0, 0, 0, 0.25);
 .sidebar-container {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   height: 100%;
   width: $side-navbar-width;
   background-color: $primary-dark;
@@ -53,7 +54,14 @@ a {
 }
 
 .logo-container {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 75px;
   @include tablet-only {
     display: none;
+  }
+
+  & img {
+    width: 100px;
   }
 }

@@ -16,7 +16,6 @@ export class NavbarComponent {
   ngOnInit() {
     this.viewDetectorService.getMobileView().subscribe((isMobile) => {
       this.isMobileView = isMobile;
-      console.log(isMobile);
     });
   }
 
