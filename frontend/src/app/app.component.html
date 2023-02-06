@@ -1,8 +1,12 @@
-<app-navbar></app-navbar>
+<app-navbar (onToggleSidebar)="toggleSidebar()"></app-navbar>
 
-<app-sidebar></app-sidebar>
-<div class="content">
-  <button (click)="toggleSideNav()">Toggle nav</button>
+<app-sidebar [isExpanded]="isSidebarExpanded"></app-sidebar>
+<div
+  class="content"
+  [style.margin-left]="
+    isMobileView ? '0' : isSidebarExpanded ? '200px' : '60px'
+  "
+>
   <p>
     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent sit amet
     egestas ex, a congue justo. Duis eu massa eget sem fringilla feugiat id

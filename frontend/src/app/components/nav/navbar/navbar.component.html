@@ -6,7 +6,10 @@
 >
   <div class="navbar-brand">
     <ng-container *ngIf="!isMobileView">
-      <span class="navbar-item sidebar-menu ripple">
+      <span
+        class="navbar-item sidebar-menu ripple"
+        (click)="onSidebarMenuClick()"
+      >
         <i class="material-icons">menu</i>
       </span>
     </ng-container>

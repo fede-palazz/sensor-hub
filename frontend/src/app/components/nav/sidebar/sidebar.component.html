@@ -1,4 +1,8 @@
-<div class="sidebar-container" *ngIf="!isMobileView">
+<div
+  class="sidebar-container"
+  *ngIf="!isMobileView"
+  [style.width]="isExpanded ? '200px' : '60px'"
+>
   <div class="icons-container">
     <a
       routerLink=""
