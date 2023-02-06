@@ -1,4 +1,9 @@
-<nav class="navbar is-primary" role="navigation" aria-label="main navigation">
+<nav
+  class="navbar is-primary"
+  role="navigation"
+  aria-label="main navigation"
+  [style.display]="isMobileView ? 'block' : 'flex'"
+>
   <div class="navbar-brand">
     <ng-container *ngIf="!isMobileView">
       <span class="navbar-item sidebar-menu ripple">
@@ -16,7 +21,11 @@
         <i class="material-icons md-active">person</i>
       </span>
     </div>
-    <button class="navbar-burger ripple" aria-label="menu">
+    <button
+      class="navbar-burger ripple"
+      aria-label="menu"
+      [style.display]="isMobileView ? 'block' : 'none'"
+    >
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>

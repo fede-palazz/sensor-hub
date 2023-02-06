@@ -13,6 +13,12 @@ export class AppComponent {
   ngOnInit() {}
 
   toggleSideNav(): void {
-    this.isSideNavExpanded = !this.isSideNavExpanded;
+    // this.isSideNavExpanded = !this.isSideNavExpanded;
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+
+    console.log(
+      `The viewport's width is ${width} and the height is ${height}.`
+    );
   }
 }

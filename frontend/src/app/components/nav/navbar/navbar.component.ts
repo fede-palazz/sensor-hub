@@ -13,8 +13,9 @@ export class NavbarComponent {
   constructor(private viewDetectorService: ViewDetectorService) {}
 
   ngOnInit() {
-    this.viewDetectorService
-      .getMobileView()
-      .subscribe((isMobile) => (this.isMobileView = isMobile));
+    this.viewDetectorService.getMobileView().subscribe((isMobile) => {
+      this.isMobileView = isMobile;
+      console.log(isMobile);
+    });
   }
 }
