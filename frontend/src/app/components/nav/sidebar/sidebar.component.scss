@@ -30,6 +30,7 @@ $link-bg-color: rgba(0, 0, 0, 0.25);
     align-items: center;
     padding-left: 1em;
     height: 3.75em;
+
     &:hover:not(.active),
     &:focus:not(.active) {
       background-color: $link-bg-color;
@@ -59,14 +60,13 @@ $link-bg-color: rgba(0, 0, 0, 0.25);
   justify-content: center;
   padding-bottom: 30px;
 
-  @media screen and (max-height: 570px) {
-    display: none;
-  }
   & a:hover {
     cursor: pointer;
   }
-
   & img {
     width: 100px;
+  }
+  @media screen and (max-height: 570px) {
+    display: none;
   }
 }
