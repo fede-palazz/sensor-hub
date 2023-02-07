@@ -1,10 +1,8 @@
-<nav
-  role="navigation"
-  class="navbar is-primary"
-  aria-label="main navigation"
-  [style.display]="isMobileView ? 'block' : 'flex'"
->
+<nav role="navigation" class="navbar is-primary" aria-label="main navigation">
+  <!-- [style.display]="isMobileView ? 'block' : 'flex'" -->
+  <!----------- NAVBAR BRAND ------------>
   <div class="navbar-brand">
+    <!-- SIDEBAR BUTTON --->
     <ng-container *ngIf="!isMobileView">
       <span
         class="navbar-item sidebar-menu ripple"
@@ -13,10 +11,15 @@
         <i class="material-icons">menu</i>
       </span>
     </ng-container>
+
+    <!------------- APP TITLE ---------------->
     <span class="navbar-item">
       <h1 class="navbar-title non-draggable">IoT Platform</h1>
     </span>
-    <div class="navbar-item icons-container" *ngIf="isMobileView">
+
+    <!------- NAVBAR END ICONS -------------->
+
+    <div class="icons-container">
       <span class="navbar-item icon-wrapper ripple">
         <i class="material-icons md-active">notifications</i>
       </span>
@@ -24,7 +27,10 @@
         <i class="material-icons md-active">person</i>
       </span>
     </div>
-    <button
+    <!----------------------------------->
+
+    <!----------- NAVBAR BURGER ------------>
+    <div
       aria-label="menu"
       class="navbar-burger ripple"
       [style.display]="isMobileView ? 'block' : 'none'"
@@ -34,24 +40,27 @@
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
-    </button>
+    </div>
   </div>
+  <!------------------------------------->
 
-  <div class="navbar-menu" [class.is-active]="isMobileMenuOpen">
-    <div class="navbar-start" *ngIf="isMobileView">
-      <a class="navbar-item"> Home </a>
-
-      <a class="navbar-item"> Documentation </a>
-    </div>
-    <div class="navbar-end" *ngIf="!isMobileView">
-      <div class="navbar-item icons-container">
-        <span class="icon-wrapper ripple"
-          ><i class="material-icons md-active">notifications</i></span
-        >
-        <span class="icon-wrapper ripple"
-          ><i class="material-icons md-active">person</i></span
-        >
+  <!------------- NAVBAR MOBILE MENU ------------>
+  <div
+    class="navbar-menu"
+    *ngIf="isMobileView"
+    [class.is-active]="isMobileMenuOpen"
+  >
+    <div class="navbar-start">
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link is-arrowless" href="#"> Docs </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="#"> Overview </a>
+          <a class="navbar-item" href="#"> Modifiers </a>
+          <a class="navbar-item" href="#"> Columns </a>
+        </div>
       </div>
+      <a class="navbar-item" href="#"> More </a>
     </div>
+    <!-- <div class="navbar-end"></div> -->
   </div>
 </nav>

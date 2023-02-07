@@ -7,7 +7,7 @@ $link-bg-color: rgba(0, 0, 0, 0.25);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 100%;
+  height: calc(100vh - $top-navbar-height);
   width: $side-navbar-width;
   background-color: $primary-dark;
   position: fixed;
@@ -20,6 +20,7 @@ $link-bg-color: rgba(0, 0, 0, 0.25);
     width: $side-navbar-collapsed-width;
   }
 }
+
 .icons-container {
   display: flex;
   flex-direction: column;
@@ -40,7 +41,7 @@ $link-bg-color: rgba(0, 0, 0, 0.25);
 }
 
 .material-icons {
-  font-size: 28px;
+  font-size: 1.75em;
   margin-right: 16px;
 }
 
@@ -56,11 +57,7 @@ $link-bg-color: rgba(0, 0, 0, 0.25);
 .logo-container {
   display: flex;
   justify-content: center;
-  align-items: self-start;
-  padding-bottom: 65px;
-  @include tablet-only {
-    display: none;
-  }
+  padding-bottom: 30px;
 
   @media screen and (max-height: 570px) {
     display: none;

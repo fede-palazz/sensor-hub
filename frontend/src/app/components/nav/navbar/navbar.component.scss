@@ -4,17 +4,20 @@
 $icon-bg-color: rgba(0, 0, 0, 0.05);
 
 .navbar {
+  font-size: 1rem;
   position: sticky;
   z-index: 40;
   top: 0;
   left: 0;
   // Mobile view
-  @media screen and ((max-height: $mobile-viewport-height) or (max-width: $tablet)) {
+  @media screen and (max-width: $tablet) {
     font-size: 0.85rem;
   }
 }
 
 .navbar-brand {
+  flex-grow: 1;
+
   // Sidebar menu button
   & .sidebar-menu {
     width: 3.75em;
@@ -27,7 +30,6 @@ $icon-bg-color: rgba(0, 0, 0, 0.05);
       }
     }
   }
-
   & .navbar-title {
     color: $icon-active;
     font-size: 1.75em;
@@ -35,21 +37,11 @@ $icon-bg-color: rgba(0, 0, 0, 0.05);
     line-height: 1.125;
     text-shadow: 2px 2px $primary-dark;
   }
-
-  // Mobile icons container
-  & .icons-container {
-    margin-left: auto;
-
-    & .icon-wrapper {
-      width: 3.25em;
-    }
-  }
 }
 
 .icons-container {
   display: flex;
-  justify-content: flex-end;
-  padding: 0;
+  margin-left: auto;
 
   & .icon-wrapper {
     display: flex;
@@ -60,17 +52,15 @@ $icon-bg-color: rgba(0, 0, 0, 0.05);
     &:hover {
       cursor: pointer;
       background-color: $icon-bg-color;
-
       & .material-icons {
         color: $icon-hover;
       }
     }
+    // Mobile view
+    @media screen and (max-width: $tablet) {
+      width: 3em;
+    }
   }
-}
-
-// Desktop icons container
-.navbar-end .icons-container .icon-wrapper {
-  width: 3.75em;
 }
 
 .material-icons {
@@ -84,4 +74,7 @@ $icon-bg-color: rgba(0, 0, 0, 0.05);
     color: $icon-hover;
     background-color: $icon-bg-color;
   }
+}
+
+.navbar-menu {
 }
