@@ -1,5 +1,4 @@
 <nav role="navigation" class="navbar is-primary" aria-label="main navigation">
-  <!-- [style.display]="isMobileView ? 'block' : 'flex'" -->
   <!----------- NAVBAR BRAND ------------>
   <div class="navbar-brand">
     <!-- SIDEBAR BUTTON --->
@@ -12,12 +11,12 @@
       </span>
     </ng-container>
 
-    <!------------- APP TITLE ---------------->
+    <!---------- APP TITLE -------------->
     <span class="navbar-item">
       <h1 class="navbar-title non-draggable">IoT Platform</h1>
     </span>
 
-    <!------- NAVBAR END ICONS -------------->
+    <!------- NAVBAR END ICONS ---------->
 
     <div class="icons-container">
       <span class="navbar-item icon-wrapper ripple">
@@ -27,13 +26,11 @@
         <i class="material-icons md-active">person</i>
       </span>
     </div>
-    <!----------------------------------->
 
     <!----------- NAVBAR BURGER ------------>
     <div
       aria-label="menu"
       class="navbar-burger ripple"
-      [style.display]="isMobileView ? 'block' : 'none'"
       [class.is-active]="isMobileMenuOpen"
       (click)="toggleMobileMenu()"
     >
@@ -42,9 +39,8 @@
       <span aria-hidden="true"></span>
     </div>
   </div>
-  <!------------------------------------->
 
-  <!------------- NAVBAR MOBILE MENU ------------>
+  <!--------- NAVBAR MOBILE MENU -------->
   <div
     class="navbar-menu"
     *ngIf="isMobileView"
@@ -61,6 +57,5 @@
       </div>
       <a class="navbar-item" href="#"> More </a>
     </div>
-    <!-- <div class="navbar-end"></div> -->
   </div>
 </nav>
