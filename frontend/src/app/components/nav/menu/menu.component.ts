@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-menu',
@@ -6,7 +6,8 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styleUrls: ['./menu.component.scss'],
 })
 export class MenuComponent {
-  @Input() currentIndex!: number;
+  // TODO: Initialise based on current route
+  currentIndex: number = 0;
   @Output() linkClicked = new EventEmitter<any>();
 
   onLinkClick($elem: HTMLElement) {

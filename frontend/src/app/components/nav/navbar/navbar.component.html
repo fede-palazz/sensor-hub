@@ -47,10 +47,7 @@
     [class.is-active]="isMobileMenuOpen"
   >
     <div class="navbar-start">
-      <app-menu
-        [currentIndex]="0"
-        (linkClicked)="onMenuLinkClicked()"
-      ></app-menu>
+      <app-menu (linkClicked)="onMenuLinkClicked()"></app-menu>
     </div>
   </div>
 </nav>

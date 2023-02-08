@@ -8,10 +8,12 @@ import { ViewDetectorService } from 'src/app/services/view-detector.service';
 })
 export class NavbarComponent {
   isMobileView!: boolean;
-  isMobileMenuOpen: boolean = false;
-  @Output() onToggleSidebar = new EventEmitter<boolean>();
+  isMobileMenuOpen: boolean;
+  @Output() toggleSidebar = new EventEmitter<any>();
 
-  constructor(private viewDetectorService: ViewDetectorService) {}
+  constructor(private viewDetectorService: ViewDetectorService) {
+    this.isMobileMenuOpen = false;
+  }
 
   ngOnInit() {
     // Detect mobile resizing
@@ -23,7 +25,7 @@ export class NavbarComponent {
   }
 
   onSidebarMenuClick(): void {
-    this.onToggleSidebar.emit();
+    this.toggleSidebar.emit();
   }
 
   toggleMobileMenu(): void {
@@ -34,6 +36,4 @@ export class NavbarComponent {
     // Close the dropdown menu when clicking a link
     this.isMobileMenuOpen = false;
   }
-
-  //TODO: Add eventlistener to autoclose menu onLinkClick
 }
