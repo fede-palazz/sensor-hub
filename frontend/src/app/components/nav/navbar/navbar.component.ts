@@ -1,5 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { ViewDetectorService } from 'src/app/services/view-detector.service';
 
 @Component({
@@ -15,9 +14,12 @@ export class NavbarComponent {
   constructor(private viewDetectorService: ViewDetectorService) {}
 
   ngOnInit() {
-    this.viewDetectorService.getMobileView().subscribe((isMobile) => {
-      this.isMobileView = isMobile;
-    });
+    // Detect mobile resizing
+    this.viewDetectorService
+      .getMobileView()
+      .subscribe((isMobile) => (this.isMobileView = isMobile));
+
+    // Register listener to close mobile panel when selecting a menu
   }
 
   onSidebarMenuClick(): void {

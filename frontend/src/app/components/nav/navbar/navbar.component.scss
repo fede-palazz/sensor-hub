@@ -4,18 +4,14 @@
 $icon-bg-color: rgba(0, 0, 0, 0.05);
 
 .navbar {
-  font-size: 1rem;
   position: sticky;
   z-index: 40;
   top: 0;
   left: 0;
-  // Mobile view
-  @media screen and (max-width: $tablet) {
-    font-size: 0.85rem;
-  }
 }
 
 .navbar-brand {
+  font-size: 1rem;
   flex-grow: 1;
 
   // Sidebar menu button
@@ -36,6 +32,15 @@ $icon-bg-color: rgba(0, 0, 0, 0.05);
     font-weight: 600;
     line-height: 1.125;
     text-shadow: 2px 2px $primary-dark;
+  }
+
+  & .material-icons {
+    font-size: 1.75em;
+  }
+
+  // Mobile view
+  @media screen and (max-width: $tablet) {
+    font-size: 0.85rem;
   }
 }
 
@@ -63,10 +68,6 @@ $icon-bg-color: rgba(0, 0, 0, 0.05);
   }
 }
 
-.material-icons {
-  font-size: 1.75em;
-}
-
 .navbar-burger {
   width: 3em;
   margin-left: 0;
@@ -77,4 +78,15 @@ $icon-bg-color: rgba(0, 0, 0, 0.05);
 }
 
 .navbar-menu {
+  font-size: 1rem;
+
+  & .navbar-item {
+    // color: #fff;
+    display: flex;
+    align-items: center;
+    padding-left: 10%;
+  }
+  & .material-icons {
+    margin-right: 16px;
+  }
 }

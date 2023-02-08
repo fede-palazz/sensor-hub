@@ -1,7 +1,7 @@
 <nav role="navigation" class="navbar is-primary" aria-label="main navigation">
   <!----------- NAVBAR BRAND ------------>
   <div class="navbar-brand">
-    <!-- SIDEBAR BUTTON --->
+    <!-------- SIDEBAR BUTTON ----------->
     <ng-container *ngIf="!isMobileView">
       <span
         class="navbar-item sidebar-menu ripple"
@@ -27,7 +27,7 @@
       </span>
     </div>
 
-    <!----------- NAVBAR BURGER ------------>
+    <!---------- NAVBAR BURGER ---------->
     <div
       aria-label="menu"
       class="navbar-burger ripple"
@@ -47,15 +47,34 @@
     [class.is-active]="isMobileMenuOpen"
   >
     <div class="navbar-start">
-      <div class="navbar-item has-dropdown is-hoverable">
-        <a class="navbar-link is-arrowless" href="#"> Docs </a>
-        <div class="navbar-dropdown">
-          <a class="navbar-item" href="#"> Overview </a>
-          <a class="navbar-item" href="#"> Modifiers </a>
-          <a class="navbar-item" href="#"> Columns </a>
-        </div>
-      </div>
-      <a class="navbar-item" href="#"> More </a>
+      <a class="navbar-item" routerLink="">
+        <i class="material-icons">explore</i>
+        <span class="is-size-5">Dashboard</span>
+      </a>
+      <a class="navbar-item" routerLink="">
+        <i class="material-icons">factory</i>
+        <span class="is-size-5">Impianti</span>
+      </a>
+      <a class="navbar-item" routerLink="">
+        <i class="material-icons">warning</i>
+        <span class="is-size-5">Allarmi</span>
+      </a>
+      <a class="navbar-item" routerLink="">
+        <i class="material-icons">bar_chart</i>
+        <span class="is-size-5">Storico</span>
+      </a>
+      <a class="navbar-item" routerLink="">
+        <i class="material-icons">tune</i>
+        <span class="is-size-5">Soglie</span>
+      </a>
+      <a class="navbar-item" routerLink="">
+        <i class="material-icons">people</i>
+        <span class="is-size-5">Utenti</span>
+      </a>
+      <a class="navbar-item" routerLink="">
+        <i class="material-icons">monitor_heart</i>
+        <span class="is-size-5">Diagnostica</span>
+      </a>
     </div>
   </div>
 </nav>
