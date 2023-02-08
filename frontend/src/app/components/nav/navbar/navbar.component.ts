@@ -8,7 +8,7 @@ import { ViewDetectorService } from 'src/app/services/view-detector.service';
 })
 export class NavbarComponent {
   isMobileView!: boolean;
-  isMobileMenuOpen?: boolean;
+  isMobileMenuOpen?: boolean = true;
   @Output() onToggleSidebar = new EventEmitter<boolean>();
 
   constructor(private viewDetectorService: ViewDetectorService) {}

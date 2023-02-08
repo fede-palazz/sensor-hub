@@ -2,6 +2,7 @@
 @import "bulma/sass/utilities/mixins";
 
 $icon-bg-color: rgba(0, 0, 0, 0.05);
+$link-bg-color: rgba(0, 0, 0, 0.25);
 
 .navbar {
   position: sticky;
@@ -79,14 +80,31 @@ $icon-bg-color: rgba(0, 0, 0, 0.05);
 
 .navbar-menu {
   font-size: 1rem;
+  padding: 0;
 
   & .navbar-item {
     // color: #fff;
     display: flex;
     align-items: center;
     padding-left: 10%;
+    &:hover:not(.active),
+    &:focus:not(.active) {
+      background-color: $link-bg-color;
+    }
+    &:active {
+      background-color: $link-bg-color;
+    }
   }
   & .material-icons {
     margin-right: 16px;
   }
+}
+
+.link-active {
+  background-color: $link-bg-color;
+  color: $icon-active;
+}
+
+.link-inactive {
+  color: $icon-inactive;
 }
