@@ -1,7 +1,22 @@
 @import "bulma/sass/utilities/initial-variables";
 
-// Colors customization
+/* COLORS */
 $primary: #395d7d;
-$primary-dark: #233545;
+$primary-dark: #3b4856;
 
+/* ICONS */
+$icon-active: #fff;
+$icon-inactive: #b5b5b5;
+$icon-hover: #dbdbdb;
+
+/* BREAKPOINTS */
+$tablet: 701px;
+$fullhd-enabled: false;
+$widescreen-enabled: false;
 $navbar-breakpoint: $tablet;
+$mobile-viewport-height: 475px;
+
+/* NAVBARS */
+$top-navbar-height: 52px;
+$side-navbar-width: 200px;
+$side-navbar-collapsed-width: 60px;

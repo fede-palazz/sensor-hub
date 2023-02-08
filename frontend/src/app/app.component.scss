@@ -1,0 +1,17 @@
+@import "../styles/variables.scss";
+@import "bulma/sass/utilities/mixins";
+
+.content {
+  margin-left: $side-navbar-width;
+  padding: 20px 15px;
+  text-align: justify;
+
+  @include tablet-only {
+    margin-left: $side-navbar-collapsed-width;
+  }
+
+  // Mobile view
+  @media screen and ((max-height: $mobile-viewport-height) or ((max-width: $tablet))) {
+    margin-left: 0;
+  }
+}

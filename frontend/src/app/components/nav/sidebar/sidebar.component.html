@@ -1,0 +1,15 @@
+<div
+  class="sidebar-container no-scrollbars"
+  *ngIf="!isMobileView"
+  [style.width]="isExpanded ? '200px' : '60px'"
+>
+  <!--------- SIDEBAR MENU ----------->
+  <app-menu></app-menu>
+
+  <!--------- SIDEBAR LOGO ----------->
+  <div class="logo-container" *ngIf="isExpanded">
+    <a href="https://www.idea-on-line.it/" target="_blank">
+      <img src="assets/imgs/logo.png" />
+    </a>
+  </div>
+</div>

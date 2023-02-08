@@ -1,0 +1,38 @@
+@import "../../../../styles/variables.scss";
+@import "bulma/sass/utilities/mixins";
+
+$link-bg-color: rgba(0, 0, 0, 0.25);
+
+.sidebar-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: calc(100vh - $top-navbar-height);
+  width: $side-navbar-width;
+  background-color: $primary-dark;
+  position: fixed;
+  top: $top-navbar-height;
+  left: 0;
+  overflow-x: hidden;
+  z-index: 10;
+
+  @include tablet-only {
+    width: $side-navbar-collapsed-width;
+  }
+}
+
+.logo-container {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 30px;
+
+  & a:hover {
+    cursor: pointer;
+  }
+  & img {
+    width: 100px;
+  }
+  @media screen and (max-height: 570px) {
+    display: none;
+  }
+}
