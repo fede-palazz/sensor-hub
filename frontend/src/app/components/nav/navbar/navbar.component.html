@@ -2,7 +2,7 @@
   <!----------- NAVBAR BRAND ------------>
   <div class="navbar-brand">
     <!-------- SIDEBAR BUTTON ----------->
-    <ng-container *ngIf="!isMobileView">
+    <ng-container *ngIf="!(isMobileView$ | async)">
       <span
         class="navbar-item sidebar-menu ripple"
         (click)="onSidebarMenuClick()"
@@ -43,7 +43,7 @@
   <!--------- NAVBAR MOBILE MENU -------->
   <div
     class="navbar-menu has-background-primary-dark"
-    *ngIf="isMobileView"
+    *ngIf="isMobileView$ | async"
     [class.is-active]="isMobileMenuOpen"
   >
     <div class="navbar-start">

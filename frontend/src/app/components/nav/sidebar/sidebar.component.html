@@ -1,6 +1,6 @@
 <div
   class="sidebar-container no-scrollbars"
-  *ngIf="!isMobileView"
+  *ngIf="!(isMobileView$ | async)"
   [style.width]="isExpanded ? '200px' : '60px'"
 >
   <!--------- SIDEBAR MENU ----------->

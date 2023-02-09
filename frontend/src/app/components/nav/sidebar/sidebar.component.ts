@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Observable } from 'rxjs';
 import { ViewDetectorService } from '../../../services/view-detector.service';
 
 @Component({
@@ -8,15 +9,17 @@ import { ViewDetectorService } from '../../../services/view-detector.service';
 })
 export class SidebarComponent {
   currentIndex?: number;
-  isMobileView!: boolean;
+  isMobileView$: Observable<boolean>;
   @Input() isExpanded!: boolean;
 
-  constructor(private viewDetectorService: ViewDetectorService) {}
+  constructor(private viewDetectorService: ViewDetectorService) {
+    this.isMobileView$ = this.viewDetectorService.getMobileView();
+  }
 
   ngOnInit() {
-    this.viewDetectorService
-      .getMobileView()
-      .subscribe((isMobile) => (this.isMobileView = isMobile));
+    // this.isMobileView$ = this.viewDetectorService
+    //   .getMobileView()
+    //   .subscribe((isMobile) => (this.isMobileView = isMobile));
   }
 
   onLinkClick($elem: HTMLElement) {

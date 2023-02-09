@@ -24,7 +24,7 @@ export class ViewDetectorService {
     this.isMobileView$ = screenSizeChanged$.pipe(startWith(isMobileViewport()));
   }
 
-  getMobileView(): Observable<any> {
+  getMobileView(): Observable<boolean> {
     return this.isMobileView$;
   }
 }

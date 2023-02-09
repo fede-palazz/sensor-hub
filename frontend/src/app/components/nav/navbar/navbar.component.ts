@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
+import { Observable } from 'rxjs';
 import { ViewDetectorService } from 'src/app/services/view-detector.service';
 
 @Component({
@@ -7,21 +8,22 @@ import { ViewDetectorService } from 'src/app/services/view-detector.service';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent {
-  isMobileView!: boolean;
+  isMobileView$: Observable<boolean>;
   isMobileMenuOpen: boolean;
   @Output() toggleSidebar = new EventEmitter<any>();
 
   constructor(private viewDetectorService: ViewDetectorService) {
+    this.isMobileView$ = this.viewDetectorService.getMobileView();
     this.isMobileMenuOpen = false;
   }
 
   ngOnInit() {
     // Detect mobile resizing
-    this.viewDetectorService.getMobileView().subscribe((isMobile) => {
-      this.isMobileView = isMobile;
-      // Automatically close dropdown menu on resize
-      if (!isMobile) this.isMobileMenuOpen = false;
-    });
+    // this.viewDetectorService.getMobileView().subscribe((isMobile) => {
+    //   this.isMobileView = isMobile;
+    //   // Automatically close dropdown menu on resize
+    //   if (!isMobile) this.isMobileMenuOpen = false;
+    // });
   }
 
   onSidebarMenuClick(): void {
