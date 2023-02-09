@@ -27,19 +27,30 @@
 
 ### Nodi
 
+- suddivisi in:
+  
+  - <u>nodi master</u> (principali)
+    - non posseggono sensori direttamente collegati ad essi
+    - sono connessi ad uno o più nodi slave
+  
+  - <u>nodi slave</u> (secondari)
+    - possiedono uno o più sensori direttamente connessi ad essi
+    - trasmettono i dati raccolti ad un nodo master
+  
 - arruolamento di nuovi nodi
+
   - inserimento manuale del codice identificativo
   - QR code
-  
+
 - modifica delle informazioni
 
 - spegnimento volontario di un nodo
 
 - **informazioni aggiuntive**
-  - <u>ogni nodo</u> sarà dotato di <u>un solo tipo di sensore</u> per una determinata grandezza fisica 
-  
+  - <u>ogni nodo</u> sarà dotato di <u>un solo tipo di sensore</u> per misurare una determinata grandezza fisica 
+
     <u>es</u>: un nodo non potrà avere due sensori di temperatura installati al suo interno
-  
+
   - la locazione di un nodo all'interno di un impianto <u>non viene memorizzata</u> nella piattaforma: l'utente dovrà assegnare un nome significativo al nodo affinchè ne riconosca posizione e tipologia
 
 ### Sensori
@@ -95,7 +106,7 @@
 ### Interfaccia grafica
 
 - deve essere <u>responsive</u>, ovvero capace di adattarsi a varie tipologie di schermi/dispositivi
-- deve permettere la visualizzazione dei dati acquisiti dai sensori, in particoalre tramite l'utilizzo di <u>grafici</u> opportuni
+- deve permettere la visualizzazione dei dati acquisiti dai sensori, in particolare tramite l'utilizzo di <u>grafici</u> opportuni
   - le grandezze fisiche devono essere visualizzate sullo stesso grafico (ovviamente con possibilità di mascherarne alcune)
   - ogni grandezza dovrà avere il <u>proprio asse delle ordinate</u> (sempre visibile), mentre quello delle <u>ascisse è comune</u> a tutte e <u>rappresenta il tempo</u> trascorso
 - deve consentire di <u>scaricare i dati in locale</u> nell'intervallo temporale desiderato nei formati `.xlsx`, `.csv` e `.json`
