@@ -3,15 +3,14 @@
 
 .content {
   margin-left: $side-navbar-width;
-  padding: 20px 15px;
-  text-align: justify;
+  padding: 25px 30px;
 
-  @include tablet-only {
-    margin-left: $side-navbar-collapsed-width;
-  }
+  // @include tablet-only {
+  //   margin-left: $side-navbar-collapsed-width;
+  // }
 
   // Mobile view
-  @media screen and ((max-height: $mobile-viewport-height) or ((max-width: $tablet))) {
-    margin-left: 0;
-  }
+  // @media screen and (max-width: $tablet) {
+  //   margin-left: 0;
+  // }
 }

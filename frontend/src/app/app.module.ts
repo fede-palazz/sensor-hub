@@ -7,9 +7,10 @@ import { NavbarComponent } from './components/nav/navbar/navbar.component';
 import { SidebarComponent } from './components/nav/sidebar/sidebar.component';
 import { MenuComponent } from './components/nav/menu/menu.component';
 import { SystemsComponent } from './components/systems/systems/systems.component';
+import { SystemPanelComponent } from './components/systems/system-panel/system-panel.component';
 
 @NgModule({
-  declarations: [AppComponent, NavbarComponent, SidebarComponent, MenuComponent, SystemsComponent],
+  declarations: [AppComponent, NavbarComponent, SidebarComponent, MenuComponent, SystemsComponent, SystemPanelComponent],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],
   bootstrap: [AppComponent],

@@ -1,0 +1,78 @@
+@import "../../../../styles/variables.scss";
+@import "bulma/sass/utilities/mixins";
+
+$danger-color: #f14668;
+
+.panel {
+  width: 90%;
+  margin-top: 25px;
+}
+
+.panel-heading {
+  display: flex;
+  align-items: center;
+  & .icon {
+    margin-right: 0.5em;
+  }
+}
+
+.panel-block {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+  &:hover > :not(.slave-block).list-item-controls {
+    display: blocK;
+  }
+
+  & .panel-icon {
+    margin-right: 0.5em;
+    font-size: 1.25em;
+  }
+
+  // Add nodes buttons
+  &:last-child {
+    justify-content: flex-start;
+    & .button {
+      margin: 0.25em 0.75em 0.25em 0;
+    }
+  }
+
+  & .panel-left {
+    display: flex;
+    align-items: center;
+    margin: 0.5em 1.5em 0.5em 0;
+  }
+}
+
+.list-item-controls {
+  padding: 0;
+  display: none;
+
+  @include mobile {
+    display: block;
+  }
+
+  & .material-icons {
+    font-size: 1.25em;
+  }
+}
+
+.slave-panel {
+  max-height: 9.5em;
+  overflow-y: auto;
+  padding-left: 1em;
+}
+
+.panel-block .slave-block {
+  padding: 0.25em 0 0.25em 0.5em;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  border-left: 1px solid #dbdbdb;
+
+  &:hover .list-item-controls {
+    display: block;
+  }
+}
