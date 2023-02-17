@@ -49,7 +49,8 @@ $danger-color: #f14668;
   padding: 0;
   display: none;
 
-  @include mobile {
+  // Touch device
+  @media screen and (hover: none) {
     display: block;
   }
 
