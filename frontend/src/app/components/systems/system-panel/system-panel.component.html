@@ -85,7 +85,7 @@
       >
       <span>Nodo master</span>
     </button>
-    <button class="button is-light">
+    <button class="button is-light" [disabled]="!system.masterNodes.length">
       <span class="icon"
         ><i class="material-icons" aria-hidden="true">add_circle</i></span
       >
