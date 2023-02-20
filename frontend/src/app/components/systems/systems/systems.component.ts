@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { System } from 'src/app/model/system';
+import { System } from 'src/app/model/system/system';
 import { SYSTEMS } from 'src/app/data/mock-systems';
 import { Button } from 'src/app/model/button';
 
@@ -9,6 +9,9 @@ import { Button } from 'src/app/model/button';
   template: `
     <app-title-bar [title]="'Impianti'" [buttons]="buttons"></app-title-bar>
     <div class="systems-container">
+      <span *ngIf="!systems.length" class="subtitle">
+        Per iniziare, registra un nuovo impianto.
+      </span>
       <ng-container *ngFor="let system of systems">
         <app-system-panel [system]="system" class="system-panel">
         </app-system-panel>
@@ -17,6 +20,12 @@ import { Button } from 'src/app/model/button';
   `,
 })
 export class SystemsComponent {
-  buttons: Button[] = [{ icon: 'add_circle', text: 'Nuovo impianto' }];
+  buttons: Button[] = [
+    {
+      icon: 'add_circle',
+      text: 'Nuovo impianto',
+      color: 'is-primary is-light',
+    },
+  ];
   systems: System[] = SYSTEMS;
 }

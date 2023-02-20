@@ -1,10 +1,10 @@
-import { System } from '../model/system';
+import { System } from '../model/system/system';
 
 export const SYSTEMS: System[] = [
   {
     icon: 'home',
     name: 'Impianto Casa',
-    color: 'danger',
+    color: 'is-danger',
     masterNodes: [
       {
         id: '1',
@@ -31,7 +31,7 @@ export const SYSTEMS: System[] = [
   {
     icon: 'apartment',
     name: 'Impianto Ufficio',
-    color: 'info',
+    color: 'is-info',
     masterNodes: [
       {
         id: '1',
@@ -48,13 +48,13 @@ export const SYSTEMS: System[] = [
   {
     icon: 'warning',
     name: 'Impianto di test',
-    color: 'success',
+    color: 'is-success',
     masterNodes: [],
   },
   {
     icon: 'home',
     name: 'Impianto Casa',
-    color: 'danger',
+    color: 'is-danger',
     masterNodes: [
       {
         id: '1',
@@ -81,7 +81,7 @@ export const SYSTEMS: System[] = [
   {
     icon: 'apartment',
     name: 'Impianto Ufficio',
-    color: 'info',
+    color: 'is-info',
     masterNodes: [
       {
         id: '1',
@@ -98,7 +98,7 @@ export const SYSTEMS: System[] = [
   {
     icon: 'warning',
     name: 'Impianto di test',
-    color: 'success',
+    color: 'is-success',
     masterNodes: [],
   },
 ];

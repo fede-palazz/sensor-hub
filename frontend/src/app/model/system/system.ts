@@ -1,4 +1,4 @@
-import { MasterNode } from './master-node';
+import { MasterNode } from '../node/master-node';
 
 export interface System {
   name: string;

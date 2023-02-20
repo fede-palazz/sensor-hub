@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { System } from 'src/app/model/system';
-
+import { System } from 'src/app/model/system/system';
 @Component({
   selector: 'app-system-panel',
   templateUrl: './system-panel.component.html',
