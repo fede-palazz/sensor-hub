@@ -1,0 +1,27 @@
+@import "../../../../styles/variables.scss";
+
+.title {
+  display: block;
+  font-size: 1.75rem;
+}
+
+.systems-container {
+  // border: 2px solid red;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.system-panel {
+  width: 20%;
+  min-width: 19rem;
+  max-width: 24rem;
+  margin-right: 2rem;
+  margin-bottom: 2rem;
+  // border: 1px solid green;
+
+  // Mobile view
+  @media screen and (max-width: $tablet) {
+    width: 100%;
+    margin-right: 0;
+  }
+}

@@ -8,8 +8,4 @@ import { System } from 'src/app/model/system';
 })
 export class SystemPanelComponent {
   @Input() system!: System;
-
-  ngOnInit() {
-    console.log(this.system);
-  }
 }

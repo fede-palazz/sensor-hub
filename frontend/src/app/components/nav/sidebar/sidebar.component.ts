@@ -16,12 +16,6 @@ export class SidebarComponent {
     this.isMobileView$ = this.viewDetectorService.getMobileView();
   }
 
-  ngOnInit() {
-    // this.isMobileView$ = this.viewDetectorService
-    //   .getMobileView()
-    //   .subscribe((isMobile) => (this.isMobileView = isMobile));
-  }
-
   onLinkClick($elem: HTMLElement) {
     this.currentIndex = Number($elem.getAttribute('data-index'));
   }

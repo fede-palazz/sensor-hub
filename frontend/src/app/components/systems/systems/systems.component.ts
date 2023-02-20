@@ -7,9 +7,12 @@ import { SYSTEMS } from 'src/app/data/mock-systems';
   styleUrls: ['./systems.component.scss'],
   template: `
     <span class="title is-3">Impianti</span>
-    <ng-container *ngFor="let system of systems">
-      <app-system-panel [system]="system"> </app-system-panel>
-    </ng-container>
+    <div class="systems-container">
+      <ng-container *ngFor="let system of systems">
+        <app-system-panel [system]="system" class="system-panel">
+        </app-system-panel>
+      </ng-container>
+    </div>
   `,
 })
 export class SystemsComponent {
