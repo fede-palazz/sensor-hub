@@ -9,9 +9,10 @@ import { MenuComponent } from './components/nav/menu/menu.component';
 import { SystemsComponent } from './components/systems/systems/systems.component';
 import { SystemPanelComponent } from './components/systems/system-panel/system-panel.component';
 import { TitleBarComponent } from './components/utils/title-bar/title-bar.component';
+import { NewSystemComponent } from './components/systems/new-system/new-system.component';
 
 @NgModule({
-  declarations: [AppComponent, NavbarComponent, SidebarComponent, MenuComponent, SystemsComponent, SystemPanelComponent, TitleBarComponent],
+  declarations: [AppComponent, NavbarComponent, SidebarComponent, MenuComponent, SystemsComponent, SystemPanelComponent, TitleBarComponent, NewSystemComponent],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],
   bootstrap: [AppComponent],

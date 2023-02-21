@@ -12,6 +12,7 @@ import { Button } from 'src/app/model/button';
           *ngFor="let button of buttons"
           class="button"
           [class]="button.color"
+          [routerLink]="button.url"
         >
           <span class="icon"
             ><i class="material-icons">{{ button.icon }}</i></span

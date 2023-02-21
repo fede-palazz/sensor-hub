@@ -25,7 +25,9 @@ export class SystemsComponent {
       icon: 'add_circle',
       text: 'Nuovo impianto',
       color: 'is-primary is-light',
+      url: '/systems/new',
     },
   ];
-  systems: System[] = SYSTEMS;
+  //systems: System[] = SYSTEMS;
+  systems: System[] = [];
 }
