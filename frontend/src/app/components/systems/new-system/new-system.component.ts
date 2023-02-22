@@ -17,6 +17,7 @@ export class NewSystemComponent {
       url: '/systems',
     },
   ];
+  // TODO: Update icons list
   iconsList = [
     'home',
     'shopping_bag',

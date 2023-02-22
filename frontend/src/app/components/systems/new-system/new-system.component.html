@@ -71,13 +71,14 @@
           <span>Salva</span>
         </button>
       </div>
-      <p class="help is-danger" *ngIf="true">
+      <!-- TODO: Display error box dinamically -->
+      <p class="help is-danger" *ngIf="false">
         Errore durante il salvataggio. Per favore, riprovare
       </p>
     </div>
   </form>
   <div class="preview">
-    <label class="label">Preview</label>
+    <label class="label">Anteprima</label>
     <app-system-panel [system]="system"></app-system-panel>
   </div>
 </div>

@@ -11,6 +11,7 @@ import { SystemPanelComponent } from './components/systems/system-panel/system-p
 import { TitleBarComponent } from './components/utils/title-bar/title-bar.component';
 import { NewSystemComponent } from './components/systems/new-system/new-system.component';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,7 @@ import { FormsModule } from '@angular/forms';
     TitleBarComponent,
     NewSystemComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule],
+  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [],
   bootstrap: [AppComponent],
 })
