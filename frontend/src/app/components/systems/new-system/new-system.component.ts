@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Button } from 'src/app/model/button';
 import { System } from 'src/app/model/system/system';
 
@@ -72,7 +73,8 @@ export class NewSystemComponent {
     this.system.color = this.colorsList[this.selectedColorIndex];
   }
 
-  onSubmit(): void {
-    console.log('Submitted!');
+  onSubmit(form: NgForm): void {
+    if (!form.valid) return;
+    // TODO: Send the system obj to a service
   }
 }

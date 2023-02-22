@@ -4,7 +4,7 @@
 ></app-title-bar>
 
 <div class="container">
-  <form (ngSubmit)="onSubmit()" #systemForm="ngForm">
+  <form (ngSubmit)="onSubmit(form)" #form="ngForm">
     <div class="field">
       <label class="label">Nome</label>
       <div class="control">
@@ -16,9 +16,21 @@
           [minlength]="5"
           [maxLength]="35"
           [(ngModel)]="system.name"
+          #name="ngModel"
           required
+          [class.is-danger]="
+            (!name.pristine && !name.valid) || (!name.valid && form.submitted)
+          "
         />
       </div>
+      <p
+        class="help is-danger"
+        *ngIf="
+          (!name.pristine && !name.valid) || (!name.valid && form.submitted)
+        "
+      >
+        Inserire almeno 5 caratteri
+      </p>
     </div>
 
     <div class="field">
@@ -59,6 +71,9 @@
           <span>Salva</span>
         </button>
       </div>
+      <p class="help is-danger" *ngIf="true">
+        Errore durante il salvataggio. Per favore, riprovare
+      </p>
     </div>
   </form>
   <div class="preview">
