@@ -17,15 +17,6 @@ export class NavbarComponent {
     this.isMobileMenuOpen = false;
   }
 
-  ngOnInit() {
-    // Detect mobile resizing
-    // this.viewDetectorService.getMobileView().subscribe((isMobile) => {
-    //   this.isMobileView = isMobile;
-    //   // Automatically close dropdown menu on resize
-    //   if (!isMobile) this.isMobileMenuOpen = false;
-    // });
-  }
-
   onSidebarMenuClick(): void {
     this.toggleSidebar.emit();
   }

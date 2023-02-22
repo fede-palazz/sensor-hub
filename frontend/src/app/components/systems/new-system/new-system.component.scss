@@ -1,0 +1,11 @@
+@import "../../../../styles/variables.scss";
+@import "bulma/sass/utilities/mixins";
+
+form {
+  & input[type="text"] {
+    max-width: 25rem;
+  }
+  & button[type="submit"] {
+    margin-top: 0.5rem;
+  }
+}

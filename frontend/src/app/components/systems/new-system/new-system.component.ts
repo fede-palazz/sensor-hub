@@ -3,13 +3,8 @@ import { Button } from 'src/app/model/button';
 
 @Component({
   selector: 'app-new-system',
+  templateUrl: './new-system.component.html',
   styleUrls: ['./new-system.component.scss'],
-  template: `
-    <app-title-bar
-      [title]="'Nuovo Impianto'"
-      [buttons]="buttons"
-    ></app-title-bar>
-  `,
 })
 export class NewSystemComponent {
   buttons: Button[] = [
@@ -20,4 +15,38 @@ export class NewSystemComponent {
       url: '/systems',
     },
   ];
+  iconsList = [
+    'home',
+    'shopping_bag',
+    'account_balance',
+    'work',
+    'store',
+    'tour',
+    'fax',
+  ];
+
+  colorsList = [
+    'is-black',
+    'is-dark',
+    'is-primary',
+    'is-link',
+    'is-info',
+    'is-success',
+    'is-warning',
+    'is-danger',
+  ];
+  selectedIconIndex?: number;
+  selectedColorIndex?: number;
+
+  onIconClick(index: number): void {
+    this.selectedIconIndex = index;
+  }
+
+  onColorClick(index: number): void {
+    this.selectedColorIndex = index;
+  }
+
+  onSubmit(): void {
+    console.log('Submitted!');
+  }
 }
