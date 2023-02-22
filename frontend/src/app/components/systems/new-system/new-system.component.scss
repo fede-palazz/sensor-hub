@@ -1,7 +1,23 @@
 @import "../../../../styles/variables.scss";
 @import "bulma/sass/utilities/mixins";
 
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-left: 0;
+
+  @include mobile {
+    flex-direction: column;
+  }
+}
+
+.preview {
+  width: 24rem;
+}
+
 form {
+  margin-bottom: 2rem;
   & input[type="text"] {
     max-width: 25rem;
   }
