@@ -16,6 +16,7 @@ $link-bg-color: rgba(0, 0, 0, 0.25);
   overflow-x: hidden;
   z-index: 10;
 
+  // When resizing windows
   @include tablet-only {
     width: $side-navbar-collapsed-width;
   }
