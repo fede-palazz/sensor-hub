@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { debounceTime, fromEvent, map, Observable, startWith } from 'rxjs';
+import { fromEvent, map, Observable, startWith } from 'rxjs';
 
 const TABLET_BREAKPOINT = 700; // Must be equal to ($tablet + 1px) in variables.scss
 
@@ -16,7 +16,6 @@ export class ViewDetectorService {
 
     // Create observable from window resize event so it only fires every 5ms
     const screenSizeChanged$ = fromEvent(window, 'resize').pipe(
-      debounceTime(5),
       map(isMobileViewport)
     );
     // Start off with the initial value use the isScreenSmall$ | async in the

@@ -4,7 +4,6 @@
 ></app-title-bar>
 
 <div class="container">
-  <!-- <div class="form-container"> -->
   <form (ngSubmit)="onSubmit(form)" #form="ngForm">
     <div class="field">
       <label class="label">Nome</label>
@@ -78,7 +77,6 @@
       </p>
     </div>
   </form>
-  <!-- </div> -->
   <div class="preview-container">
     <label class="label">Anteprima</label>
     <app-system-panel [system]="system"></app-system-panel>
