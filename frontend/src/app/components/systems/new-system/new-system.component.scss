@@ -12,16 +12,18 @@
   }
 }
 
-.preview {
-  width: 24rem;
+.preview-container {
+  max-width: 24rem;
 }
 
 form {
+  padding-right: 1.75rem;
   margin-bottom: 2rem;
   & input[type="text"] {
     max-width: 25rem;
   }
   & button[type="submit"] {
     margin-top: 0.5rem;
+    background-color: $accent;
   }
 }

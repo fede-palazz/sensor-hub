@@ -83,7 +83,15 @@
       <span class="icon"><i class="material-icons">add_circle</i></span>
       <span>Nodo master</span>
     </button>
-    <button class="button is-light" [disabled]="!system.masterNodes.length">
+    <button
+      class="button"
+      [class]="
+        ['is-dark', 'is-light'].includes(system.color)
+          ? 'is-white'
+          : system.color + ' is-light'
+      "
+      [disabled]="!system.masterNodes.length"
+    >
       <span class="icon"><i class="material-icons">add_circle</i></span>
       <span>Nodo slave</span>
     </button>

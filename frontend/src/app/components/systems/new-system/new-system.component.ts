@@ -20,16 +20,18 @@ export class NewSystemComponent {
   // TODO: Update icons list
   iconsList = [
     'home',
-    'shopping_bag',
+    'apartment',
+    'store',
+    'storefront',
     'account_balance',
     'work',
-    'store',
-    'tour',
     'fax',
+    'shopping_bag',
   ];
 
   colorsList = [
     'is-dark',
+    'is-light',
     'is-primary',
     'is-link',
     'is-info',
