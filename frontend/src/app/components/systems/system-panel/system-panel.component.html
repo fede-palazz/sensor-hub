@@ -20,7 +20,8 @@
   <!-- Placeholder panel -->
   <div class="panel-block" *ngIf="!system.smartNodes.length">
     <div class="panel-left">
-      <i class="material-icons panel-icon">info</i> <span>Prova</span>
+      <i class="material-icons panel-icon">info</i>
+      <span>Per iniziare, registra un nuovo nodo smart</span>
     </div>
   </div>
 
@@ -118,8 +119,7 @@
           ? 'is-white'
           : system.color + ' is-light'
       "
-      [disabled]="!system.smartNodes.length"
-      *ngIf="!isStandaloneSystem()"
+      [disabled]="isStandaloneSystem()"
     >
       <!-- TODO: Disable if all the smart nodes are standalone -->
       <span class="icon"><i class="material-icons">add_circle</i></span>
