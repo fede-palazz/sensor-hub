@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Button } from 'src/app/model/button';
+import { NodeStatus } from 'src/app/model/system/node-status';
 import { System } from 'src/app/model/system/system';
 
 @Component({
@@ -17,7 +18,6 @@ export class NewSystemComponent {
       url: '/systems',
     },
   ];
-  // TODO: Update icons list
   iconsList = [
     'home',
     'apartment',
@@ -48,18 +48,37 @@ export class NewSystemComponent {
     this.selectedColorIndex = 0;
     // Initialize preview system
     this.system = {
+      icon: this.iconsList[this.selectedIconIndex],
       name: '',
-      color: this.colorsList[0],
-      icon: this.iconsList[0],
-      masterNodes: [
+      color: this.colorsList[this.selectedColorIndex],
+      smartNodes: [
         {
           id: '1',
-          name: 'Nodo Master 1',
-          slaveNodes: [
-            { id: '1', name: 'nodo slave 1' },
-            { id: '2', name: 'nodo slave 2' },
-            { id: '3', name: 'nodo slave 3' },
-            { id: '4', name: 'nodo slave 4' },
+          name: 'Nodo smart autonomo disattivato',
+          status: NodeStatus.DEACTIVATED,
+          isStandalone: true,
+        },
+        {
+          id: '2',
+          name: 'Nodo smart con sensori online',
+          status: NodeStatus.ONLINE,
+          isStandalone: false,
+          simpleNodes: [
+            {
+              id: '11',
+              name: 'Nodo semplice 1 online',
+              status: NodeStatus.ONLINE,
+            },
+            {
+              id: '12',
+              name: 'Nodo semplice 2 offline',
+              status: NodeStatus.OFFLINE,
+            },
+            {
+              id: '13',
+              name: 'Nodo semplice 3 disattivato',
+              status: NodeStatus.DEACTIVATED,
+            },
           ],
         },
       ],

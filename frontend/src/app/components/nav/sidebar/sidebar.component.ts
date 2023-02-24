@@ -14,5 +14,4 @@ export class SidebarComponent {
   constructor(private viewDetectorService: ViewDetectorService) {
     this.isMobileView$ = this.viewDetectorService.getMobileView();
   }
-  // FIXME: At 701px width, sidebar font is not increasing
 }

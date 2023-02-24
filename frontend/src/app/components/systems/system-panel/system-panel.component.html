@@ -17,12 +17,19 @@
     </p>
   </div>
 
-  <!-- Master node panel -->
-  <ng-container *ngFor="let masterNode of system.masterNodes">
+  <!-- Placeholder panel -->
+  <div class="panel-block" *ngIf="!system.smartNodes.length">
+    <div class="panel-left">
+      <i class="material-icons panel-icon">info</i> <span>Prova</span>
+    </div>
+  </div>
+
+  <!-- Smart node panel -->
+  <ng-container *ngFor="let smartNode of system.smartNodes">
     <div class="panel-block">
-      <div class="panel-left">
+      <div class="panel-left" [class]="nodeStyleMapping(smartNode.status)">
         <i class="material-icons panel-icon">hub</i>
-        <span>{{ masterNode.name }}</span>
+        <span>{{ smartNode.name }}</span>
       </div>
       <div class="list-item-controls">
         <div class="buttons is-right">
@@ -32,26 +39,47 @@
             </span>
           </button>
 
+          <button class="button" *ngIf="smartNode.isStandalone">
+            <span class="icon">
+              <i class="material-icons">power_settings_new</i>
+            </span>
+          </button>
+
           <button
             class="button"
-            title="Almeno un nodo slave ancora presente"
-            disabled
+            *ngIf="smartNode.isStandalone; else disabledDeleteButton"
           >
             <span class="icon">
               <i class="material-icons">delete</i>
             </span>
           </button>
+
+          <!-- Disabled delete button -->
+          <ng-template #disabledDeleteButton>
+            <button
+              class="button"
+              title="Rimuovere tutti i nodi semplici prima di procedere"
+              disabled
+            >
+              <span class="icon">
+                <i class="material-icons">delete</i>
+              </span>
+            </button>
+          </ng-template>
         </div>
       </div>
     </div>
 
-    <!-- Slave nodes panel -->
-    <div class="panel-block slave-panel" *ngIf="masterNode.slaveNodes">
-      <!-- Slave node  -->
-      <div class="slave-block" *ngFor="let slaveNode of masterNode.slaveNodes">
-        <div class="panel-left">
+    <!-- Simple nodes panel -->
+    <div class="panel-block simple-nodes-panel" *ngIf="!smartNode.isStandalone">
+      <!-- Simple node  -->
+      <div
+        class="simple-node-block"
+        *ngFor="let simpleNode of smartNode.simpleNodes"
+      >
+        <div class="panel-left" [class]="nodeStyleMapping(simpleNode.status)">
           <i class="material-icons panel-icon">sensors</i>
-          <span>{{ slaveNode.name }}</span>
+          <span>{{ simpleNode.name }}</span>
         </div>
         <div class="list-item-controls">
           <div class="buttons is-right">
@@ -81,7 +109,7 @@
   <div class="panel-block">
     <button class="button" [class]="system.color">
       <span class="icon"><i class="material-icons">add_circle</i></span>
-      <span>Nodo master</span>
+      <span>Nodo smart</span>
     </button>
     <button
       class="button"
@@ -90,10 +118,12 @@
           ? 'is-white'
           : system.color + ' is-light'
       "
-      [disabled]="!system.masterNodes.length"
+      [disabled]="!system.smartNodes.length"
+      *ngIf="!isStandaloneSystem()"
     >
+      <!-- TODO: Disable if all the smart nodes are standalone -->
       <span class="icon"><i class="material-icons">add_circle</i></span>
-      <span>Nodo slave</span>
+      <span>Nodo semplice</span>
     </button>
   </div>
 </div>

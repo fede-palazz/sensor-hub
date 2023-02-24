@@ -8,12 +8,12 @@ import { Button } from 'src/app/model/button';
   styleUrls: ['./systems.component.scss'],
   template: `
     <app-title-bar [title]="'Impianti'" [buttons]="buttons"></app-title-bar>
-    <div class="systems-container">
+    <div class="columns is-multiline ">
       <span *ngIf="!systems.length" class="subtitle">
         Per iniziare, registra un nuovo impianto.
       </span>
       <ng-container *ngFor="let system of systems">
-        <app-system-panel [system]="system" class="system-panel">
+        <app-system-panel [system]="system" class="column system-panel">
         </app-system-panel>
       </ng-container>
     </div>
@@ -28,6 +28,6 @@ export class SystemsComponent {
       url: '/systems/new',
     },
   ];
-  //systems: System[] = SYSTEMS;
-  systems: System[] = [];
+  systems: System[] = SYSTEMS;
+  //systems: System[] = [];
 }

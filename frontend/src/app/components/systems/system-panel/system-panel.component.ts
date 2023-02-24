@@ -1,5 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { System } from 'src/app/model/system/system';
+import { NodeStatus } from 'src/app/model/system/node-status';
+
 @Component({
   selector: 'app-system-panel',
   templateUrl: './system-panel.component.html',
@@ -7,4 +9,30 @@ import { System } from 'src/app/model/system/system';
 })
 export class SystemPanelComponent {
   @Input() system!: System;
+
+  /**
+   * Map node status to the corresponsing style
+   * @param status node status
+   * @returns style class name
+   */
+  nodeStyleMapping(status: NodeStatus): string {
+    switch (status) {
+      case NodeStatus.ONLINE:
+        return 'online-node';
+      case NodeStatus.OFFLINE:
+        return 'offline-node';
+      case NodeStatus.DEACTIVATED:
+        return 'deactivated-node';
+    }
+  }
+
+  /**
+   * Determine whether the current system is composed by only standalone smart nodes or not
+   * @returns true if the system is standalone, false otherwise
+   */
+  isStandaloneSystem(): boolean {
+    return !this.system.smartNodes.filter(
+      (smartNode) => !smartNode.isStandalone
+    ).length;
+  }
 }

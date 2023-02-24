@@ -1,27 +1,16 @@
 @import "../../../../styles/variables.scss";
 @import "bulma/sass/utilities/mixins";
 
-.systems-container {
-  // border: 2px solid red;
-  display: flex;
-  flex-wrap: wrap;
-}
-
 .system-panel {
-  // width: 20%;
-  // min-width: 19rem;
-  max-width: 28rem;
-  margin-right: 2rem;
-  margin-bottom: 2rem;
-  // border: 1px solid green;
+  min-width: 20rem;
 
-  // Mobile view
-  // @media screen and (max-width: $tablet) {
-  //   width: 100%;
-  //   margin-right: 0;
-  // }
+  @include desktop {
+    min-width: 22rem;
+    max-width: 28rem;
+  }
+
   @include mobile {
-    width: 100%;
-    margin-right: 0;
+    min-width: none;
+    max-width: none;
   }
 }
