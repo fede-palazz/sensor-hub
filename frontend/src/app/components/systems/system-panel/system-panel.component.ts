@@ -1,6 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { System } from 'src/app/model/system/system';
 import { NodeStatus } from 'src/app/model/system/node-status';
+import { SmartNode } from 'src/app/model/system/smart-node';
+import { SimpleNode } from 'src/app/model/system/simple-node';
 
 @Component({
   selector: 'app-system-panel',
@@ -35,4 +37,9 @@ export class SystemPanelComponent {
       (smartNode) => !smartNode.isStandalone
     ).length;
   }
+
+  // getTooltipMessage(node: SmartNode | SimpleNode) {
+  //   let tooltipMessage = ''; // (node as SmartNode)?.isStandalone ?
+  //   console.log(node as SmartNode);
+  // }
 }
