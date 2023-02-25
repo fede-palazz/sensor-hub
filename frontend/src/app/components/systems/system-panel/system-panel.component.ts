@@ -37,7 +37,7 @@ export class SystemPanelComponent {
       (smartNode) => !smartNode.isStandalone
     ).length;
   }
-
+  // TODO: Esclude also every DEACTIVATED / OFFLINE smart node
   // getTooltipMessage(node: SmartNode | SimpleNode) {
   //   let tooltipMessage = ''; // (node as SmartNode)?.isStandalone ?
   //   console.log(node as SmartNode);
