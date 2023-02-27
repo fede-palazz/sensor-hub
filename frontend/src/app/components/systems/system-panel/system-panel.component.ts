@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, HostListener, Input } from '@angular/core';
 import { System } from 'src/app/model/system/system';
 import { NodeStatus } from 'src/app/model/system/node-status';
 
@@ -9,6 +9,15 @@ import { NodeStatus } from 'src/app/model/system/node-status';
 })
 export class SystemPanelComponent {
   @Input() system!: System;
+  @Input() isPreview!: boolean;
+
+  @HostListener('click', ['$event'])
+  onHostClick(event: MouseEvent) {
+    if (this.isPreview) {
+      event.stopPropagation();
+      event.preventDefault();
+    }
+  }
 
   /**
    * Map node status to the corresponsing style
@@ -45,5 +54,9 @@ export class SystemPanelComponent {
       (smartNode) =>
         !smartNode.isStandalone && smartNode.status === NodeStatus.ONLINE
     ).length;
+  }
+
+  log(mess: string) {
+    console.log(mess);
   }
 }

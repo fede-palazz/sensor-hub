@@ -13,7 +13,11 @@ import { Button } from 'src/app/model/button';
         Per iniziare, registra un nuovo impianto.
       </span>
       <ng-container *ngFor="let system of systems">
-        <app-system-panel [system]="system" class="column system-panel">
+        <app-system-panel
+          [system]="system"
+          class="column system-panel"
+          [isPreview]="false"
+        >
         </app-system-panel>
       </ng-container>
     </div>
