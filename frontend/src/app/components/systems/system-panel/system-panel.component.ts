@@ -1,8 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { System } from 'src/app/model/system/system';
 import { NodeStatus } from 'src/app/model/system/node-status';
-import { SmartNode } from 'src/app/model/system/smart-node';
-import { SimpleNode } from 'src/app/model/system/simple-node';
 
 @Component({
   selector: 'app-system-panel',
@@ -37,9 +35,15 @@ export class SystemPanelComponent {
       (smartNode) => !smartNode.isStandalone
     ).length;
   }
-  // TODO: Esclude also every DEACTIVATED / OFFLINE smart node
-  // getTooltipMessage(node: SmartNode | SimpleNode) {
-  //   let tooltipMessage = ''; // (node as SmartNode)?.isStandalone ?
-  //   console.log(node as SmartNode);
-  // }
+
+  /**
+   * Determine whether the non standalone smart nodes of the current system are all offline or not
+   * @returns true if all the non standalone smart nodes are offline, false otherwise
+   */
+  areNonStandaloneNodesOffline(): boolean {
+    return !this.system.smartNodes.filter(
+      (smartNode) =>
+        !smartNode.isStandalone && smartNode.status === NodeStatus.ONLINE
+    ).length;
+  }
 }

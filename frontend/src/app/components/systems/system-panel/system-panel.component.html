@@ -119,9 +119,8 @@
           ? 'is-white'
           : system.color + ' is-light'
       "
-      [disabled]="isStandaloneSystem()"
+      [disabled]="isStandaloneSystem() || areNonStandaloneNodesOffline()"
     >
-      <!-- TODO: Disable if all the smart nodes are standalone -->
       <span class="icon"><i class="material-icons">add_circle</i></span>
       <span>Nodo semplice</span>
     </button>
