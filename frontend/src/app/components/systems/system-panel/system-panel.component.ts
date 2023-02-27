@@ -56,7 +56,8 @@ export class SystemPanelComponent {
     ).length;
   }
 
-  log(mess: string) {
-    console.log(mess);
+  onDeleteSystem(): void {
+    if (this.isPreview) return;
+    console.log('Deleted');
   }
 }

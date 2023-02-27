@@ -1,16 +1,17 @@
 import { Component } from '@angular/core';
 import { System } from 'src/app/model/system/system';
-import { SYSTEMS } from 'src/app/data/mock-systems';
 import { Button } from 'src/app/model/button';
+import { Observable } from 'rxjs';
+import { SystemsDataService } from 'src/app/services/systems-data.service';
 
 @Component({
   selector: 'app-systems',
   styleUrls: ['./systems.component.scss'],
   template: `
     <app-title-bar [title]="'Impianti'" [buttons]="buttons"></app-title-bar>
-    <div class="columns is-multiline ">
+    <div class="columns is-multiline" *ngIf="systems$ | async as systems">
       <span *ngIf="!systems.length" class="subtitle">
-        Per iniziare, registra un nuovo impianto.
+        Per iniziare crea un nuovo impianto.
       </span>
       <ng-container *ngFor="let system of systems">
         <app-system-panel
@@ -32,6 +33,9 @@ export class SystemsComponent {
       url: '/systems/new',
     },
   ];
-  systems: System[] = SYSTEMS;
-  //systems: System[] = [];
+  systems$: Observable<System[]>;
+
+  constructor(private systemsDataService: SystemsDataService) {
+    this.systems$ = this.systemsDataService.getSystems();
+  }
 }

@@ -14,8 +14,8 @@
           name="system-name"
           placeholder="Nome identificativo dell'impianto"
           [minlength]="5"
-          [maxLength]="35"
-          [(ngModel)]="system.name"
+          [maxLength]="45"
+          [(ngModel)]="previewSystem.name"
           #name="ngModel"
           required
           [class.is-danger]="
@@ -79,6 +79,9 @@
   </form>
   <div class="preview-container">
     <label class="label">Anteprima</label>
-    <app-system-panel [system]="system" [isPreview]="true"></app-system-panel>
+    <app-system-panel
+      [system]="previewSystem"
+      [isPreview]="true"
+    ></app-system-panel>
   </div>
 </div>

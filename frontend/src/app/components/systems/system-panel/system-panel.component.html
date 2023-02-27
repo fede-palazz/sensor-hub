@@ -1,10 +1,16 @@
 <div class="panel" [class]="system.color">
   <!-- Panel header -->
   <div class="panel-heading">
-    <span class="icon"
+    <span class="icon icon-left"
       ><i class="material-icons">{{ system.icon }}</i></span
     >
     <span>{{ system.name }}</span>
+    <span
+      class="icon icon-right"
+      (click)="onDeleteSystem()"
+      *ngIf="!system.smartNodes.length"
+      ><i class="material-icons">delete</i></span
+    >
   </div>
   <!-- TODO: Add tooltips -->
   <!-- Search panel -->
@@ -21,7 +27,7 @@
   <div class="panel-block" *ngIf="!system.smartNodes.length">
     <div class="panel-left">
       <i class="material-icons panel-icon">info</i>
-      <span>Per iniziare, registra un nuovo nodo smart</span>
+      <span>Ora puoi registrare un nodo smart nell'impianto</span>
     </div>
   </div>
 

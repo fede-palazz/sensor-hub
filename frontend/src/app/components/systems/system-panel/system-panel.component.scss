@@ -4,8 +4,15 @@
 .panel-heading {
   display: flex;
   align-items: center;
-  & .icon {
+  & .icon-left {
     margin-right: 0.5em;
+  }
+  & .icon-right {
+    margin-left: auto;
+    &:hover {
+      color: $icon-hover;
+      cursor: pointer;
+    }
   }
 }
 

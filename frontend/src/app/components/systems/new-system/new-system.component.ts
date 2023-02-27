@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { Button } from 'src/app/model/button';
 import { NodeStatus } from 'src/app/model/system/node-status';
 import { System } from 'src/app/model/system/system';
+import { PreviewSystem } from 'src/app/data/preview-system';
 
 @Component({
   selector: 'app-new-system',
@@ -41,58 +42,25 @@ export class NewSystemComponent {
   ];
   selectedIconIndex?: number;
   selectedColorIndex?: number;
-  system: System;
+  previewSystem: System;
 
   constructor() {
     this.selectedIconIndex = 0;
     this.selectedColorIndex = 0;
     // Initialize preview system
-    this.system = {
-      icon: this.iconsList[this.selectedIconIndex],
-      name: '',
-      color: this.colorsList[this.selectedColorIndex],
-      smartNodes: [
-        {
-          id: '1',
-          name: 'Nodo smart autonomo disattivato',
-          status: NodeStatus.DEACTIVATED,
-          isStandalone: true,
-        },
-        {
-          id: '2',
-          name: 'Nodo smart con sensori online',
-          status: NodeStatus.ONLINE,
-          isStandalone: false,
-          simpleNodes: [
-            {
-              id: '11',
-              name: 'Nodo semplice 1 online',
-              status: NodeStatus.ONLINE,
-            },
-            {
-              id: '12',
-              name: 'Nodo semplice 2 offline',
-              status: NodeStatus.OFFLINE,
-            },
-            {
-              id: '13',
-              name: 'Nodo semplice 3 disattivato',
-              status: NodeStatus.DEACTIVATED,
-            },
-          ],
-        },
-      ],
-    };
+    this.previewSystem = PreviewSystem;
+    this.previewSystem.icon = this.iconsList[this.selectedIconIndex];
+    this.previewSystem.color = this.colorsList[this.selectedColorIndex];
   }
 
   onIconClick(index: number): void {
     this.selectedIconIndex = index;
-    this.system.icon = this.iconsList[this.selectedIconIndex];
+    this.previewSystem.icon = this.iconsList[this.selectedIconIndex];
   }
 
   onColorClick(index: number): void {
     this.selectedColorIndex = index;
-    this.system.color = this.colorsList[this.selectedColorIndex];
+    this.previewSystem.color = this.colorsList[this.selectedColorIndex];
   }
 
   onSubmit(form: NgForm): void {

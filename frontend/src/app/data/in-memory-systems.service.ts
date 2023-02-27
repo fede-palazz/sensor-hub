@@ -131,7 +131,7 @@ export class InMemorySystemsService implements InMemoryDbService {
       {
         id: 'system6',
         icon: 'warning',
-        name: 'Impianto di test',
+        name: 'Impianto di test con nome lungo andiamo per i 50',
         color: 'is-success',
         smartNodes: [],
       },
