@@ -28,6 +28,6 @@ export class SystemsDataService {
 
   deleteSystem(id: string) {
     const url = `${this.API_URL}/${id}`;
-    return this.http.delete<System>(url, httpOptions);
+    return this.http.delete<any>(url, httpOptions);
   }
 }

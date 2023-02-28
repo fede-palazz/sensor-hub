@@ -17,9 +17,9 @@ import { SmartNode } from 'src/app/model/system/smart-node';
 export class SystemPanelComponent {
   @Input() system!: System;
   @Input() isPreview!: boolean;
-  nodeStatus = NodeStatus;
-  // Emit the system id
   @Output() deleteSystem = new EventEmitter<string>();
+  systemDeletion = false; // binded to the delete system btn
+  nodeStatus = NodeStatus; // access NodeStatus enum from template
 
   @HostListener('click', ['$event'])
   onHostClick(event: MouseEvent) {
@@ -29,9 +29,11 @@ export class SystemPanelComponent {
     }
   }
 
-  onDeleteSystem(): void {
+  onDeleteSystem($event: MouseEvent): void {
     if (this.isPreview) return;
     this.deleteSystem.emit(this.system.id);
+    // Display loading spinner
+    this.systemDeletion = true;
   }
 
   /**

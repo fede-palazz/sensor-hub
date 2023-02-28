@@ -5,12 +5,15 @@
       ><i class="material-icons">{{ system.icon }}</i></span
     >
     <span>{{ system.name }}</span>
-    <span
-      class="icon icon-right"
-      (click)="onDeleteSystem()"
+    <button
+      class="button icon-right"
       *ngIf="!system.smartNodes.length"
-      ><i class="material-icons">delete</i></span
+      [class]="system.color"
+      [class.is-loading]="systemDeletion"
+      (click)="onDeleteSystem($event)"
     >
+      <span class="icon"><i class="material-icons">delete</i></span>
+    </button>
   </div>
   <!-- TODO: Add tooltips -->
   <!-- Search panel -->
