@@ -1,4 +1,10 @@
-import { Component, HostListener, Input } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  HostListener,
+  Input,
+  Output,
+} from '@angular/core';
 import { System } from 'src/app/model/system/system';
 import { NodeStatus } from 'src/app/model/system/node-status';
 import { SmartNode } from 'src/app/model/system/smart-node';
@@ -12,6 +18,8 @@ export class SystemPanelComponent {
   @Input() system!: System;
   @Input() isPreview!: boolean;
   nodeStatus = NodeStatus;
+  // Emit the system id
+  @Output() deleteSystem = new EventEmitter<string>();
 
   @HostListener('click', ['$event'])
   onHostClick(event: MouseEvent) {
@@ -23,7 +31,7 @@ export class SystemPanelComponent {
 
   onDeleteSystem(): void {
     if (this.isPreview) return;
-    console.log('Deleted');
+    this.deleteSystem.emit(this.system.id);
   }
 
   /**

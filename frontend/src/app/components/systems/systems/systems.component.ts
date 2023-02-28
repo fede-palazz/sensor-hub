@@ -9,7 +9,7 @@ import { SystemsDataService } from 'src/app/services/systems-data.service';
   styleUrls: ['./systems.component.scss'],
   template: `
     <app-title-bar [title]="'Impianti'" [buttons]="buttons"></app-title-bar>
-    <div class="columns is-multiline" *ngIf="systems$ | async as systems">
+    <div class="columns is-multiline" *ngIf="systems">
       <span *ngIf="!systems.length" class="subtitle">
         Per iniziare crea un nuovo impianto.
       </span>
@@ -18,6 +18,7 @@ import { SystemsDataService } from 'src/app/services/systems-data.service';
           [system]="system"
           class="column system-panel"
           [isPreview]="false"
+          (deleteSystem)="onDeleteSystem($event)"
         >
         </app-system-panel>
       </ng-container>
@@ -33,9 +34,19 @@ export class SystemsComponent {
       url: '/systems/new',
     },
   ];
-  systems$: Observable<System[]>;
+  systems?: System[];
 
   constructor(private systemsDataService: SystemsDataService) {
-    this.systems$ = this.systemsDataService.getSystems();
+    this.systemsDataService
+      .getSystems()
+      .subscribe((systems) => (this.systems = systems));
   }
+
+  onDeleteSystem(id: string) {
+    this.systemsDataService.deleteSystem(id).subscribe(() => {
+      this.systems = this.systems!.filter((system) => system.id !== id);
+    });
+  }
+
+  // TODO: Unsubscribe on destroy
 }

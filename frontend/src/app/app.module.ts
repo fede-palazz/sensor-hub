@@ -13,7 +13,7 @@ import { SystemsComponent } from './components/systems/systems/systems.component
 import { SystemPanelComponent } from './components/systems/system-panel/system-panel.component';
 import { TitleBarComponent } from './components/utils/title-bar/title-bar.component';
 import { NewSystemComponent } from './components/systems/new-system/new-system.component';
-import { InMemorySystemsService } from './data/in-memory-systems.service';
+import { InMemoryDataService } from './data/in-memory-data.service';
 
 import { environment } from 'src/environments/environment';
 
@@ -34,7 +34,7 @@ import { environment } from 'src/environments/environment';
     FormsModule,
     HttpClientModule,
     environment.useMockServer
-      ? HttpClientInMemoryWebApiModule.forRoot(InMemorySystemsService, {
+      ? HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, {
           dataEncapsulation: false,
           delay: 500,
         })
