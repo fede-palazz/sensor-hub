@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { InMemoryDbService } from 'angular-in-memory-web-api';
 import { NodeStatus } from '../model/system/node-status';
+import { InMemoryDbService } from 'angular-in-memory-web-api';
 
 @Injectable({
   providedIn: 'root',
@@ -131,7 +131,7 @@ export class InMemorySystemsService implements InMemoryDbService {
       {
         id: 'system6',
         icon: 'warning',
-        name: 'Impianto di test con nome lungo andiamo per i 50',
+        name: 'Impianto di test',
         color: 'is-success',
         smartNodes: [],
       },

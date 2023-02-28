@@ -1,7 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Button } from 'src/app/model/button';
-import { NodeStatus } from 'src/app/model/system/node-status';
 import { System } from 'src/app/model/system/system';
 import { PreviewSystem } from 'src/app/data/preview-system';
 
@@ -49,6 +48,7 @@ export class NewSystemComponent {
     this.selectedColorIndex = 0;
     // Initialize preview system
     this.previewSystem = PreviewSystem;
+    this.previewSystem.name = '';
     this.previewSystem.icon = this.iconsList[this.selectedIconIndex];
     this.previewSystem.color = this.colorsList[this.selectedColorIndex];
   }
