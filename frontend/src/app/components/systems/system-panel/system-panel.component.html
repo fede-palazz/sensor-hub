@@ -34,7 +34,16 @@
   <!-- Smart node panel -->
   <ng-container *ngFor="let smartNode of system.smartNodes">
     <div class="panel-block">
-      <div class="panel-left" [class]="nodeStyleMapping(smartNode.status)">
+      <div
+        class="panel-left"
+        [class]="
+          smartNode.status === nodeStatus.ONLINE
+            ? 'online-node'
+            : smartNode.status === nodeStatus.OFFLINE
+            ? 'offline-node'
+            : 'deactivated-node'
+        "
+      >
         <i class="material-icons panel-icon">hub</i>
         <span>{{ smartNode.name }}</span>
       </div>
@@ -84,7 +93,16 @@
         class="simple-node-block"
         *ngFor="let simpleNode of smartNode.simpleNodes"
       >
-        <div class="panel-left" [class]="nodeStyleMapping(simpleNode.status)">
+        <div
+          class="panel-left"
+          [class]="
+            simpleNode.status === nodeStatus.ONLINE
+              ? 'online-node'
+              : simpleNode.status === nodeStatus.OFFLINE
+              ? 'offline-node'
+              : 'deactivated-node'
+          "
+        >
           <i class="material-icons panel-icon">sensors</i>
           <span>{{ simpleNode.name }}</span>
         </div>

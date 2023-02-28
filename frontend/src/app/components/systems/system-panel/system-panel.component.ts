@@ -1,6 +1,7 @@
 import { Component, HostListener, Input } from '@angular/core';
 import { System } from 'src/app/model/system/system';
 import { NodeStatus } from 'src/app/model/system/node-status';
+import { SmartNode } from 'src/app/model/system/smart-node';
 
 @Component({
   selector: 'app-system-panel',
@@ -10,6 +11,7 @@ import { NodeStatus } from 'src/app/model/system/node-status';
 export class SystemPanelComponent {
   @Input() system!: System;
   @Input() isPreview!: boolean;
+  nodeStatus = NodeStatus;
 
   @HostListener('click', ['$event'])
   onHostClick(event: MouseEvent) {
@@ -19,20 +21,37 @@ export class SystemPanelComponent {
     }
   }
 
+  onDeleteSystem(): void {
+    if (this.isPreview) return;
+    console.log('Deleted');
+  }
+
   /**
-   * Map node status to the corresponsing style
-   * @param status node status
-   * @returns style class name
+   * Retrieve all the standalone smart nodes of the current system
+   * @returns an array of standalone smart nodes
    */
-  nodeStyleMapping(status: NodeStatus): string {
-    switch (status) {
-      case NodeStatus.ONLINE:
-        return 'online-node';
-      case NodeStatus.OFFLINE:
-        return 'offline-node';
-      case NodeStatus.DEACTIVATED:
-        return 'deactivated-node';
-    }
+  getStandaloneNodes(): SmartNode[] {
+    return this.system.smartNodes.filter((smartNode) => smartNode.isStandalone);
+  }
+
+  /**
+   * Retrieve all the standalone online smart nodes of the current system
+   * @returns an array of standalone smart nodes
+   */
+  // getStandaloneNodesOnline(): SmartNode[] {
+  //   return this.getStandaloneNodes().filter(
+  //     (smartNode) => smartNode.status === NodeStatus.ONLINE
+  //   );
+  // }
+
+  /**
+   * Retrieve all the non standalone smart nodes of the current system
+   * @returns an array of non standalone smart nodes
+   */
+  getNonStandaloneNodes(): SmartNode[] {
+    return this.system.smartNodes.filter(
+      (smartNode) => !smartNode.isStandalone
+    );
   }
 
   /**
@@ -40,9 +59,7 @@ export class SystemPanelComponent {
    * @returns true if the system is standalone, false otherwise
    */
   isStandaloneSystem(): boolean {
-    return !this.system.smartNodes.filter(
-      (smartNode) => !smartNode.isStandalone
-    ).length;
+    return this.system.smartNodes.length === this.getStandaloneNodes().length;
   }
 
   /**
@@ -50,14 +67,8 @@ export class SystemPanelComponent {
    * @returns true if all the non standalone smart nodes are offline, false otherwise
    */
   areNonStandaloneNodesOffline(): boolean {
-    return !this.system.smartNodes.filter(
-      (smartNode) =>
-        !smartNode.isStandalone && smartNode.status === NodeStatus.ONLINE
+    return !this.getNonStandaloneNodes().filter(
+      (smartNode) => smartNode.status === NodeStatus.ONLINE
     ).length;
-  }
-
-  onDeleteSystem(): void {
-    if (this.isPreview) return;
-    console.log('Deleted');
   }
 }
