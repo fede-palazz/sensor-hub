@@ -1,6 +1,8 @@
 import { SystemPanelComponent } from './system-panel.component';
 import { System } from 'src/app/model/system/system';
 import { NodeStatus } from 'src/app/model/system/node-status';
+import { SmartNode } from 'src/app/model/system/smart-node';
+import { SimpleNode } from 'src/app/model/system/simple-node';
 
 describe('SystemPanelComponent', () => {
   let component: SystemPanelComponent;
@@ -444,5 +446,39 @@ describe('SystemPanelComponent', () => {
 
     // ASSERT
     expect(component.areNonStandaloneNodesOffline()).toBeTrue();
+  });
+
+  /*****************
+   *  isSmartNode  *
+   *****************/
+  it('#isSmartNode - one smart node - should return true', () => {
+    // ARRANGE
+    const node: SmartNode = {
+      id: '1',
+      name: 'smartNode',
+      isStandalone: true,
+      status: NodeStatus.ONLINE,
+    };
+
+    // ACT
+    const isSmart = component.isSmartNode(node);
+
+    // ASSERT
+    expect(isSmart).toBeTrue();
+  });
+
+  it('#isSmartNode - one simple node - should return false', () => {
+    // ARRANGE
+    const node: SimpleNode = {
+      id: '1',
+      name: 'smartNode',
+      status: NodeStatus.OFFLINE,
+    };
+
+    // ACT
+    const isSmart = component.isSmartNode(node);
+
+    // ASSERT
+    expect(isSmart).toBeFalse();
   });
 });

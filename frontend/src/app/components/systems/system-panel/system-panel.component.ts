@@ -8,6 +8,7 @@ import {
 import { System } from 'src/app/model/system/system';
 import { NodeStatus } from 'src/app/model/system/node-status';
 import { SmartNode } from 'src/app/model/system/smart-node';
+import { SimpleNode } from 'src/app/model/system/simple-node';
 
 @Component({
   selector: 'app-system-panel',
@@ -17,8 +18,8 @@ import { SmartNode } from 'src/app/model/system/smart-node';
 export class SystemPanelComponent {
   @Input() system!: System;
   @Input() isPreview!: boolean;
-  @Output() deleteSystem = new EventEmitter<string>();
-  systemDeletion = false; // binded to the delete system btn
+  @Output() deleteSystem = new EventEmitter<any>();
+  @Output() deleteNode = new EventEmitter<SmartNode | SimpleNode>();
   nodeStatus = NodeStatus; // access NodeStatus enum from template
 
   @HostListener('click', ['$event'])
@@ -29,11 +30,24 @@ export class SystemPanelComponent {
     }
   }
 
-  onDeleteSystem($event: MouseEvent): void {
+  onDeleteSystem($elem: HTMLElement): void {
     if (this.isPreview) return;
-    this.deleteSystem.emit(this.system.id);
+    this.deleteSystem.emit();
     // Display loading spinner
-    this.systemDeletion = true;
+    $elem.classList.add('is-loading');
+  }
+
+  onDeleteNode($elem: HTMLElement, node: SmartNode | SimpleNode): void {
+    if (this.isPreview) return;
+    // If smart node, check the presence of child simple nodes
+    if (this.isSmartNode(node) && (node as SmartNode).simpleNodes?.length)
+      return;
+    const deletedNode = this.isSmartNode(node)
+      ? (node as SmartNode)
+      : (node as SimpleNode);
+    this.deleteNode.emit(deletedNode);
+    // Display loading spinner
+    $elem.classList.add('is-loading');
   }
 
   /**
@@ -43,16 +57,6 @@ export class SystemPanelComponent {
   getStandaloneNodes(): SmartNode[] {
     return this.system.smartNodes.filter((smartNode) => smartNode.isStandalone);
   }
-
-  /**
-   * Retrieve all the standalone online smart nodes of the current system
-   * @returns an array of standalone smart nodes
-   */
-  // getStandaloneNodesOnline(): SmartNode[] {
-  //   return this.getStandaloneNodes().filter(
-  //     (smartNode) => smartNode.status === NodeStatus.ONLINE
-  //   );
-  // }
 
   /**
    * Retrieve all the non standalone smart nodes of the current system
@@ -80,5 +84,14 @@ export class SystemPanelComponent {
     return !this.getNonStandaloneNodes().filter(
       (smartNode) => smartNode.status === NodeStatus.ONLINE
     ).length;
+  }
+
+  /**
+   * Determine whether a node is either a SmartNode or a SimpleNode
+   * @param node SmartNode | SimpleNode
+   * @returns true if node is a smartNode, false otherwise
+   */
+  isSmartNode(node: SmartNode | SimpleNode) {
+    return node.hasOwnProperty('isStandalone');
   }
 }

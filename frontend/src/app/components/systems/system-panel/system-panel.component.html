@@ -7,10 +7,10 @@
     <span>{{ system.name }}</span>
     <button
       class="button icon-right"
+      #deleteSystemBtn
       *ngIf="!system.smartNodes.length"
       [class]="system.color"
-      [class.is-loading]="systemDeletion"
-      (click)="onDeleteSystem($event)"
+      (click)="onDeleteSystem(deleteSystemBtn)"
     >
       <span class="icon"><i class="material-icons">delete</i></span>
     </button>
@@ -66,7 +66,9 @@
 
           <button
             class="button"
-            *ngIf="smartNode.isStandalone; else disabledDeleteButton"
+            *ngIf="!smartNode.simpleNodes?.length; else disabledDeleteButton"
+            #deleteSmartNodeBtn
+            (click)="onDeleteNode(deleteSmartNodeBtn, smartNode)"
           >
             <span class="icon">
               <i class="material-icons">delete</i>
@@ -90,7 +92,10 @@
     </div>
 
     <!-- Simple nodes panel -->
-    <div class="panel-block simple-nodes-panel" *ngIf="!smartNode.isStandalone">
+    <div
+      class="panel-block simple-nodes-panel"
+      *ngIf="!smartNode.isStandalone && smartNode.simpleNodes?.length"
+    >
       <!-- Simple node  -->
       <div
         class="simple-node-block"
@@ -123,7 +128,11 @@
               </span>
             </button>
 
-            <button class="button">
+            <button
+              class="button"
+              #deleteSimpleNodeBtn
+              (click)="onDeleteNode(deleteSimpleNodeBtn, simpleNode)"
+            >
               <span class="icon">
                 <i class="material-icons">delete</i>
               </span>
