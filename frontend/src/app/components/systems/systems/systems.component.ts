@@ -39,13 +39,16 @@ export class SystemsComponent {
   systems?: System[];
 
   constructor(private systemsDataService: SystemsDataService) {
-    this.systemsDataService
-      .getSystems()
-      .subscribe((systems) => (this.systems = systems));
+    this.systemsDataService.getSystems().subscribe((systems) => {
+      // console.log(systems);
+      this.systems = systems;
+    });
   }
 
   onDeleteSystem(id: string): void {
-    this.systemsDataService.deleteSystem(id).subscribe(() => {
+    this.systemsDataService.deleteSystem(id).subscribe((c) => {
+      // console.log(c);
+      // this.systems = c;
       this.systems = this.systems!.filter((system) => system.id !== id);
     });
   }

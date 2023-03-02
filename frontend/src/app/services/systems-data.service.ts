@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { System } from '../model/system/system';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { SmartNode } from '../model/system/smart-node';
+import { environment } from 'src/environments/environment';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -14,7 +14,16 @@ const httpOptions = {
   providedIn: 'root',
 })
 export class SystemsDataService {
-  private readonly API_URL = 'api/systems';
+  /**
+   * URL CONVENTION
+   *
+   * - api/systems        ->    all the systems db
+   * - api/systems/{id}   ->    specific system
+   * - api/systems/{id}?smartId={id} -> specific smart node
+   * - api/systems/{id}?smartId={id}&simpleId={id} -> specific simple node
+   */
+
+  private readonly API_URL = environment.apiUrl + '/systems';
 
   constructor(private http: HttpClient) {}
 
