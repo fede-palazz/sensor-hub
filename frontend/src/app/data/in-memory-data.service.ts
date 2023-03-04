@@ -10,11 +10,12 @@ import {
   ResponseOptions,
   STATUS,
 } from 'angular-in-memory-web-api';
+import { System } from '../model/system/system';
 
 enum COLLECTION {
   SYSTEMS = 'systems',
-  SMARTNODES = 'smartNodes',
-  SIMPLENODES = 'simpleNodes',
+  SYSTEMS_SMARTNODES = 'smartNodes',
+  SYSTEMS_SIMPLENODES = 'simpleNodes',
 }
 
 enum ID {
@@ -23,7 +24,7 @@ enum ID {
   SIMPLE_NODE_ID = 'simpleNodeId',
 }
 
-const systems = [
+const systems: System[] = [
   {
     id: 'system1',
     icon: 'home',
@@ -151,41 +152,6 @@ export class InMemoryDataService implements InMemoryDbService {
     return {};
   }
 
-  // HTTP GET interceptor
-  get(reqInfo: RequestInfo): Observable<any> | undefined {
-    // console.log(reqInfo);
-    switch (reqInfo.collectionName) {
-      case COLLECTION.SYSTEMS:
-        return reqInfo.utils.createResponse$(() => {
-          const data = this.db.get(COLLECTION.SYSTEMS);
-          const options: ResponseOptions = data
-            ? { body: data, status: STATUS.OK }
-            : {
-                body: { error: `Error` },
-                status: STATUS.NOT_FOUND,
-              };
-          return this.finishOptions(options, reqInfo);
-        });
-
-      default:
-        return undefined;
-    }
-  }
-
-  // HTTP DELETE interceptor
-  delete(reqInfo: RequestInfo): Observable<any> | undefined {
-    return reqInfo.utils.createResponse$(() => {
-      const data = {};
-      const options: ResponseOptions = data
-        ? { body: data, status: STATUS.OK }
-        : {
-            body: { error: `Error` },
-            status: STATUS.NOT_FOUND,
-          };
-      return this.finishOptions(options, reqInfo);
-    });
-  }
-
   parseRequestUrl(
     url: string,
     utils: RequestInfoUtilities
@@ -198,32 +164,131 @@ export class InMemoryDataService implements InMemoryDbService {
         if (!parsedUrl.query.size) return undefined;
 
         // Copy query params
-        const map = new Map(parsedUrl.query);
+        const queryParams = new Map(parsedUrl.query);
 
-        if (map.get('simpleId')) {
+        // Set systemId param
+        parsedUrl.query.clear();
+        parsedUrl.query.set('systemId', [parsedUrl.id]);
+
+        if (queryParams.get('simpleId')) {
           // Redirect request to simpleNodes collection
-          // Set params
-          parsedUrl.query.clear();
-          parsedUrl.query.set('systemId', [parsedUrl.id]);
-          parsedUrl.query.set('smartId', map.get('smartId')!);
-          parsedUrl.collectionName = COLLECTION.SIMPLENODES;
-          parsedUrl.id = map.get('simpleId')![0];
+          parsedUrl.query.set('smartId', queryParams.get('smartId')!);
+          parsedUrl.collectionName = COLLECTION.SYSTEMS_SIMPLENODES;
+          parsedUrl.id = queryParams.get('simpleId')![0];
         } else {
           // Redirect request to smartNodes collection
-          // Set params
-          parsedUrl.query.clear();
-          parsedUrl.query.set('systemId', [parsedUrl.id]);
-          parsedUrl.collectionName = COLLECTION.SMARTNODES;
-          parsedUrl.id = map.get('smartId')![0];
+          parsedUrl.collectionName = COLLECTION.SYSTEMS_SMARTNODES;
+          parsedUrl.id = queryParams.get('smartId')![0];
         }
         break;
     }
-
-    console.log(parsedUrl);
     return parsedUrl;
   }
 
-  // HELPERS
+  /*************************
+   * HTTP METHODS OVERRIDE *
+   *************************/
+
+  // HTTP GET interceptor
+  get(reqInfo: RequestInfo): Observable<any> | undefined {
+    switch (reqInfo.collectionName) {
+      case COLLECTION.SYSTEMS:
+        /**
+         * Sub cases:
+         * - GET /systems
+         * - GET /systems/{id}
+         */
+        const systemId = reqInfo.id;
+        return systemId
+          ? this.getSystem(reqInfo, systemId)
+          : this.getSystems(reqInfo);
+
+      default:
+        return undefined;
+    }
+  }
+
+  // HTTP DELETE interceptor
+  delete(reqInfo: RequestInfo): Observable<any> | undefined {
+    switch (reqInfo.collectionName) {
+      case COLLECTION.SYSTEMS:
+        /**
+         * Sub cases:
+         * - DELETE /systems/{id}
+         */
+        const systemId = reqInfo.id;
+        return systemId
+          ? this.deleteSystem(reqInfo, systemId)
+          : this.invalidIdResponse(reqInfo);
+      default:
+        return undefined;
+    }
+  }
+
+  /*********************
+   * SYSTEMS FUNCTIONS *
+   *********************/
+
+  getSystems(reqInfo: RequestInfo): Observable<any> {
+    return reqInfo.utils.createResponse$(() => {
+      const data = this.db.get(COLLECTION.SYSTEMS);
+      const options: ResponseOptions = { body: data, status: STATUS.OK };
+      return this.finishOptions(options, reqInfo);
+    });
+  }
+
+  getSystem(reqInfo: RequestInfo, systemId: string): Observable<any> {
+    return reqInfo.utils.createResponse$(() => {
+      // Get data
+      const systems: System[] = this.db.get(COLLECTION.SYSTEMS);
+      const data = systems.filter((system) => system.id === systemId);
+
+      // Set response options
+      const options: ResponseOptions =
+        data && data.length
+          ? { body: data, status: STATUS.OK }
+          : {
+              body: { error: `System with id "${systemId}" not found` },
+              status: STATUS.NOT_FOUND,
+            };
+      return this.finishOptions(options, reqInfo);
+    });
+  }
+
+  deleteSystem(reqInfo: RequestInfo, systemId: string): Observable<any> {
+    // Get data
+    let systems: System[] = this.db.get(COLLECTION.SYSTEMS);
+    let options: ResponseOptions;
+    const systemToDelete = systems.find((system) => system.id === systemId);
+
+    // System not found
+    if (!systemToDelete)
+      return this.resourceNotFoundResponse(reqInfo, 'system', systemId);
+
+    return reqInfo.utils.createResponse$(() => {
+      // SmartNodes inside system
+      if (systemToDelete.smartNodes.length) {
+        options = {
+          body: {
+            error: `Impossible to delete the system ${systemId}: remove all the nodes before`,
+          },
+          status: STATUS.BAD_REQUEST,
+        };
+      }
+      // Request OK
+      else {
+        // Delete the requested system
+        systems = systems.filter((system) => system.id !== systemId);
+        options = { body: { id: systemId }, status: STATUS.OK };
+      }
+      return this.finishOptions(options, reqInfo);
+    });
+  }
+
+  /********************
+   * HELPER FUNCTIONS *
+   ********************/
+
   private finishOptions(
     options: ResponseOptions,
     { headers, url }: RequestInfo
@@ -233,6 +298,31 @@ export class InMemoryDataService implements InMemoryDbService {
     options.headers = headers;
     options.url = url;
     return options;
+  }
+
+  private invalidIdResponse(reqInfo: RequestInfo) {
+    return reqInfo.utils.createResponse$(() => {
+      const options = {
+        body: { error: `Invalid id` },
+        status: STATUS.BAD_REQUEST,
+      };
+      return this.finishOptions(options, reqInfo);
+    });
+  }
+
+  private resourceNotFoundResponse(
+    reqInfo: RequestInfo,
+    name: string,
+    id: string
+  ) {
+    return reqInfo.utils.createResponse$(() => {
+      const resourceName = name.charAt(0).toUpperCase() + name.slice(1);
+      const options = {
+        body: { error: `${resourceName} with id: ${id} not found` },
+        status: STATUS.NOT_FOUND,
+      };
+      return this.finishOptions(options, reqInfo);
+    });
   }
 
   // protected responseInterceptor(
