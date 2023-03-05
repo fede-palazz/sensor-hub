@@ -1,0 +1,97 @@
+@import "../../../../styles/variables.scss";
+@import "bulma/sass/utilities/mixins";
+
+.panel-heading {
+  display: flex;
+  align-items: center;
+  & .icon-left {
+    margin-right: 0.5em;
+  }
+  & .icon-right {
+    margin-left: auto;
+    &:hover {
+      color: $icon-hover;
+      cursor: pointer;
+    }
+  }
+}
+
+.panel-block {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+  &:hover > :not(.slave-block).list-item-controls {
+    display: blocK;
+  }
+
+  & .panel-icon {
+    margin-right: 0.5em;
+    font-size: 1.25em;
+  }
+
+  // Add nodes buttons
+  &:last-child {
+    justify-content: flex-start;
+    & .button {
+      margin: 0.25em 0.75em 0.25em 0;
+    }
+  }
+
+  & .panel-left {
+    display: flex;
+    align-items: center;
+    margin: 0.5em 1.5em 0.5em 0;
+  }
+}
+
+.list-item-controls {
+  padding: 0;
+  display: none;
+
+  // Touch device
+  @media screen and (hover: none) {
+    display: block;
+  }
+
+  & .material-icons {
+    font-size: 1.25em;
+  }
+}
+
+.simple-nodes-panel {
+  max-height: 9.5em;
+  overflow-y: auto;
+  padding-left: 1em;
+}
+
+.panel-block .simple-node-block {
+  padding: 0.25em 0 0.25em 0.5em;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  border-left: 1px solid #dbdbdb;
+
+  &:hover .list-item-controls {
+    display: block;
+  }
+}
+
+.online-node {
+  & .material-icons {
+    color: $success-dark;
+  }
+}
+
+.offline-node {
+  & .material-icons {
+    color: $danger;
+  }
+}
+
+.deactivated-node {
+  & .material-icons {
+    color: #7a7a7a;
+  }
+}

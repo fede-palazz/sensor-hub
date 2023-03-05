@@ -1,0 +1,166 @@
+<div class="panel" [class]="system.color">
+  <!-- Panel header -->
+  <div class="panel-heading">
+    <span class="icon icon-left"
+      ><i class="material-icons">{{ system.icon }}</i></span
+    >
+    <span>{{ system.name }}</span>
+    <button
+      class="button icon-right"
+      #deleteSystemBtn
+      *ngIf="!system.smartNodes.length"
+      [class]="system.color"
+      (click)="onDeleteSystem(deleteSystemBtn)"
+    >
+      <span class="icon"><i class="material-icons">delete</i></span>
+    </button>
+  </div>
+  <!-- TODO: Add tooltips -->
+  <!-- Search panel -->
+  <div class="panel-block">
+    <p class="control has-icons-left">
+      <input class="input" type="text" placeholder="Filtra per nodo" />
+      <span class="icon is-left">
+        <i class="material-icons">search</i>
+      </span>
+    </p>
+  </div>
+
+  <!-- Placeholder panel -->
+  <div class="panel-block" *ngIf="!system.smartNodes.length">
+    <div class="panel-left">
+      <i class="material-icons panel-icon">info</i>
+      <span>Ora puoi registrare un nodo smart nell'impianto</span>
+    </div>
+  </div>
+
+  <!-- Smart node panel -->
+  <ng-container *ngFor="let smartNode of system.smartNodes">
+    <div class="panel-block">
+      <div
+        class="panel-left"
+        [class]="
+          smartNode.status === nodeStatus.ONLINE
+            ? 'online-node'
+            : smartNode.status === nodeStatus.OFFLINE
+            ? 'offline-node'
+            : 'deactivated-node'
+        "
+      >
+        <i class="material-icons panel-icon">hub</i>
+        <span>{{ smartNode.name }}</span>
+      </div>
+      <div class="list-item-controls">
+        <div class="buttons is-right">
+          <button class="button">
+            <span class="icon">
+              <i class="material-icons">edit</i>
+            </span>
+          </button>
+
+          <button class="button" *ngIf="smartNode.isStandalone">
+            <span class="icon">
+              <i class="material-icons">power_settings_new</i>
+            </span>
+          </button>
+
+          <button
+            class="button"
+            *ngIf="!smartNode.simpleNodes?.length; else disabledDeleteButton"
+            #deleteSmartNodeBtn
+            (click)="onDeleteNode(deleteSmartNodeBtn, smartNode.id)"
+          >
+            <span class="icon">
+              <i class="material-icons">delete</i>
+            </span>
+          </button>
+
+          <!-- Disabled delete button -->
+          <ng-template #disabledDeleteButton>
+            <button
+              class="button"
+              title="Rimuovere tutti i nodi semplici prima di procedere"
+              disabled
+            >
+              <span class="icon">
+                <i class="material-icons">delete</i>
+              </span>
+            </button>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+
+    <!-- Simple nodes panel -->
+    <div
+      class="panel-block simple-nodes-panel"
+      *ngIf="!smartNode.isStandalone && smartNode.simpleNodes?.length"
+    >
+      <!-- Simple node  -->
+      <div
+        class="simple-node-block"
+        *ngFor="let simpleNode of smartNode.simpleNodes"
+      >
+        <div
+          class="panel-left"
+          [class]="
+            simpleNode.status === nodeStatus.ONLINE
+              ? 'online-node'
+              : simpleNode.status === nodeStatus.OFFLINE
+              ? 'offline-node'
+              : 'deactivated-node'
+          "
+        >
+          <i class="material-icons panel-icon">sensors</i>
+          <span>{{ simpleNode.name }}</span>
+        </div>
+        <div class="list-item-controls">
+          <div class="buttons is-right">
+            <button class="button">
+              <span class="icon">
+                <i class="material-icons">edit</i>
+              </span>
+            </button>
+
+            <button class="button">
+              <span class="icon">
+                <i class="material-icons">power_settings_new</i>
+              </span>
+            </button>
+
+            <button
+              class="button"
+              #deleteSimpleNodeBtn
+              (click)="
+                onDeleteNode(deleteSimpleNodeBtn, smartNode.id, simpleNode.id)
+              "
+            >
+              <span class="icon">
+                <i class="material-icons">delete</i>
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+  <!-- Add nodes panel -->
+  <div class="panel-block">
+    <button class="button" [class]="system.color">
+      <span class="icon"><i class="material-icons">add_circle</i></span>
+      <span>Nodo smart</span>
+    </button>
+    <button
+      class="button"
+      [class]="
+        ['is-dark', 'is-light'].includes(system.color)
+          ? 'is-white'
+          : system.color + ' is-light'
+      "
+      [disabled]="isStandaloneSystem() || areNonStandaloneNodesOffline()"
+    >
+      <span class="icon"><i class="material-icons">add_circle</i></span>
+      <span>Nodo semplice</span>
+    </button>
+  </div>
+</div>

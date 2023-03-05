@@ -1,0 +1,16 @@
+@import "../../../../styles/variables.scss";
+@import "bulma/sass/utilities/mixins";
+
+.system-panel {
+  min-width: 20rem;
+
+  @include desktop {
+    min-width: 22rem;
+    max-width: 28rem;
+  }
+
+  @include mobile {
+    min-width: none;
+    max-width: none;
+  }
+}

@@ -1,0 +1,87 @@
+<app-title-bar
+  [title]="'Nuovo Impianto'"
+  [buttons]="titleButtons"
+></app-title-bar>
+
+<div class="container">
+  <form (ngSubmit)="onSubmit(form)" #form="ngForm">
+    <div class="field">
+      <label class="label">Nome</label>
+      <div class="control">
+        <input
+          class="input"
+          type="text"
+          name="system-name"
+          placeholder="Nome identificativo dell'impianto"
+          [minlength]="5"
+          [maxLength]="45"
+          [(ngModel)]="previewSystem.name"
+          #name="ngModel"
+          required
+          [class.is-danger]="
+            (!name.pristine && !name.valid) || (!name.valid && form.submitted)
+          "
+        />
+      </div>
+      <p
+        class="help is-danger"
+        *ngIf="
+          (!name.pristine && !name.valid) || (!name.valid && form.submitted)
+        "
+      >
+        Inserire almeno 5 caratteri
+      </p>
+    </div>
+
+    <div class="field">
+      <label class="label">Icona</label>
+      <div class="buttons">
+        <button
+          type="button"
+          class="button"
+          *ngFor="let icon of iconsList; let i = index"
+          (click)="onIconClick(i)"
+          [class.is-focused]="selectedIconIndex === i"
+        >
+          <span class="icon"
+            ><i class="material-icons">{{ icon }}</i>
+          </span>
+        </button>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="label">Colore</label>
+      <div class="buttons">
+        <button
+          type="button"
+          class="button is-rounded"
+          *ngFor="let color of colorsList; let i = index"
+          [class]="color"
+          (click)="onColorClick(i)"
+          [class.is-focused]="selectedColorIndex === i"
+        ></button>
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="control">
+        <button type="submit" class="button has-text-white">
+          <span class="icon"><i class="material-icons">save</i></span>
+          <span>Salva</span>
+        </button>
+      </div>
+      <!-- TODO: Display error box dinamically -->
+      <p class="help is-danger" *ngIf="false">
+        Errore durante il salvataggio. Per favore, riprovare
+      </p>
+    </div>
+  </form>
+  <div class="preview-container">
+    <label class="label">Anteprima</label>
+    <app-system-panel
+      [system]="previewSystem"
+      [isPreview]="true"
+    ></app-system-panel>
+  </div>
+</div>
