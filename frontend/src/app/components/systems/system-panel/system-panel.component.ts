@@ -19,7 +19,10 @@ export class SystemPanelComponent {
   @Input() system!: System;
   @Input() isPreview!: boolean;
   @Output() deleteSystem = new EventEmitter<any>();
-  @Output() deleteNode = new EventEmitter<SmartNode | SimpleNode>();
+  @Output() deleteNode = new EventEmitter<{
+    smartNodeId: string;
+    simpleNodeId: string | undefined;
+  }>();
   nodeStatus = NodeStatus; // access NodeStatus enum from template
 
   @HostListener('click', ['$event'])
@@ -32,22 +35,33 @@ export class SystemPanelComponent {
 
   onDeleteSystem($elem: HTMLElement): void {
     if (this.isPreview) return;
-    this.deleteSystem.emit();
     // Display loading spinner
     $elem.classList.add('is-loading');
+    this.deleteSystem.emit();
   }
 
-  onDeleteNode($elem: HTMLElement, node: SmartNode | SimpleNode): void {
+  onDeleteNode(
+    $elem: HTMLElement,
+    smartNodeId: string,
+    simpleNodeId?: string
+  ): void {
     if (this.isPreview) return;
+    const isSmartNode: boolean = !simpleNodeId;
     // If smart node, check the presence of child simple nodes
-    if (this.isSmartNode(node) && (node as SmartNode).simpleNodes?.length)
+    if (
+      isSmartNode &&
+      this.system.smartNodes.find((smartNode) => smartNode.id === smartNodeId)
+        ?.simpleNodes?.length
+    )
       return;
-    const deletedNode = this.isSmartNode(node)
-      ? (node as SmartNode)
-      : (node as SimpleNode);
-    this.deleteNode.emit(deletedNode);
+
+    console.log('Emettendo');
     // Display loading spinner
     $elem.classList.add('is-loading');
+    this.deleteNode.emit({
+      smartNodeId: smartNodeId,
+      simpleNodeId: simpleNodeId,
+    });
   }
 
   /**

@@ -68,7 +68,7 @@
             class="button"
             *ngIf="!smartNode.simpleNodes?.length; else disabledDeleteButton"
             #deleteSmartNodeBtn
-            (click)="onDeleteNode(deleteSmartNodeBtn, smartNode)"
+            (click)="onDeleteNode(deleteSmartNodeBtn, smartNode.id)"
           >
             <span class="icon">
               <i class="material-icons">delete</i>
@@ -131,7 +131,9 @@
             <button
               class="button"
               #deleteSimpleNodeBtn
-              (click)="onDeleteNode(deleteSimpleNodeBtn, simpleNode)"
+              (click)="
+                onDeleteNode(deleteSimpleNodeBtn, smartNode.id, simpleNode.id)
+              "
             >
               <span class="icon">
                 <i class="material-icons">delete</i>

@@ -11,18 +11,14 @@ import {
   STATUS,
 } from 'angular-in-memory-web-api';
 import { System } from '../model/system/system';
+import { SmartNode } from '../model/system/smart-node';
+import { SimpleNode } from '../model/system/simple-node';
 
-enum COLLECTION {
-  SYSTEMS = 'systems',
-  SYSTEMS_SMARTNODES = 'smartNodes',
-  SYSTEMS_SIMPLENODES = 'simpleNodes',
-}
-
-enum ID {
-  SYSTEM_ID = 'systemId',
-  SMART_NODE_ID = 'smartNodeId',
-  SIMPLE_NODE_ID = 'simpleNodeId',
-}
+// enum COLLECTION {
+//   SYSTEMS = 'systems',
+//   SYSTEMS_SMARTNODES = 'smartNodes',
+//   SYSTEMS_SIMPLENODES = 'simpleNodes',
+// }
 
 const systems: System[] = [
   {
@@ -139,17 +135,17 @@ const systems: System[] = [
   providedIn: 'root',
 })
 export class InMemoryDataService implements InMemoryDbService {
-  private db: Map<COLLECTION, any>;
+  // private db;
 
   constructor() {
     // Instantiate the db
-    this.db = new Map<COLLECTION, []>();
+    // this.db = new Map<COLLECTION, any>();
     // Add the systems collection
-    this.db.set(COLLECTION.SYSTEMS, systems);
+    // this.db.set(COLLECTION.SYSTEMS, systems);
   }
 
   createDb() {
-    return {};
+    return { systems };
   }
 
   parseRequestUrl(
@@ -157,173 +153,381 @@ export class InMemoryDataService implements InMemoryDbService {
     utils: RequestInfoUtilities
   ): ParsedRequestUrl | null | undefined {
     const parsedUrl = utils.parseRequestUrl(url);
-
-    switch (parsedUrl.collectionName) {
-      case COLLECTION.SYSTEMS:
-        // No query params -> use default parser
-        if (!parsedUrl.query.size) return undefined;
-
-        // Copy query params
-        const queryParams = new Map(parsedUrl.query);
-
-        // Set systemId param
-        parsedUrl.query.clear();
-        parsedUrl.query.set('systemId', [parsedUrl.id]);
-
-        if (queryParams.get('simpleId')) {
-          // Redirect request to simpleNodes collection
-          parsedUrl.query.set('smartId', queryParams.get('smartId')!);
-          parsedUrl.collectionName = COLLECTION.SYSTEMS_SIMPLENODES;
-          parsedUrl.id = queryParams.get('simpleId')![0];
-        } else {
-          // Redirect request to smartNodes collection
-          parsedUrl.collectionName = COLLECTION.SYSTEMS_SMARTNODES;
-          parsedUrl.id = queryParams.get('smartId')![0];
-        }
-        break;
-    }
+    console.log(url);
+    // Set resource URL
+    parsedUrl.resourceUrl = url.slice(url.indexOf(parsedUrl.collectionName));
     return parsedUrl;
   }
+
+  // parseRequestUrl(
+  //   url: string,
+  //   utils: RequestInfoUtilities
+  // ): ParsedRequestUrl | null | undefined {
+  //   const parsedUrl = utils.parseRequestUrl(url);
+
+  //   switch (parsedUrl.collectionName) {
+  //     case COLLECTION.SYSTEMS:
+  //       // No query params -> use default parser
+  //       if (!parsedUrl.query.size) return undefined;
+
+  //       // Copy query params
+  //       const queryParams = new Map(parsedUrl.query);
+
+  //       // Set systemId param
+  //       parsedUrl.query.clear();
+  //       parsedUrl.query.set('systemId', [parsedUrl.id]);
+
+  //       if (queryParams.get('simpleId')) {
+  //         // Redirect request to simpleNodes collection
+  //         parsedUrl.query.set('smartId', queryParams.get('smartId')!);
+  //         parsedUrl.collectionName = COLLECTION.SYSTEMS_SIMPLENODES;
+  //         parsedUrl.id = queryParams.get('simpleId')![0];
+  //       } else {
+  //         // Redirect request to smartNodes collection
+  //         parsedUrl.collectionName = COLLECTION.SYSTEMS_SMARTNODES;
+  //         parsedUrl.id = queryParams.get('smartId')![0];
+  //       }
+  //       break;
+  //   }
+  //   return parsedUrl;
+  // }
 
   /*************************
    * HTTP METHODS OVERRIDE *
    *************************/
 
   // HTTP GET interceptor
-  get(reqInfo: RequestInfo): Observable<any> | undefined {
-    switch (reqInfo.collectionName) {
-      case COLLECTION.SYSTEMS:
-        /**
-         * Sub cases:
-         * - GET /systems
-         * - GET /systems/{id}
-         */
-        const systemId = reqInfo.id;
-        return systemId
-          ? this.getSystem(reqInfo, systemId)
-          : this.getSystems(reqInfo);
-
-      default:
-        return undefined;
-    }
-  }
+  // get(reqInfo: RequestInfo): Observable<any> | undefined {
+  //   switch (reqInfo.collectionName) {
+  //     case COLLECTION.SYSTEMS:
+  //       /**
+  //        * Sub cases:
+  //        * - GET /systems
+  //        * - GET /systems/{id}
+  //        * - GET /systems/{id}/smartnodes
+  //        * - GET /systems/{id}/smartnodes/{id}
+  //        * - GET /systems/{id}/smartnodes/{id}/simplenodes
+  //        * - GET /systems/{id}/smartnodes/{id}/simplenodes/{id}
+  //        */
+  //       const splittedUrl = reqInfo.resourceUrl.split('/');
+  //       switch (splittedUrl.length) {
+  //         case 1: // GET /systems
+  //           return this.getSystems(reqInfo);
+  //         case 2: {
+  //           // GET /systems/{id}
+  //           const systemId = splittedUrl[1];
+  //           return this.getSystem(reqInfo, systemId);
+  //         }
+  //         case 3: {
+  //           // GET /systems/{id}/smartnodes
+  //           const systemId = splittedUrl[1];
+  //           return this.getSmartNodes(reqInfo, systemId);
+  //         }
+  //         case 4: {
+  //           // GET /systems/{id}/smartnodes/{id}
+  //           const systemId = splittedUrl[1];
+  //           const smartNodeId = splittedUrl[3];
+  //           return this.getSmartNode(reqInfo, systemId, smartNodeId);
+  //         }
+  //         case 5: {
+  //           // GET /systems/{id}/smartnodes/{id}/simplenodes
+  //           const systemId = splittedUrl[1];
+  //           const smartNodeId = splittedUrl[3];
+  //           return this.getSimpleNodes(reqInfo, systemId, smartNodeId);
+  //         }
+  //         case 6: {
+  //           // GET /systems/{id}/smartnodes/{id}/simplenodes/{id}
+  //           const systemId = splittedUrl[1];
+  //           const smartNodeId = splittedUrl[3];
+  //           const simpleNodeId = splittedUrl[5];
+  //           return this.getSimpleNode(
+  //             reqInfo,
+  //             systemId,
+  //             smartNodeId,
+  //             simpleNodeId
+  //           );
+  //         }
+  //         default:
+  //           return undefined;
+  //       }
+  //     default:
+  //       return undefined;
+  //   }
+  // }
 
   // HTTP DELETE interceptor
-  delete(reqInfo: RequestInfo): Observable<any> | undefined {
-    switch (reqInfo.collectionName) {
-      case COLLECTION.SYSTEMS:
-        /**
-         * Sub cases:
-         * - DELETE /systems/{id}
-         */
-        const systemId = reqInfo.id;
-        return systemId
-          ? this.deleteSystem(reqInfo, systemId)
-          : this.invalidIdResponse(reqInfo);
-      default:
-        return undefined;
-    }
-  }
+  // delete(reqInfo: RequestInfo): Observable<any> | undefined {
+  //   switch (reqInfo.collectionName) {
+  //     case COLLECTION.SYSTEMS:
+  //       /**
+  //        * Sub cases:
+  //        * - DELETE /systems/{id}
+  //        * - DELETE /systems/{id}/smartnodes/{id}
+  //        * - DELETE /systems/{id}/smartnodes/{id}/simplenodes/{id}
+  //        */
+  //       const splittedUrl = reqInfo.resourceUrl.split('/');
+  //       switch (splittedUrl.length) {
+  //         case 2: {
+  //           // DELETE /systems/{id}
+  //           const systemId = splittedUrl[1];
+  //           return this.deleteSystem(reqInfo, systemId);
+  //         }
+  //         case 4: {
+  //           // DELETE /systems/{id}/smartnodes/{id}
+  //           const systemId = splittedUrl[1];
+  //           const smartNodeId = splittedUrl[3];
+  //           return this.deleteSmartNode(reqInfo, systemId, smartNodeId);
+  //         }
+  //         case 6: {
+  //           // DELETE /systems/{id}/smartnodes/{id}/simplenodes/{id}
+  //           const systemId = splittedUrl[1];
+  //           const smartNodeId = splittedUrl[3];
+  //           const simpleNodeId = splittedUrl[5];
+  //           return this.deleteSimpleNode(
+  //             reqInfo,
+  //             systemId,
+  //             smartNodeId,
+  //             simpleNodeId
+  //           );
+  //         }
+  //         default:
+  //           return undefined;
+  //       }
+  //     default:
+  //       return undefined;
+  //   }
+  // }
 
   /*********************
    * SYSTEMS FUNCTIONS *
    *********************/
 
-  getSystems(reqInfo: RequestInfo): Observable<any> {
-    return reqInfo.utils.createResponse$(() => {
-      const data = this.db.get(COLLECTION.SYSTEMS);
-      const options: ResponseOptions = { body: data, status: STATUS.OK };
-      return this.finishOptions(options, reqInfo);
-    });
-  }
+  // getSystems(reqInfo: RequestInfo): Observable<any> {
+  //   return reqInfo.utils.createResponse$(() => {
+  //     const data: System[] = this.getDBCopy().get(COLLECTION.SYSTEMS);
+  //     const options: ResponseOptions = {
+  //       body: data,
+  //       status: STATUS.OK,
+  //     };
+  //     return this.finishOptions(options, reqInfo);
+  //   });
+  // }
 
-  getSystem(reqInfo: RequestInfo, systemId: string): Observable<any> {
-    return reqInfo.utils.createResponse$(() => {
-      // Get data
-      const systems: System[] = this.db.get(COLLECTION.SYSTEMS);
-      const data = systems.filter((system) => system.id === systemId);
+  // getSystem(reqInfo: RequestInfo, systemId: string): Observable<any> {
+  //   return reqInfo.utils.createResponse$(() => {
+  //     // Get data
+  //     const systems: System[] = this.getDBCopy().get(COLLECTION.SYSTEMS);
+  //     const data = systems.filter((system) => system.id === systemId);
 
-      // Set response options
-      const options: ResponseOptions =
-        data && data.length
-          ? { body: data, status: STATUS.OK }
-          : {
-              body: { error: `System with id "${systemId}" not found` },
-              status: STATUS.NOT_FOUND,
-            };
-      return this.finishOptions(options, reqInfo);
-    });
-  }
+  //     // Set response options
+  //     const options: ResponseOptions =
+  //       data && data.length
+  //         ? { body: data, status: STATUS.OK }
+  //         : {
+  //             body: { error: `System with id "${systemId}" not found` },
+  //             status: STATUS.NOT_FOUND,
+  //           };
+  //     return this.finishOptions(options, reqInfo);
+  //   });
+  // }
 
-  deleteSystem(reqInfo: RequestInfo, systemId: string): Observable<any> {
-    // Get data
-    let systems: System[] = this.db.get(COLLECTION.SYSTEMS);
-    let options: ResponseOptions;
-    const systemToDelete = systems.find((system) => system.id === systemId);
+  // getSmartNodes(reqInfo: RequestInfo, systemId: string): Observable<any> {
+  //   return reqInfo.utils.createResponse$(() => {
+  //     const data: SmartNode[] = this.getDBCopy()
+  //       .get(COLLECTION.SYSTEMS)
+  //       .find((system: System) => system.id === systemId).smartNodes;
 
-    // System not found
-    if (!systemToDelete)
-      return this.resourceNotFoundResponse(reqInfo, 'system', systemId);
+  //     const options: ResponseOptions = { body: data, status: STATUS.OK };
+  //     return this.finishOptions(options, reqInfo);
+  //   });
+  // }
 
-    return reqInfo.utils.createResponse$(() => {
-      // SmartNodes inside system
-      if (systemToDelete.smartNodes.length) {
-        options = {
-          body: {
-            error: `Impossible to delete the system ${systemId}: remove all the nodes before`,
-          },
-          status: STATUS.BAD_REQUEST,
-        };
-      }
-      // Request OK
-      else {
-        // Delete the requested system
-        systems = systems.filter((system) => system.id !== systemId);
-        options = { body: { id: systemId }, status: STATUS.OK };
-      }
-      return this.finishOptions(options, reqInfo);
-    });
-  }
+  // getSmartNode(
+  //   reqInfo: RequestInfo,
+  //   systemId: string,
+  //   smartNodeId: string
+  // ): Observable<any> {
+  //   return reqInfo.utils.createResponse$(() => {
+  //     const data: SmartNode = this.getDBCopy()
+  //       .get(COLLECTION.SYSTEMS)
+  //       .find((system: System) => system.id === systemId)
+  //       .smartNodes.find(
+  //         (smartNode: SmartNode) => smartNode.id === smartNodeId
+  //       );
+
+  //     const options: ResponseOptions = { body: data, status: STATUS.OK };
+  //     return this.finishOptions(options, reqInfo);
+  //   });
+  // }
+
+  // getSimpleNodes(
+  //   reqInfo: RequestInfo,
+  //   systemId: string,
+  //   smartNodeId: string
+  // ): Observable<any> {
+  //   return reqInfo.utils.createResponse$(() => {
+  //     const data: SimpleNode[] = this.getDBCopy()
+  //       .get(COLLECTION.SYSTEMS)
+  //       .find((system: System) => system.id === systemId)
+  //       .smartNodes.find(
+  //         (smartNode: SmartNode) => smartNode.id === smartNodeId
+  //       ).simpleNodes;
+
+  //     const options: ResponseOptions = { body: data, status: STATUS.OK };
+  //     return this.finishOptions(options, reqInfo);
+  //   });
+  // }
+
+  // getSimpleNode(
+  //   reqInfo: RequestInfo,
+  //   systemId: string,
+  //   smartNodeId: string,
+  //   simpleNodeId: string
+  // ): Observable<any> {
+  //   return reqInfo.utils.createResponse$(() => {
+  //     const data: SimpleNode = this.getDBCopy()
+  //       .get(COLLECTION.SYSTEMS)
+  //       .find((system: System) => system.id === systemId)
+  //       .smartNodes.find((smartNode: SmartNode) => smartNode.id === smartNodeId)
+  //       .simpleNodes.find(
+  //         (simpleNode: SimpleNode) => simpleNode.id === simpleNodeId
+  //       );
+
+  //     const options: ResponseOptions = { body: data, status: STATUS.OK };
+  //     return this.finishOptions(options, reqInfo);
+  //   });
+  // }
+
+  // deleteSystem(reqInfo: RequestInfo, systemId: string): Observable<any> {
+  //   return reqInfo.utils.createResponse$(() => {
+  //     let systems: System[] = this.db.get(COLLECTION.SYSTEMS);
+  //     const systemToDelete = systems.find(
+  //       (system: System) => system.id === systemId
+  //     );
+  //     // SmartNodes inside system
+  //     if (systemToDelete!.smartNodes.length) {
+  //       const options: ResponseOptions = {
+  //         body: {
+  //           error: `Impossible to delete the system ${systemId}: remove all the child smartNodes before`,
+  //         },
+  //         status: STATUS.BAD_REQUEST,
+  //       };
+  //       return this.finishOptions(options, reqInfo);
+  //     }
+  //     // Delete the requested system
+  //     systems = systems.filter((system) => system.id !== systemId);
+  //     const options: ResponseOptions = {
+  //       body: { systemId: systemId },
+  //       status: STATUS.OK,
+  //     };
+  //     return this.finishOptions(options, reqInfo);
+  //   });
+  // }
+
+  // deleteSmartNode(
+  //   reqInfo: RequestInfo,
+  //   systemId: string,
+  //   smartNodeId: string
+  // ): Observable<any> {
+  //   return reqInfo.utils.createResponse$(() => {
+  //     let system: System = this.db
+  //       .get(COLLECTION.SYSTEMS)
+  //       .find((system: System) => system.id === systemId);
+  //     const smartNode = system.smartNodes.find(
+  //       (smartNode) => smartNode.id === smartNodeId
+  //     );
+  //     // SimpleNodes inside smartNode
+  //     if (!smartNode!.isStandalone && smartNode!.simpleNodes!.length) {
+  //       const options: ResponseOptions = {
+  //         body: {
+  //           error: `Impossible to delete the smartNode ${smartNodeId}: remove all the child simpleNodes before`,
+  //         },
+  //         status: STATUS.BAD_REQUEST,
+  //       };
+  //       return this.finishOptions(options, reqInfo);
+  //     }
+  //     // Delete the requested smartNode
+  //     system.smartNodes = system.smartNodes.filter(
+  //       (smartNode) => smartNode.id !== smartNodeId
+  //     );
+  //     const options: ResponseOptions = {
+  //       body: system,
+  //       status: STATUS.OK,
+  //     };
+  //     return this.finishOptions(options, reqInfo);
+  //   });
+  // }
+
+  // deleteSimpleNode(
+  //   reqInfo: RequestInfo,
+  //   systemId: string,
+  //   smartNodeId: string,
+  //   simpleNodeId: string
+  // ): Observable<any> {
+  //   return reqInfo.utils.createResponse$(() => {
+  //     let system: System = this.db
+  //       .get(COLLECTION.SYSTEMS)
+  //       .find((system: System) => system.id === systemId);
+  //     let smartNode = system.smartNodes.find(
+  //       (smartNode) => smartNode.id === smartNodeId
+  //     );
+
+  //     // Delete the requested simpleNode
+  //     smartNode!.simpleNodes = smartNode!.simpleNodes!.filter(
+  //       (simpleNode) => simpleNode.id !== simpleNodeId
+  //     );
+
+  //     const options: ResponseOptions = {
+  //       body: system,
+  //       status: STATUS.OK,
+  //     };
+  //     return this.finishOptions(options, reqInfo);
+  //   });
+  // }
 
   /********************
    * HELPER FUNCTIONS *
    ********************/
 
-  private finishOptions(
-    options: ResponseOptions,
-    { headers, url }: RequestInfo
-  ) {
-    options.statusText =
-      options.status == null ? undefined : getStatusText(options.status);
-    options.headers = headers;
-    options.url = url;
-    return options;
-  }
+  // private getDBCopy(): Map<COLLECTION, any> {
+  //   return new Map<COLLECTION, any>(this.db);
+  // }
 
-  private invalidIdResponse(reqInfo: RequestInfo) {
-    return reqInfo.utils.createResponse$(() => {
-      const options = {
-        body: { error: `Invalid id` },
-        status: STATUS.BAD_REQUEST,
-      };
-      return this.finishOptions(options, reqInfo);
-    });
-  }
+  // private finishOptions(
+  //   options: ResponseOptions,
+  //   { headers, url }: RequestInfo
+  // ) {
+  //   options.statusText =
+  //     options.status == null ? undefined : getStatusText(options.status);
+  //   options.headers = headers;
+  //   options.url = url;
+  //   return options;
+  // }
 
-  private resourceNotFoundResponse(
-    reqInfo: RequestInfo,
-    name: string,
-    id: string
-  ) {
-    return reqInfo.utils.createResponse$(() => {
-      const resourceName = name.charAt(0).toUpperCase() + name.slice(1);
-      const options = {
-        body: { error: `${resourceName} with id: ${id} not found` },
-        status: STATUS.NOT_FOUND,
-      };
-      return this.finishOptions(options, reqInfo);
-    });
-  }
+  // private invalidIdResponse(reqInfo: RequestInfo, resourceName: string) {
+  //   return reqInfo.utils.createResponse$(() => {
+  //     const options = {
+  //       body: { error: `Invalid id for the resource ${resourceName}` },
+  //       status: STATUS.BAD_REQUEST,
+  //     };
+  //     return this.finishOptions(options, reqInfo);
+  //   });
+  // }
+
+  // private resourceNotFoundResponse(
+  //   reqInfo: RequestInfo,
+  //   name: string,
+  //   id: string
+  // ) {
+  //   return reqInfo.utils.createResponse$(() => {
+  //     const resourceName = name.charAt(0).toUpperCase() + name.slice(1);
+  //     const options = {
+  //       body: { error: `${resourceName} with id: ${id} not found` },
+  //       status: STATUS.NOT_FOUND,
+  //     };
+  //     return this.finishOptions(options, reqInfo);
+  //   });
+  // }
 
   // protected responseInterceptor(
   //   res: ResponseOptions,

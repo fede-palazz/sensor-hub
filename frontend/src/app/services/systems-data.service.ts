@@ -19,8 +19,8 @@ export class SystemsDataService {
    *
    * - api/systems        ->    all the systems db
    * - api/systems/{id}   ->    specific system
-   * - api/systems/{id}?smartId={id} -> specific smart node
-   * - api/systems/{id}?smartId={id}&simpleId={id} -> specific simple node
+   * - api/systems/{id}/smartnodes/{id} -> specific smart node
+   * - api/systems/{id}/smartnodes/{id}/simplenodes/{id} -> specific simple node
    */
 
   private readonly API_URL = environment.apiUrl + '/systems';
@@ -41,18 +41,14 @@ export class SystemsDataService {
     return this.http.delete<any>(url, httpOptions);
   }
 
-  // deleteSmartNode(systemId: string, nodeId: string): Observable<any> {
-  //   return this.getSystem(systemId).pipe(
-
-  //   );
-  // }
-
-  // deleteSimpleNode(systemId:string, nodeId: string) {
-
-  // }
-
-  deleteNode(systemId: string, nodeId: string): Observable<any> {
-    const url = `${this.API_URL}/${systemId}`;
-    return this.http.post<any>(url, httpOptions);
+  deleteNode(
+    systemId: string,
+    smartNodeId: string,
+    simpleNodeId?: string
+  ): Observable<System> {
+    let url = `${this.API_URL}/${systemId}/smartnodes/${smartNodeId}`;
+    if (simpleNodeId) url = `${url}/simplenodes/${simpleNodeId}`;
+    // return this.http.delete<any>(url, httpOptions);
+    return this.http.get<any>(url, httpOptions);
   }
 }

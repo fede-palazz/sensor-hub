@@ -41,30 +41,40 @@ export class SystemsComponent {
   constructor(private systemsDataService: SystemsDataService) {
     this.systemsDataService.getSystems().subscribe((systems) => {
       // console.log(systems);
-      this.systems = systems;
+      console.log('Constructor');
+      // this.systems = systems;
+      this.systems = JSON.parse(JSON.stringify(systems));
     });
   }
 
   onDeleteSystem(id: string): void {
-    this.systemsDataService.deleteSystem(id).subscribe((c) => {
-      // console.log(c);
-      // this.systems = c;
+    this.systemsDataService.deleteSystem(id).subscribe(() => {
       this.systems = this.systems!.filter((system) => system.id !== id);
     });
   }
 
-  onDeleteNode(system: System, node: SmartNode | SimpleNode): void {
-    this.systemsDataService.deleteNode(system.id, node.id).subscribe();
-    // this.isSmartNode(node)
-    //   ? (system.smartNodes = system.smartNodes.filter(
-    //       (smartNode) => smartNode.id !== node.id
-    //     ))
-    //   : system.smartNodes.forEach(
-    //       (smartNode) =>
-    //         (smartNode.simpleNodes = smartNode.simpleNodes!.filter(
-    //           (simpleNode) => simpleNode.id !== node.id
-    //         ))
-    //     );
+  onDeleteNode(
+    system: System,
+    node: { smartNodeId: string; simpleNodeId?: string }
+  ): void {
+    this.systemsDataService
+      .deleteNode(system.id, node.smartNodeId, node.simpleNodeId)
+      .subscribe((sys) => {
+        console.log(sys);
+        // TODO: Get the result system
+        if (!node.simpleNodeId)
+          system.smartNodes = system.smartNodes.filter(
+            (smartNode) => smartNode.id !== node.smartNodeId
+          );
+        else {
+          let smartNode = system.smartNodes.find(
+            (smartNode) => smartNode.id === node.smartNodeId
+          );
+          smartNode!.simpleNodes = smartNode!.simpleNodes!.filter(
+            (simpleNode) => simpleNode.id !== node.simpleNodeId
+          );
+        }
+      });
   }
 
   /**
