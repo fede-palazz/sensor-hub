@@ -2,11 +2,13 @@
 @import "bulma/sass/utilities/mixins";
 
 .system-panel {
-  min-width: 20rem;
-
   @include desktop {
     min-width: 22rem;
     max-width: 28rem;
+  }
+
+  @include tablet {
+    min-width: 20rem;
   }
 
   @include mobile {

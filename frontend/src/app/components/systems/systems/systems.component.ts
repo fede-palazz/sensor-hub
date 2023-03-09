@@ -29,7 +29,7 @@ import { SimpleNode } from 'src/app/model/system/simple-node';
         >
         </app-system-panel>
       </ng-container>
-      <app-new-node #newNode [isActive]="true"></app-new-node>
+      <app-new-node #newNode></app-new-node>
     </div>
   `,
 })
