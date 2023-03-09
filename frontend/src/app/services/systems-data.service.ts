@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { System } from '../model/system/system';
+import { AddSystemRequest, System } from '../model/system/system';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
@@ -36,6 +36,19 @@ export class SystemsDataService {
     return this.http.get<System>(url);
   }
 
+  addSystem(system: System): Observable<any> {
+    const url = `${this.API_URL}`;
+    // TODO: Modify with addSystemRequest
+    const systemRequest: System = {
+      id: this.genId(),
+      name: system.name,
+      color: system.color,
+      icon: system.icon,
+      smartNodes: [],
+    };
+    return this.http.post<any>(url, systemRequest, httpOptions);
+  }
+
   deleteSystem(id: string): Observable<any> {
     const url = `${this.API_URL}/${id}`;
     return this.http.delete<any>(url, httpOptions);
@@ -50,5 +63,12 @@ export class SystemsDataService {
     if (simpleNodeId) url = `${url}/simplenodes/${simpleNodeId}`;
     // return this.http.delete<any>(url, httpOptions);
     return this.http.get<any>(url, httpOptions);
+  }
+
+  genId(length = 5): string {
+    return Math.random()
+      .toString(36)
+      .substring(2, length + 2)
+      .toUpperCase();
   }
 }

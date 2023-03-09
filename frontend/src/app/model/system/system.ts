@@ -7,3 +7,9 @@ export interface System {
   color: string;
   smartNodes: SmartNode[];
 }
+
+// TODO: Remove smartNodes
+export type AddSystemRequest = Pick<
+  System,
+  'name' | 'color' | 'icon' | 'smartNodes'
+>;

@@ -40,10 +40,7 @@ export class SystemsComponent {
 
   constructor(private systemsDataService: SystemsDataService) {
     this.systemsDataService.getSystems().subscribe((systems) => {
-      // console.log(systems);
-      console.log('Constructor');
-      // this.systems = systems;
-      this.systems = JSON.parse(JSON.stringify(systems));
+      this.systems = systems;
     });
   }
 
