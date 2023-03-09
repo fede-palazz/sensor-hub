@@ -78,7 +78,7 @@ const systems: System[] = [
     id: 'system5',
     icon: 'apartment',
     name: 'Impianto Ufficio',
-    color: 'is-info',
+    color: 'is-warning',
     smartNodes: [
       {
         id: 'hHHAj',

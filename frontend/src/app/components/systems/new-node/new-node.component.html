@@ -1,36 +1,114 @@
-<div class="modal" [class.is-active]="isActive">
+<div class="modal" [class.is-active]="isActive" *ngIf="isActive">
   <div class="modal-background"></div>
-  <div class="modal-card is-danger">
+  <div class="modal-card">
+    <!-- HEADER -->
     <header
       class="modal-card-head"
       [class]="'has-background-' + color.replace('is-', '')"
     >
-      <span class="modal-card-title has-text-white">
-        <ng-container *ngIf="isSmart; else simpleNodeTitle">
-          <span class="icon icon-left mr-2"
-            ><i class="material-icons">hub</i></span
-          >
-          <span *ngIf="isSmart">Registra Nodo Smart</span>
-        </ng-container>
-
-        <ng-template #simpleNodeTitle>
-          <span class="icon icon-left mr-2"
-            ><i class="material-icons">sensors</i></span
-          >
-          <span>Registra Nodo Semplice</span>
-        </ng-template>
+      <span
+        class="modal-card-title"
+        [class]="
+          ['is-warning', 'is-light'].includes(color)
+            ? 'has-text-grey-darker'
+            : 'has-text-white'
+        "
+      >
+        <span class="icon mr-2"><i class="material-icons">add_circle</i></span>
+        <span *ngIf="isSmart">Nodo Smart</span>
+        <span *ngIf="!isSmart">Nodo Semplice</span>
       </span>
       <button class="delete is-large" (click)="close()"></button>
     </header>
+
+    <!-- BODY -->
     <section class="modal-card-body">
-      <div *ngIf="isSmart">E' smart</div>
-      <div *ngIf="!isSmart">Non è smart</div>
+      <form (ngSubmit)="onSubmit(form)" #form="ngForm">
+        <div class="field">
+          <label class="label" for="node-id">Codice identificativo</label>
+          <div class="control">
+            <input
+              class="input"
+              type="text"
+              name="node-id"
+              id="node-id"
+              placeholder="Inserisci o scansiona l'id del nodo"
+              [minlength]="5"
+              [maxLength]="5"
+              [(ngModel)]="node.id"
+              #id="ngModel"
+              required
+              [class.is-danger]="
+                (!id.pristine && !id.valid) || (!id.valid && form.submitted)
+              "
+            />
+          </div>
+          <p
+            class="help is-danger"
+            *ngIf="(!id.pristine && !id.valid) || (!id.valid && form.submitted)"
+          >
+            Id non valido
+          </p>
+        </div>
+        <div class="field">
+          <label class="label" for="node-name">Nome</label>
+          <div class="control">
+            <input
+              class="input"
+              type="text"
+              name="node-name"
+              id="node-name"
+              placeholder="Es: 'nodo-smart-cucina'"
+              [minlength]="5"
+              [maxLength]="45"
+              [(ngModel)]="node.name"
+              #name="ngModel"
+              required
+              [class.is-danger]="
+                (!name.pristine && !name.valid) ||
+                (!name.valid && form.submitted)
+              "
+            />
+          </div>
+          <p
+            class="help is-danger"
+            *ngIf="
+              (!name.pristine && !name.valid) || (!name.valid && form.submitted)
+            "
+          >
+            Inserire almeno 5 caratteri
+          </p>
+        </div>
+      </form>
     </section>
+
+    <!-- FOOTER -->
     <footer class="modal-card-foot">
-      <button class="button" [class]="color">Salva</button>
-      <button class="button is-light" [class]="color" (click)="close()">
-        Annulla
-      </button>
+      <div class="field">
+        <div class="control">
+          <button
+            type="submit"
+            class="button"
+            [class]="color"
+            (click)="form.ngSubmit.emit()"
+          >
+            <span class="icon">
+              <i class="material-icons">save</i>
+            </span>
+            <span>Salva</span>
+          </button>
+          <button class="button is-light" [class]="color" (click)="close()">
+            <span class="icon">
+              <i class="material-icons">cancel</i>
+            </span>
+            <span>Annulla</span>
+          </button>
+        </div>
+        <!-- TODO: Display error box dinamically -->
+        <p class="help is-danger" *ngIf="false">
+          Errore durante il salvataggio. Per favore, riprovare
+        </p>
+      </div>
     </footer>
   </div>
 </div>

@@ -1,11 +1,21 @@
+@import "../../../../styles/variables.scss";
+@import "bulma/sass/utilities/mixins";
+
 .modal-card {
   max-width: 95%;
 }
 
 .modal-card-head {
   padding: 15px;
+  overflow-wrap: break-word;
+
+  @include mobile {
+    font-size: 1.25rem;
+  }
+
   & .modal-card-title {
     display: flex;
+    font-weight: 600;
     margin: 0;
   }
 }
