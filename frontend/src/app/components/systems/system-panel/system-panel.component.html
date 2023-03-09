@@ -146,7 +146,7 @@
   </ng-container>
   <!-- Add nodes panel -->
   <div class="panel-block">
-    <button class="button" [class]="system.color">
+    <button class="button" [class]="system.color" (click)="onAddNode(true)">
       <span class="icon"><i class="material-icons">add_circle</i></span>
       <span>Nodo smart</span>
     </button>
@@ -158,6 +158,7 @@
           : system.color + ' is-light'
       "
       [disabled]="isStandaloneSystem() || areNonStandaloneNodesOffline()"
+      (click)="onAddNode(false)"
     >
       <span class="icon"><i class="material-icons">add_circle</i></span>
       <span>Nodo semplice</span>

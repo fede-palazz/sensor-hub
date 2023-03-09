@@ -1,0 +1,36 @@
+<div class="modal" [class.is-active]="isActive">
+  <div class="modal-background"></div>
+  <div class="modal-card is-danger">
+    <header
+      class="modal-card-head"
+      [class]="'has-background-' + color.replace('is-', '')"
+    >
+      <span class="modal-card-title has-text-white">
+        <ng-container *ngIf="isSmart; else simpleNodeTitle">
+          <span class="icon icon-left mr-2"
+            ><i class="material-icons">hub</i></span
+          >
+          <span *ngIf="isSmart">Registra Nodo Smart</span>
+        </ng-container>
+
+        <ng-template #simpleNodeTitle>
+          <span class="icon icon-left mr-2"
+            ><i class="material-icons">sensors</i></span
+          >
+          <span>Registra Nodo Semplice</span>
+        </ng-template>
+      </span>
+      <button class="delete is-large" (click)="close()"></button>
+    </header>
+    <section class="modal-card-body">
+      <div *ngIf="isSmart">E' smart</div>
+      <div *ngIf="!isSmart">Non è smart</div>
+    </section>
+    <footer class="modal-card-foot">
+      <button class="button" [class]="color">Salva</button>
+      <button class="button is-light" [class]="color" (click)="close()">
+        Annulla
+      </button>
+    </footer>
+  </div>
+</div>

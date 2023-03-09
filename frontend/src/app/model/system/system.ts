@@ -8,8 +8,4 @@ export interface System {
   smartNodes: SmartNode[];
 }
 
-// TODO: Remove smartNodes
-export type AddSystemRequest = Pick<
-  System,
-  'name' | 'color' | 'icon' | 'smartNodes'
->;
+export type AddSystemRequest = Pick<System, 'name' | 'color' | 'icon'>;

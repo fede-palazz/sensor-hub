@@ -21,9 +21,15 @@ import { SimpleNode } from 'src/app/model/system/simple-node';
           [isPreview]="false"
           (deleteSystem)="onDeleteSystem(system.id)"
           (deleteNode)="onDeleteNode(system, $event)"
+          (addNode)="
+            newNode.isActive = true;
+            newNode.isSmart = $event.isSmart;
+            newNode.color = $event.color
+          "
         >
         </app-system-panel>
       </ng-container>
+      <app-new-node #newNode [isActive]="true"></app-new-node>
     </div>
   `,
 })
