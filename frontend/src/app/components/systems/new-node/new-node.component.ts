@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 @Component({
@@ -6,7 +6,7 @@ import { NgForm } from '@angular/forms';
   templateUrl: './new-node.component.html',
   styleUrls: ['./new-node.component.scss'],
 })
-export class NewNodeComponent {
+export class NewNodeComponent implements OnInit {
   @Input() isActive: boolean;
   @Input() isSmart!: boolean;
   @Input() color!: string;
@@ -25,6 +25,10 @@ export class NewNodeComponent {
     };
   }
 
+  ngOnInit() {
+    if (this.isSmart) this.node.isStandalone = false;
+  }
+
   close(): void {
     this.isActive = false;
   }
@@ -32,8 +36,8 @@ export class NewNodeComponent {
   onQrScan(): void {}
 
   onSubmit(form: NgForm): void {
-    console.log('Submitting');
     if (!form.valid) return;
     console.log('Submitted');
+    console.log(this.node);
   }
 }

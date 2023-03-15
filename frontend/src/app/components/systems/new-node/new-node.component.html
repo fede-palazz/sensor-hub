@@ -49,19 +49,19 @@
     <!-- BODY -->
     <section class="modal-card-body">
       <form (ngSubmit)="onSubmit(form)" #form="ngForm" id="form">
-        <label class="label" for="node-id">Codice identificativo</label>
         <!-- Node ID -->
-        <div class="field has-addons is-flex-wrap-wrap">
-          <!-- <label class="label" for="node-id">Codice identificativo</label> -->
+        <label class="label" for="node-id">Codice identificativo</label>
+        <div class="field has-addons">
           <div class="control is-expanded">
+            <!-- TODO: Change min/max length according to actual node id length -->
             <input
               class="input"
               type="text"
               name="node-id"
               id="node-id"
               placeholder="Inserisci o scansiona l'id del nodo"
-              [minlength]="5"
-              [maxLength]="5"
+              [minlength]="13"
+              [maxLength]="13"
               [(ngModel)]="node.id"
               #id="ngModel"
               required
@@ -120,6 +120,27 @@
           >
             Inserire almeno 5 caratteri
           </p>
+        </div>
+
+        <!-- Standalone node -->
+        <div class="field" id="standalone-field" *ngIf="isSmart">
+          <div class="control is-flex is-align-content-center">
+            <label class="checkbox">
+              <input
+                type="checkbox"
+                name="node-standalone"
+                [(ngModel)]="node.isStandalone"
+                [ngModelOptions]="{ standalone: true }"
+              />
+              Nodo Smart Standalone
+            </label>
+            <span
+              class="icon ml-2"
+              title="Spunta la casella se il nodo smart è dotato di sensori propri"
+            >
+              <i class="material-icons">help</i>
+            </span>
+          </div>
         </div>
       </form>
     </section>
