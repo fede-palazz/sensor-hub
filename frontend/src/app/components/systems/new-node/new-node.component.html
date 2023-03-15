@@ -100,7 +100,11 @@
               type="text"
               name="node-name"
               id="node-name"
-              placeholder="Es: 'nodo-smart-cucina'"
+              [placeholder]="
+                isSmart
+                  ? 'Es: \'nodo-smart-stanza-1\''
+                  : 'Es: \'nodo-semplice-stanza-1\''
+              "
               [minlength]="5"
               [maxLength]="45"
               [(ngModel)]="node.name"
@@ -134,11 +138,32 @@
               />
               Nodo Smart Standalone
             </label>
+            <!-- TODO: Implement a proper tooltip visible also from mobile -->
             <span
               class="icon ml-2"
               title="Spunta la casella se il nodo smart è dotato di sensori propri"
             >
               <i class="material-icons">help</i>
+            </span>
+          </div>
+        </div>
+
+        <!-- Parent Smart Node -->
+        <div class="field" *ngIf="!isSmart">
+          <label class="label" for="node-parent">Nodo Smart associato</label>
+          <div class="control has-icon-left">
+            <div class="select" id="node-parent">
+              <select>
+                <option
+                  *ngFor="let smartNode of this.node.smartNodes"
+                  [value]="smartNode.id"
+                >
+                  {{ smartNode.name }}
+                </option>
+              </select>
+            </div>
+            <span class="icon is-left">
+              <i class="material-icons">sensors</i>
             </span>
           </div>
         </div>

@@ -33,9 +33,23 @@ import { SimpleNode } from 'src/app/model/system/simple-node';
       <app-new-node
         #newNode
         [isActive]="true"
-        [isSmart]="true"
+        [isSmart]="false"
         [color]="'is-danger'"
         [systemName]="'Impianto di casa'"
+        [smartNodes]="[
+          {
+            id: '1',
+            name: 'nodo smart 1'
+          },
+          {
+            id: '2',
+            name: 'nodo smart 2'
+          },
+          {
+            id: '3',
+            name: 'nodo smart 3'
+          }
+        ]"
       ></app-new-node>
     </div>
   `,

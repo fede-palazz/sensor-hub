@@ -11,10 +11,12 @@ export class NewNodeComponent implements OnInit {
   @Input() isSmart!: boolean;
   @Input() color!: string;
   @Input() systemName!: string;
+  @Input() smartNodes?: { id: string; name: string }[];
   node: {
     id: string;
     name: string;
     isStandalone?: boolean;
+    smartNodes?: { id: string; name: string }[] | [];
   };
 
   constructor() {
@@ -26,7 +28,10 @@ export class NewNodeComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.isSmart) this.node.isStandalone = false;
+    this.isSmart
+      ? (this.node.isStandalone = false)
+      : (this.node.smartNodes = this.smartNodes || []);
+    console.log(this.smartNodes);
   }
 
   close(): void {
