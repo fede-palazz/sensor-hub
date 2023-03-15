@@ -6,18 +6,54 @@
       class="modal-card-head"
       [class]="'has-background-' + color.replace('is-', '')"
     >
-      <span
-        class="modal-card-title"
-        [class]="
-          ['is-warning', 'is-light'].includes(color)
-            ? 'has-text-grey-darker'
-            : 'has-text-white'
-        "
-      >
-        <span class="icon mr-2"><i class="material-icons">add_circle</i></span>
-        <span *ngIf="isSmart">Nodo Smart</span>
-        <span *ngIf="!isSmart">Nodo Semplice</span>
-      </span>
+      <div class="modal-card-title">
+        <span
+          class="icon mr-3"
+          [class]="
+            ['is-warning', 'is-light'].includes(color)
+              ? 'has-text-grey-darker'
+              : 'has-text-white'
+          "
+          ><i class="material-icons">add_circle</i></span
+        >
+
+        <div class="title-container">
+          <p
+            *ngIf="isSmart"
+            class="title is-5 has-text-white"
+            [class]="
+              ['is-warning', 'is-light'].includes(color)
+                ? 'has-text-grey-darker'
+                : 'has-text-white'
+            "
+          >
+            Nodo Smart
+          </p>
+          <p
+            *ngIf="!isSmart"
+            class="title is-5"
+            [class]="
+              ['is-warning', 'is-light'].includes(color)
+                ? 'has-text-grey-darker'
+                : 'has-text-white'
+            "
+          >
+            Nodo Semplice
+          </p>
+
+          <p
+            class="subtitle is-6"
+            [class]="
+              ['is-warning', 'is-light'].includes(color)
+                ? 'has-text-grey-darker'
+                : 'has-text-' + color.replace('is-', '') + '-light'
+            "
+          >
+            {{ systemName }}
+          </p>
+        </div>
+      </div>
+
       <button class="delete is-large" (click)="close()"></button>
     </header>
 

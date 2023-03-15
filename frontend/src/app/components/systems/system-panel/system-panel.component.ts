@@ -21,6 +21,7 @@ export class SystemPanelComponent {
   @Output() addNode = new EventEmitter<{
     isSmart: boolean;
     color: string;
+    systemName: string;
   }>();
   @Output() deleteSystem = new EventEmitter<any>();
   @Output() deleteNode = new EventEmitter<{
@@ -38,7 +39,11 @@ export class SystemPanelComponent {
   }
 
   onAddNode(isSmart: boolean): void {
-    this.addNode.emit({ isSmart, color: this.system.color });
+    this.addNode.emit({
+      isSmart,
+      color: this.system.color,
+      systemName: this.system.name,
+    });
   }
 
   onDeleteSystem($elem: HTMLElement): void {

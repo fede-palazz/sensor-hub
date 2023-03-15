@@ -24,12 +24,19 @@ import { SimpleNode } from 'src/app/model/system/simple-node';
           (addNode)="
             newNode.isActive = true;
             newNode.isSmart = $event.isSmart;
-            newNode.color = $event.color
+            newNode.color = $event.color;
+            newNode.systemName = $event.systemName
           "
         >
         </app-system-panel>
       </ng-container>
-      <app-new-node #newNode></app-new-node>
+      <app-new-node
+        #newNode
+        [isActive]="true"
+        [isSmart]="true"
+        [color]="'is-danger'"
+        [systemName]="'Impianto di casa'"
+      ></app-new-node>
     </div>
   `,
 })
