@@ -7,6 +7,7 @@
       [class]="'has-background-' + color.replace('is-', '')"
     >
       <div class="modal-card-title">
+        <!-- Header left icon -->
         <span
           class="icon mr-3"
           [class]="
@@ -16,10 +17,9 @@
           "
           ><i class="material-icons">add_circle</i></span
         >
-
         <div class="title-container">
+          <!-- Header title -->
           <p
-            *ngIf="isSmart"
             class="title is-5 has-text-white"
             [class]="
               ['is-warning', 'is-light'].includes(color)
@@ -27,20 +27,9 @@
                 : 'has-text-white'
             "
           >
-            Nodo Smart
+            {{ isSmart ? "Nodo Smart" : "Nodo Semplice" }}
           </p>
-          <p
-            *ngIf="!isSmart"
-            class="title is-5"
-            [class]="
-              ['is-warning', 'is-light'].includes(color)
-                ? 'has-text-grey-darker'
-                : 'has-text-white'
-            "
-          >
-            Nodo Semplice
-          </p>
-
+          <!-- Header subtitle -->
           <p
             class="subtitle is-6"
             [class]="
@@ -53,16 +42,18 @@
           </p>
         </div>
       </div>
-
+      <!-- Close button -->
       <button class="delete is-large" (click)="close()"></button>
     </header>
 
     <!-- BODY -->
     <section class="modal-card-body">
-      <form (ngSubmit)="onSubmit(form)" #form="ngForm">
-        <div class="field">
-          <label class="label" for="node-id">Codice identificativo</label>
-          <div class="control">
+      <form (ngSubmit)="onSubmit(form)" #form="ngForm" id="form">
+        <label class="label" for="node-id">Codice identificativo</label>
+        <!-- Node ID -->
+        <div class="field has-addons is-flex-wrap-wrap">
+          <!-- <label class="label" for="node-id">Codice identificativo</label> -->
+          <div class="control is-expanded">
             <input
               class="input"
               type="text"
@@ -78,14 +69,29 @@
                 (!id.pristine && !id.valid) || (!id.valid && form.submitted)
               "
             />
+            <p
+              class="help is-danger"
+              *ngIf="
+                (!id.pristine && !id.valid) || (!id.valid && form.submitted)
+              "
+            >
+              Id non valido
+            </p>
           </div>
-          <p
-            class="help is-danger"
-            *ngIf="(!id.pristine && !id.valid) || (!id.valid && form.submitted)"
-          >
-            Id non valido
-          </p>
+          <div class="control">
+            <a
+              class="button"
+              [class]="color + ' is-light'"
+              (click)="onQrScan()"
+            >
+              <span class="icon is-small">
+                <i class="material-icons">qr_code_scanner</i>
+              </span>
+            </a>
+          </div>
         </div>
+
+        <!-- Node Name -->
         <div class="field">
           <label class="label" for="node-name">Nome</label>
           <div class="control">
@@ -122,12 +128,7 @@
     <footer class="modal-card-foot">
       <div class="field">
         <div class="control">
-          <button
-            type="submit"
-            class="button"
-            [class]="color"
-            (click)="form.ngSubmit.emit()"
-          >
+          <button type="submit" form="form" class="button" [class]="color">
             <span class="icon">
               <i class="material-icons">save</i>
             </span>

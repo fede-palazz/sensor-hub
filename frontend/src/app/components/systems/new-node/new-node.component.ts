@@ -29,7 +29,10 @@ export class NewNodeComponent {
     this.isActive = false;
   }
 
+  onQrScan(): void {}
+
   onSubmit(form: NgForm): void {
+    console.log('Submitting');
     if (!form.valid) return;
     console.log('Submitted');
   }
