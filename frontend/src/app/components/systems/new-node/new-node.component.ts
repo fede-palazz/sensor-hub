@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { SmartNode } from 'src/app/model/system/smart-node';
 
 @Component({
   selector: 'app-new-node',
@@ -7,42 +8,47 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./new-node.component.scss'],
 })
 export class NewNodeComponent implements OnInit {
-  @Input() isActive: boolean;
-  @Input() isSmart!: boolean;
-  @Input() color!: string;
-  @Input() systemName!: string;
-  @Input() smartNodes?: { id: string; name: string }[];
-  node: {
-    id: string;
-    name: string;
+  @Output() close = new EventEmitter<any>();
+  @Input() newNodeData!: {
+    isSmart: boolean;
+    color: string;
+    systemId: string;
+    systemName: string;
+    smartNodes?: SmartNode[];
+  };
+  formData: {
+    nodeId: string;
+    nodeName: string;
     isStandalone?: boolean;
-    smartNodes?: { id: string; name: string }[] | [];
+    parentSmartNodeId?: string;
   };
 
   constructor() {
-    this.isActive = false;
-    this.node = {
-      id: '',
-      name: '',
+    this.formData = {
+      nodeId: '',
+      nodeName: '',
     };
   }
 
   ngOnInit() {
-    this.isSmart
-      ? (this.node.isStandalone = false)
-      : (this.node.smartNodes = this.smartNodes || []);
-    console.log(this.smartNodes);
+    this.newNodeData.isSmart
+      ? (this.formData.isStandalone = false)
+      : (this.formData.parentSmartNodeId = this.newNodeData.smartNodes![0].id);
   }
 
-  close(): void {
-    this.isActive = false;
+  onClose(): void {
+    this.close.emit();
   }
 
-  onQrScan(): void {}
+  onParentNodeSelectChange($event: any): void {
+    if (!this.newNodeData.isSmart)
+      this.formData.parentSmartNodeId = $event.target.value;
+  }
+
+  onQrCodeScan(): void {}
 
   onSubmit(form: NgForm): void {
     if (!form.valid) return;
-    console.log('Submitted');
-    console.log(this.node);
+    console.log(this.formData);
   }
 }
