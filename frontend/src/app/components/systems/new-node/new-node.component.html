@@ -128,23 +128,18 @@
 
         <!-- Standalone node -->
         <div class="field" id="standalone-field" *ngIf="newNodeData.isSmart">
+          <label class="label" for="node-standalone">Nodo Smart Autonomo</label>
           <div class="control is-flex is-align-content-center">
             <label class="checkbox">
               <input
                 type="checkbox"
                 name="node-standalone"
+                id="node-standalone"
                 [(ngModel)]="formData.isStandalone"
                 [ngModelOptions]="{ standalone: true }"
               />
-              Nodo Smart Standalone
+              Spuntare se il nodo smart non verrà connesso a dei nodi semplici
             </label>
-            <!-- TODO: Implement a proper tooltip visible also from mobile -->
-            <span
-              class="icon ml-2"
-              title="Spunta la casella se il nodo smart è dotato di sensori propri"
-            >
-              <i class="material-icons">help</i>
-            </span>
           </div>
         </div>
 

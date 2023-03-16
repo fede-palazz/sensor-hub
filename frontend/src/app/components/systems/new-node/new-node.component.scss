@@ -7,7 +7,6 @@
 
 .modal-card-head {
   padding: 15px;
-  // overflow-wrap: break-word;
 
   & .modal-card-title {
     display: flex;
@@ -26,15 +25,8 @@
   }
 }
 
-// .modal-card-body {
-// }
-
 .modal-card-foot {
   padding: 15px;
   background-color: hsl(0deg, 0%, 100%);
   border-top: none;
-}
-
-.checkbox {
-  line-height: 1.75;
 }
