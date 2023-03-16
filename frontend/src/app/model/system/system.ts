@@ -7,3 +7,5 @@ export interface System {
   color: string;
   smartNodes: SmartNode[];
 }
+
+export type AddSystemRequest = Pick<System, 'name' | 'color' | 'icon'>;

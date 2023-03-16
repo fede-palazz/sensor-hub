@@ -1,8 +1,10 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Button } from 'src/app/model/button';
 import { System } from 'src/app/model/system/system';
 import { PreviewSystem } from 'src/app/data/preview-system';
+import { SystemsDataService } from 'src/app/services/systems-data.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-new-system',
@@ -43,7 +45,10 @@ export class NewSystemComponent {
   selectedColorIndex?: number;
   previewSystem: System;
 
-  constructor() {
+  constructor(
+    private systemsDataService: SystemsDataService,
+    private router: Router
+  ) {
     this.selectedIconIndex = 0;
     this.selectedColorIndex = 0;
     // Initialize preview system
@@ -65,6 +70,14 @@ export class NewSystemComponent {
 
   onSubmit(form: NgForm): void {
     if (!form.valid) return;
-    // TODO: Send the system obj to a service
+    // const newSystem: AddSystemRequest = {
+    //   name: this.previewSystem.name,
+    //   color: this.previewSystem.color,
+    //   icon: this.previewSystem.icon,
+    // };
+    this.systemsDataService.addSystem(this.previewSystem).subscribe(() => {
+      // TODO: Display confirm popup
+      this.router.navigate(['/systems']);
+    });
   }
 }

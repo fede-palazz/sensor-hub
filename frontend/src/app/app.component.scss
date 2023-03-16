@@ -4,4 +4,8 @@
 .content {
   margin-left: $side-navbar-width;
   padding: 1rem 2rem;
+
+  @include mobile {
+    padding: 0.75rem 0.75rem;
+  }
 }

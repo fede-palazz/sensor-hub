@@ -21,9 +21,17 @@ import { SimpleNode } from 'src/app/model/system/simple-node';
           [isPreview]="false"
           (deleteSystem)="onDeleteSystem(system.id)"
           (deleteNode)="onDeleteNode(system, $event)"
+          (newNode)="
+            this.newNodeData = $event; this.isNewNodeModalActive = true
+          "
         >
         </app-system-panel>
       </ng-container>
+      <app-new-node
+        *ngIf="isNewNodeModalActive"
+        [newNodeData]="this.newNodeData"
+        (close)="this.isNewNodeModalActive = false"
+      ></app-new-node>
     </div>
   `,
 })
@@ -37,15 +45,25 @@ export class SystemsComponent {
     },
   ];
   systems?: System[];
+  newNodeData?: any;
+  isNewNodeModalActive = false;
 
   constructor(private systemsDataService: SystemsDataService) {
-    this.systemsDataService.getSystems().subscribe((systems) => {
-      // console.log(systems);
-      console.log('Constructor');
-      // this.systems = systems;
-      this.systems = JSON.parse(JSON.stringify(systems));
-    });
+    this.systemsDataService
+      .getSystems()
+      .subscribe((systems) => (this.systems = systems));
   }
+
+  /**
+   * Display the new node modal component
+   * @param newNodeData Node info to display
+   */
+  // onNewNode(newNodeData: any): void {
+  //   this.newNodeData = newNodeData;
+  //   this.isAddNodeModalActive = true;
+  // }
+
+  onAddNode(): void {}
 
   onDeleteSystem(id: string): void {
     this.systemsDataService.deleteSystem(id).subscribe(() => {
@@ -75,14 +93,5 @@ export class SystemsComponent {
           );
         }
       });
-  }
-
-  /**
-   * Determine whether a node is either a SmartNode or a SimpleNode
-   * @param node SmartNode | SimpleNode
-   * @returns true if node is a smartNode, false otherwise
-   */
-  isSmartNode(node: SmartNode | SimpleNode) {
-    return node.hasOwnProperty('isStandalone');
   }
 }

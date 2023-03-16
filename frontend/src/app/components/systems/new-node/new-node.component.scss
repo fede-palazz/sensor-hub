@@ -1,0 +1,32 @@
+@import "../../../../styles/variables.scss";
+@import "bulma/sass/utilities/mixins";
+
+.modal-card {
+  max-width: 95%;
+}
+
+.modal-card-head {
+  padding: 15px;
+
+  & .modal-card-title {
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+    margin: 0;
+
+    .material-icons {
+      font-size: 2rem;
+    }
+
+    .title-container {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}
+
+.modal-card-foot {
+  padding: 15px;
+  background-color: hsl(0deg, 0%, 100%);
+  border-top: none;
+}

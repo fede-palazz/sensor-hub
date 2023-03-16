@@ -18,6 +18,13 @@ import { SimpleNode } from 'src/app/model/system/simple-node';
 export class SystemPanelComponent {
   @Input() system!: System;
   @Input() isPreview!: boolean;
+  @Output() newNode = new EventEmitter<{
+    isSmart: boolean;
+    color: string;
+    systemId: string;
+    systemName: string;
+    smartNodes?: SmartNode[];
+  }>();
   @Output() deleteSystem = new EventEmitter<any>();
   @Output() deleteNode = new EventEmitter<{
     smartNodeId: string;
@@ -31,6 +38,23 @@ export class SystemPanelComponent {
       event.stopPropagation();
       event.preventDefault();
     }
+  }
+
+  onAddNode(isSmart: boolean): void {
+    isSmart
+      ? this.newNode.emit({
+          isSmart,
+          color: this.system.color,
+          systemId: this.system.id,
+          systemName: this.system.name,
+        })
+      : this.newNode.emit({
+          isSmart,
+          color: this.system.color,
+          systemId: this.system.id,
+          systemName: this.system.name,
+          smartNodes: this.getNonStandaloneNodes(),
+        });
   }
 
   onDeleteSystem($elem: HTMLElement): void {
