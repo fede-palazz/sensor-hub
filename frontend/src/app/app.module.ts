@@ -4,6 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { ZXingScannerModule } from '@zxing/ngx-scanner';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/nav/navbar/navbar.component';
@@ -17,7 +18,6 @@ import { NewSystemComponent } from './components/systems/new-system/new-system.c
 import { InMemoryDataService } from './data/in-memory-data.service';
 import { environment } from 'src/environments/environment';
 import { NewNodeComponent } from './components/systems/new-node/new-node.component';
-
 
 @NgModule({
   declarations: [
@@ -36,6 +36,7 @@ import { NewNodeComponent } from './components/systems/new-node/new-node.compone
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    ZXingScannerModule,
     environment.useMockServer
       ? HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, {
           dataEncapsulation: false,
