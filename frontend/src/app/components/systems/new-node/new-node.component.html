@@ -4,14 +4,14 @@
     <!-- HEADER -->
     <header
       class="modal-card-head"
-      [class]="'has-background-' + newNodeData.color.replace('is-', '')"
+      [class]="'has-background-' + inputData.color.replace('is-', '')"
     >
       <div class="modal-card-title">
         <!-- Header left icon -->
         <span
           class="icon mr-3"
           [class]="
-            ['is-warning', 'is-light'].includes(newNodeData.color)
+            ['is-warning', 'is-light'].includes(inputData.color)
               ? 'has-text-grey-darker'
               : 'has-text-white'
           "
@@ -22,23 +22,23 @@
           <p
             class="title is-5 has-text-white"
             [class]="
-              ['is-warning', 'is-light'].includes(newNodeData.color)
+              ['is-warning', 'is-light'].includes(inputData.color)
                 ? 'has-text-grey-darker'
                 : 'has-text-white'
             "
           >
-            {{ newNodeData.isSmart ? "Nodo Smart" : "Nodo Semplice" }}
+            {{ inputData.isSmart ? "Nodo Smart" : "Nodo Semplice" }}
           </p>
           <!-- Header subtitle -->
           <p
             class="subtitle is-6"
             [class]="
-              ['is-warning', 'is-light'].includes(newNodeData.color)
+              ['is-warning', 'is-light'].includes(inputData.color)
                 ? 'has-text-grey-darker'
-                : 'has-text-' + newNodeData.color.replace('is-', '') + '-light'
+                : 'has-text-' + inputData.color.replace('is-', '') + '-light'
             "
           >
-            {{ newNodeData.systemName }}
+            {{ inputData.systemName }}
           </p>
         </div>
       </div>
@@ -50,20 +50,22 @@
     <section class="modal-card-body">
       <div class="qr-code-box" *ngIf="isScanning">
         <zxing-scanner
+          #scanner
           [formats]="scanningFormats"
+          [autostart]="true"
           [autofocusEnabled]="true"
+          (permissionResponse)="permissionError.hidden = $event"
           (scanSuccess)="onScanSuccess($event)"
+          (scanError)="scanError.hidden = false; onScanError($event)"
+          (camerasNotFound)="camerasNotFound.hidden = false"
         ></zxing-scanner>
-        <button
-          class="button"
-          [class]="newNodeData.color"
-          (click)="isScanning = false"
-        >
-          <span class="icon mr-1">
-            <i class="material-icons">no_photography</i>
-          </span>
-          <span>Chiudi</span>
-        </button>
+        <p #scanError hidden>
+          Errore imprevisto: chiudere questa schermata e riprovare
+        </p>
+        <p #camerasNotFound hidden>Errore: fotocamera non rilevata</p>
+        <p #permissionError hidden>
+          Errore: consentire l'accesso alla fotocamera per iniziare la scansione
+        </p>
       </div>
       <form
         *ngIf="!isScanning"
@@ -103,8 +105,8 @@
           <div class="control">
             <a
               class="button"
-              [class]="newNodeData.color + ' is-light'"
-              (click)="startScanning()"
+              [class]="inputData.color + ' is-light'"
+              (click)="onStartScanning()"
             >
               <span class="icon is-small">
                 <i class="material-icons">qr_code_scanner</i>
@@ -123,7 +125,7 @@
               name="node-name"
               id="node-name"
               [placeholder]="
-                newNodeData.isSmart
+                inputData.isSmart
                   ? 'Es: \'nodo-smart-stanza-1\''
                   : 'Es: \'nodo-semplice-stanza-1\''
               "
@@ -149,7 +151,7 @@
         </div>
 
         <!-- Standalone node -->
-        <div class="field" id="standalone-field" *ngIf="newNodeData.isSmart">
+        <div class="field" id="standalone-field" *ngIf="inputData.isSmart">
           <label class="label" for="node-standalone">Nodo Smart Autonomo</label>
           <div class="control is-flex is-align-content-center">
             <label class="checkbox">
@@ -166,13 +168,13 @@
         </div>
 
         <!-- Parent Smart Node -->
-        <div class="field" *ngIf="!newNodeData.isSmart">
+        <div class="field" *ngIf="!inputData.isSmart">
           <label class="label" for="node-parent">Nodo Smart associato</label>
           <p class="control has-icons-left">
             <span class="select" id="node-parent">
               <select (change)="onParentNodeSelectChange($event)">
                 <option
-                  *ngFor="let smartNode of this.newNodeData.smartNodes"
+                  *ngFor="let smartNode of this.inputData.smartNodes"
                   [value]="smartNode.id"
                 >
                   {{ smartNode.name }}
@@ -188,14 +190,14 @@
     </section>
 
     <!-- FOOTER -->
-    <footer class="modal-card-foot" *ngIf="!isScanning">
-      <div class="field">
+    <footer class="modal-card-foot">
+      <div class="field" *ngIf="!isScanning">
         <div class="control">
           <button
             type="submit"
             form="form"
             class="button"
-            [class]="newNodeData.color"
+            [class]="inputData.color"
           >
             <span class="icon">
               <i class="material-icons">save</i>
@@ -204,7 +206,7 @@
           </button>
           <button
             class="button is-light"
-            [class]="newNodeData.color"
+            [class]="inputData.color"
             (click)="onClose()"
           >
             <span class="icon">
@@ -217,6 +219,18 @@
         <p class="help is-danger" *ngIf="false">
           Errore durante il salvataggio. Per favore, riprovare
         </p>
+      </div>
+      <div class="field" *ngIf="isScanning">
+        <button
+          class="button"
+          [class]="inputData.color"
+          (click)="isScanning = false"
+        >
+          <span class="icon mr-1">
+            <i class="material-icons">no_photography</i>
+          </span>
+          <span>Chiudi</span>
+        </button>
       </div>
     </footer>
   </div>

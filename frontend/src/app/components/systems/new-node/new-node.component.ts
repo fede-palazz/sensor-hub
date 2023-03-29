@@ -10,7 +10,13 @@ import { SmartNode } from 'src/app/model/system/smart-node';
 })
 export class NewNodeComponent implements OnInit {
   @Output() close = new EventEmitter<any>();
-  @Input() newNodeData!: {
+  @Output() submitData = new EventEmitter<{
+    nodeId: string;
+    nodeName: string;
+    isStandalone?: boolean;
+    parentSmartNodeId?: string;
+  }>();
+  @Input('newNodeData') inputData!: {
     isSmart: boolean;
     color: string;
     systemId: string;
@@ -34,9 +40,9 @@ export class NewNodeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.newNodeData.isSmart
+    this.inputData.isSmart
       ? (this.formData.isStandalone = false)
-      : (this.formData.parentSmartNodeId = this.newNodeData.smartNodes![0].id);
+      : (this.formData.parentSmartNodeId = this.inputData.smartNodes![0].id);
   }
 
   onClose(): void {
@@ -44,11 +50,19 @@ export class NewNodeComponent implements OnInit {
   }
 
   onParentNodeSelectChange($event: any): void {
-    if (!this.newNodeData.isSmart)
+    if (!this.inputData.isSmart)
       this.formData.parentSmartNodeId = $event.target.value;
   }
 
-  startScanning(): void {
+  onSubmit(form: NgForm): void {
+    if (!form.valid) return;
+    this.submitData.emit(this.formData);
+    this.close.emit();
+  }
+
+  // QR Code Scanner functions
+  // TODO: Test if there is a way to directly access the back camera (maybe getDevices needs to always do this to scan them?)
+  onStartScanning() {
     this.isScanning = true;
   }
 
@@ -57,8 +71,7 @@ export class NewNodeComponent implements OnInit {
     this.isScanning = false;
   }
 
-  onSubmit(form: NgForm): void {
-    if (!form.valid) return;
-    console.log(this.formData);
+  onScanError(error: Error) {
+    console.log(error);
   }
 }

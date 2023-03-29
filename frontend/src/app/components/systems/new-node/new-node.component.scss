@@ -25,19 +25,19 @@
   }
 }
 
-.modal-card-body {
-  // position: relative;
+.qr-code-box {
+  margin: 0 auto;
+  max-width: 500px;
+
+  p {
+    color: $danger;
+  }
 }
 
-.qr-code-box {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 0 auto;
-  border: 1px solid red;
-  max-width: 500px;
-  // aspect-ratio: 4 / 3;
-  // height: 300px;
+:host zxing-scanner::ng-deep:first-child {
+  @include mobile {
+    aspect-ratio: 1 / 1;
+  }
 }
 
 .modal-card-foot {
@@ -45,7 +45,3 @@
   background-color: hsl(0deg, 0%, 100%);
   border-top: none;
 }
-
-/*
-  478 : 358 = 4 : 3
-*/
