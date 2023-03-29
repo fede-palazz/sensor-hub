@@ -1,5 +1,5 @@
 {
-  "name": "IoT-platform-frontend",
+  "name": "iot-platform-frontend",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
