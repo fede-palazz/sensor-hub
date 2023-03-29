@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { BarcodeFormat } from '@zxing/library';
 import { SmartNode } from 'src/app/model/system/smart-node';
 
 @Component({
@@ -22,6 +23,8 @@ export class NewNodeComponent implements OnInit {
     isStandalone?: boolean;
     parentSmartNodeId?: string;
   };
+  scanningFormats: BarcodeFormat[] = [BarcodeFormat.QR_CODE];
+  isScanning = false; // user is scanning a qr code
 
   constructor() {
     this.formData = {
@@ -45,7 +48,14 @@ export class NewNodeComponent implements OnInit {
       this.formData.parentSmartNodeId = $event.target.value;
   }
 
-  onQrCodeScan(): void {}
+  startScanning(): void {
+    this.isScanning = true;
+  }
+
+  onScanSuccess(result: string) {
+    this.formData.nodeId = result;
+    this.isScanning = false;
+  }
 
   onSubmit(form: NgForm): void {
     if (!form.valid) return;

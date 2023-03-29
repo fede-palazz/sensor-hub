@@ -48,7 +48,29 @@
 
     <!-- BODY -->
     <section class="modal-card-body">
-      <form (ngSubmit)="onSubmit(form)" #form="ngForm" id="form">
+      <div class="qr-code-box" *ngIf="isScanning">
+        <zxing-scanner
+          [formats]="scanningFormats"
+          [autofocusEnabled]="true"
+          (scanSuccess)="onScanSuccess($event)"
+        ></zxing-scanner>
+        <button
+          class="button"
+          [class]="newNodeData.color"
+          (click)="isScanning = false"
+        >
+          <span class="icon mr-1">
+            <i class="material-icons">no_photography</i>
+          </span>
+          <span>Chiudi</span>
+        </button>
+      </div>
+      <form
+        *ngIf="!isScanning"
+        (ngSubmit)="onSubmit(form)"
+        #form="ngForm"
+        id="form"
+      >
         <!-- Node ID -->
         <label class="label" for="node-id">Codice identificativo</label>
         <div class="field has-addons">
@@ -82,7 +104,7 @@
             <a
               class="button"
               [class]="newNodeData.color + ' is-light'"
-              (click)="onQrCodeScan()"
+              (click)="startScanning()"
             >
               <span class="icon is-small">
                 <i class="material-icons">qr_code_scanner</i>
@@ -166,7 +188,7 @@
     </section>
 
     <!-- FOOTER -->
-    <footer class="modal-card-foot">
+    <footer class="modal-card-foot" *ngIf="!isScanning">
       <div class="field">
         <div class="control">
           <button

@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "dev:lan": "ng serve --host 0.0.0.0 --disable-host-check",
+    "dev:ssl": "ng serve --host 0.0.0.0 --disable-host-check --ssl true",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
