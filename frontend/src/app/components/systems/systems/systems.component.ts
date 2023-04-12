@@ -2,8 +2,6 @@ import { Component } from '@angular/core';
 import { System } from 'src/app/model/system/system';
 import { Button } from 'src/app/model/button';
 import { SystemsDataService } from 'src/app/services/systems-data.service';
-import { SmartNode } from 'src/app/model/system/smart-node';
-import { SimpleNode } from 'src/app/model/system/simple-node';
 
 @Component({
   selector: 'app-systems',
@@ -18,7 +16,6 @@ import { SimpleNode } from 'src/app/model/system/simple-node';
         <app-system-panel
           [system]="system"
           class="column system-panel"
-          [isPreview]="false"
           (deleteSystem)="onDeleteSystem(system.id)"
           (deleteNode)="onDeleteNode(system, $event)"
           (newNode)="
