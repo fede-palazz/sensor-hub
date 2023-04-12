@@ -18,6 +18,7 @@ import { NewSystemComponent } from './components/systems/new-system/new-system.c
 import { InMemoryDataService } from './data/in-memory-data.service';
 import { environment } from 'src/environments/environment';
 import { NewNodeComponent } from './components/systems/new-node/new-node.component';
+import { DashboardComponent } from './components/dashboard/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { NewNodeComponent } from './components/systems/new-node/new-node.compone
     TitleBarComponent,
     NewSystemComponent,
     NewNodeComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,
