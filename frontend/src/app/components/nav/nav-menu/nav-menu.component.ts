@@ -9,9 +9,10 @@ import { Links } from './links';
     <div class="menu-container">
       <ng-container *ngFor="let link of links; let i = index">
         <a
+          class="link-inactive"
           routerLink="{{ link.route }}"
+          routerLinkActive="link-active"
           (click)="onClick(i)"
-          [ngClass]="currentIndex === i ? 'link-active' : 'link-inactive'"
         >
           <i class="material-icons">{{ link.icon }}</i>
           <span class="is-size-5">{{ link.label }}</span>
@@ -22,17 +23,9 @@ import { Links } from './links';
 })
 export class NavMenuComponent {
   links = Links;
-  // TODO: Initialise based on current route
-  @Input('initialIndex') currentIndex = 0;
-  @Output() linkClicked = new EventEmitter<any>();
-
-  // onLinkClick($elem: HTMLElement) {
-  //   this.currentIndex = Number($elem.getAttribute('data-index'));
-  //   this.linkClicked.emit();
-  // }
+  @Output() linkClicked = new EventEmitter<number>();
 
   onClick(index: number): void {
-    this.currentIndex = index;
-    this.linkClicked.emit();
+    this.linkClicked.emit(index);
   }
 }

@@ -12,7 +12,8 @@ const routes: Routes = [
     component: NewSystemComponent,
     title: 'Nuovo Impianto',
   },
-  { path: '', redirectTo: '/dashboard', pathMatch: 'full' }, // TODO: Redirect to '/login'
+  // { path: '', redirectTo: '/dashboard', pathMatch: 'full' }, // TODO: Redirect to '/login'
+  { path: '**', redirectTo: '/dashboard' },
 ];
 
 @NgModule({

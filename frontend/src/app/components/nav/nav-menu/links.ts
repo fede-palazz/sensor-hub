@@ -10,27 +10,27 @@ export const Links = [
     icon: 'factory',
   },
   {
-    route: '',
+    route: '/warnings',
     label: 'Allarmi',
     icon: 'warning',
   },
   {
-    route: '',
+    route: '/history',
     label: 'Storico',
     icon: 'bar_chart',
   },
   {
-    route: '',
+    route: '/threshold',
     label: 'Soglie',
     icon: 'tune',
   },
   {
-    route: '',
+    route: '/users',
     label: 'Utenti',
     icon: 'people',
   },
   {
-    route: '',
+    route: '/diagnostic',
     label: 'Diagnostica',
     icon: 'monitor_heart',
   },
