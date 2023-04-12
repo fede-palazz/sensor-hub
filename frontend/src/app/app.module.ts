@@ -20,6 +20,7 @@ import { environment } from 'src/environments/environment';
 import { NewNodeComponent } from './components/systems/new-node/new-node.component';
 import { DashboardComponent } from './components/dashboard/dashboard/dashboard.component';
 import { SystemOverviewComponent } from './components/dashboard/system-overview/system-overview.component';
+import { SystemDetailsComponent } from './components/dashboard/system-details/system-details.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { SystemOverviewComponent } from './components/dashboard/system-overview/
     NewNodeComponent,
     DashboardComponent,
     SystemOverviewComponent,
+    SystemDetailsComponent,
   ],
   imports: [
     BrowserModule,
