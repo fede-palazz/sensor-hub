@@ -1,0 +1,17 @@
+.card {
+  max-width: 500px;
+  margin-bottom: 3rem;
+}
+
+.card-footer {
+  border: none;
+
+  a {
+    &:first-child {
+      border-radius: 0 0 0 4px;
+    }
+    &:last-child {
+      border-radius: 0 0 4px 0;
+    }
+  }
+}

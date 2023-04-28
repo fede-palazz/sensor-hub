@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AddSystemRequest, System } from '../model/system/system';
+import { SystemOverviewResponse } from '../model/responses/system-overview-response';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 

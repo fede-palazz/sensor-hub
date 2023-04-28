@@ -17,7 +17,7 @@ import { SimpleNode } from 'src/app/model/system/simple-node';
 })
 export class SystemPanelComponent {
   @Input() system!: System;
-  @Input() isPreview!: boolean;
+  @Input() isPreview = false;
   @Output() newNode = new EventEmitter<{
     isSmart: boolean;
     color: string;
