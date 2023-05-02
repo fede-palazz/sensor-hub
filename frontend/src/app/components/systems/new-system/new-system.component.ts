@@ -1,13 +1,24 @@
 import { Component } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { Button } from 'src/app/model/button';
 import { System } from 'src/app/model/system/system';
 import { PreviewSystem } from 'src/app/data/preview-system';
 import { SystemsDataService } from 'src/app/services/systems-data.service';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { TitleBarComponent } from '../../utils/title-bar/title-bar.component';
+import { SystemPanelComponent } from '../system-panel/system-panel.component';
 
 @Component({
   selector: 'app-new-system',
+  standalone: true,
+  imports: [
+    CommonModule,
+    RouterModule,
+    FormsModule,
+    TitleBarComponent,
+    SystemPanelComponent,
+  ],
   templateUrl: './new-system.component.html',
   styleUrls: ['./new-system.component.scss'],
 })

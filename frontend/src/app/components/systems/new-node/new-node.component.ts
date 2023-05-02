@@ -1,10 +1,14 @@
+import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { BarcodeFormat } from '@zxing/library';
+import { ZXingScannerModule } from '@zxing/ngx-scanner';
 import { SmartNode } from 'src/app/model/system/smart-node';
 
 @Component({
   selector: 'app-new-node',
+  standalone: true,
+  imports: [CommonModule, ZXingScannerModule, FormsModule],
   templateUrl: './new-node.component.html',
   styleUrls: ['./new-node.component.scss'],
 })

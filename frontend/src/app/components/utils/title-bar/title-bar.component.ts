@@ -1,8 +1,12 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { Button } from 'src/app/model/button';
 
 @Component({
   selector: 'app-title-bar',
+  standalone: true,
+  imports: [CommonModule, RouterModule],
   styleUrls: ['./title-bar.component.scss'],
   template: `
     <div class="title-container">

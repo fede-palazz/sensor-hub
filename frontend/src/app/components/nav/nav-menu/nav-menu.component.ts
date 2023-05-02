@@ -1,9 +1,13 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { Links } from './links';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @Component({
   // TODO: Declare as standalone component
   selector: 'app-nav-menu',
+  standalone: true,
+  imports: [CommonModule, RouterModule],
   styleUrls: ['./nav-menu.component.scss'],
   template: `
     <div class="menu-container">

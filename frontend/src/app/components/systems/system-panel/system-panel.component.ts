@@ -9,9 +9,12 @@ import { System } from 'src/app/model/system/system';
 import { NodeStatus } from 'src/app/model/system/node-status';
 import { SmartNode } from 'src/app/model/system/smart-node';
 import { SimpleNode } from 'src/app/model/system/simple-node';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-system-panel',
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './system-panel.component.html',
   styleUrls: ['./system-panel.component.scss'],
 })
