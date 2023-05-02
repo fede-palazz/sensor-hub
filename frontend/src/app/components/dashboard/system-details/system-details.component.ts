@@ -1,9 +1,12 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { Observable, of, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-system-details',
+  standalone: true,
+  imports: [CommonModule, RouterModule],
   templateUrl: './system-details.component.html',
   styleUrls: ['./system-details.component.scss'],
 })

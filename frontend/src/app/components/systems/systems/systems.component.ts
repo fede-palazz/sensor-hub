@@ -2,9 +2,20 @@ import { Component } from '@angular/core';
 import { System } from 'src/app/model/system/system';
 import { Button } from 'src/app/model/button';
 import { SystemsDataService } from 'src/app/services/systems-data.service';
+import { CommonModule } from '@angular/common';
+import { TitleBarComponent } from '../../utils/title-bar/title-bar.component';
+import { SystemPanelComponent } from '../system-panel/system-panel.component';
+import { NewNodeComponent } from '../new-node/new-node.component';
 
 @Component({
   selector: 'app-systems',
+  standalone: true,
+  imports: [
+    CommonModule,
+    TitleBarComponent,
+    SystemPanelComponent,
+    NewNodeComponent,
+  ],
   styleUrls: ['./systems.component.scss'],
   template: `
     <app-title-bar [title]="'Impianti'" [buttons]="buttons"></app-title-bar>

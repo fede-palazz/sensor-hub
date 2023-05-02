@@ -1,9 +1,13 @@
 import { Component, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ViewDetectorService } from '../../../services/view-detector.service';
+import { CommonModule } from '@angular/common';
+import { NavMenuComponent } from '../nav-menu/nav-menu.component';
 
 @Component({
   selector: 'app-sidebar',
+  standalone: true,
+  imports: [CommonModule, NavMenuComponent],
   styleUrls: ['./sidebar.component.scss'],
   template: `
     <div
