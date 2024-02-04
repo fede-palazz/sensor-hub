@@ -20,8 +20,12 @@ import { NavMenuComponent } from '../nav-menu/nav-menu.component';
 
       <!--------- SIDEBAR LOGO ----------->
       <div class="logo-container" *ngIf="isExpanded">
-        <a href="https://www.idea-on-line.it/" target="_blank">
-          <img src="assets/imgs/logo.png" />
+        <a href="#">
+          <!-- Insert your company website link here -->
+          <img
+            src="assets/imgs/logo_placeholder.png"
+            title="Insert your company website link"
+          />
         </a>
       </div>
     </div>
