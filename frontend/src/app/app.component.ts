@@ -1,11 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { ViewDetectorService } from './services/view-detector.service';
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from './components/nav/navbar/navbar.component';
 import { SidebarComponent } from './components/nav/sidebar/sidebar.component';
 import { RouterModule } from '@angular/router';
-
-const DESKTOP_BREAKPOINT = 1024;
 
 @Component({
   selector: 'app-root',
@@ -13,12 +11,14 @@ const DESKTOP_BREAKPOINT = 1024;
   imports: [CommonModule, RouterModule, NavbarComponent, SidebarComponent],
   styleUrls: ['./app.component.scss'],
   template: `
-    <app-navbar (toggleSidebar)="toggleSidebar()"></app-navbar>
-    <app-sidebar [isExpanded]="isSidebarExpanded"></app-sidebar>
+    <app-navbar (toggleSidebar)="toggleSidebar()" />
+    @if (!(isMobileView$ | async)) {
+    <app-sidebar [isExpanded]="isSidebarExpanded$()" />
+    }
     <div
       class="content"
       [style.margin-left]="
-        isMobileView ? '0' : isSidebarExpanded ? '200px' : '60px'
+        (isMobileView$ | async) ? '0' : isSidebarExpanded$() ? '200px' : '60px'
       "
     >
       <router-outlet></router-outlet>
@@ -26,20 +26,10 @@ const DESKTOP_BREAKPOINT = 1024;
   `,
 })
 export class AppComponent {
-  isSidebarExpanded!: boolean;
-  isMobileView!: boolean;
-
-  constructor(private viewDetectorService: ViewDetectorService) {}
-
-  ngOnInit() {
-    this.viewDetectorService.getMobileView().subscribe((isMobile) => {
-      this.isMobileView = isMobile;
-      if (isMobile) return;
-      this.isSidebarExpanded = document.body.offsetWidth >= DESKTOP_BREAKPOINT;
-    });
-  }
+  isMobileView$ = inject(ViewDetectorService).getMobileView();
+  isSidebarExpanded$ = signal(true);
 
   toggleSidebar(): void {
-    this.isSidebarExpanded = !this.isSidebarExpanded;
+    this.isSidebarExpanded$.update((value) => !value);
   }
 }

@@ -2,15 +2,14 @@
   <!----------- NAVBAR BRAND ------------>
   <div class="navbar-brand">
     <!-------- SIDEBAR BUTTON ----------->
-    <ng-container *ngIf="!(isMobileView$ | async)">
-      <span
-        class="navbar-item sidebar-menu ripple"
-        (click)="onSidebarMenuClick()"
-      >
-        <i class="material-icons">menu</i>
-      </span>
-    </ng-container>
-
+    @if (!(isMobileView$ | async)) {
+    <span
+      class="navbar-item sidebar-menu ripple"
+      (click)="onSidebarMenuClick()"
+    >
+      <i class="material-icons">menu</i>
+    </span>
+    }
     <!---------- APP TITLE -------------->
     <span class="navbar-item">
       <h1 class="navbar-title non-draggable">IoT Platform</h1>
@@ -41,13 +40,14 @@
   </div>
 
   <!--------- NAVBAR MOBILE MENU -------->
+  @if (isMobileView$ | async) {
   <div
     class="navbar-menu has-background-primary-dark"
-    *ngIf="isMobileView$ | async"
     [class.is-active]="isMobileMenuOpen"
   >
     <div class="navbar-start">
-      <app-nav-menu (linkClicked)="onMenuLinkClicked()"></app-nav-menu>
+      <app-nav-menu (linkClicked)="onMenuLinkClicked()" />
     </div>
   </div>
+  }
 </nav>

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ViewDetectorService } from 'src/app/services/view-detector.service';
 import { NavMenuComponent } from '../nav-menu/nav-menu.component';
@@ -12,24 +12,19 @@ import { NavMenuComponent } from '../nav-menu/nav-menu.component';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent {
-  isMobileView$: Observable<boolean>;
-  isMobileMenuOpen: boolean;
+  isMobileMenuOpen = false;
   @Output() toggleSidebar = new EventEmitter<any>();
+  isMobileView$ = inject(ViewDetectorService).getMobileView();
 
-  constructor(private viewDetectorService: ViewDetectorService) {
-    this.isMobileView$ = this.viewDetectorService.getMobileView();
-    this.isMobileMenuOpen = false;
-  }
-
-  onSidebarMenuClick(): void {
+  onSidebarMenuClick() {
     this.toggleSidebar.emit();
   }
 
-  toggleMobileMenu(): void {
+  toggleMobileMenu() {
     this.isMobileMenuOpen = !this.isMobileMenuOpen;
   }
 
-  onMenuLinkClicked(): void {
+  onMenuLinkClicked() {
     // Close the dropdown menu when clicking a link
     this.isMobileMenuOpen = false;
   }

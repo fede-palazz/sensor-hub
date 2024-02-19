@@ -12,16 +12,15 @@ import { NavMenuComponent } from '../nav-menu/nav-menu.component';
   template: `
     <div
       class="sidebar-container no-scrollbars"
-      *ngIf="!(isMobileView$ | async)"
       [style.width]="isExpanded ? '200px' : '60px'"
     >
       <!--------- SIDEBAR MENU ----------->
-      <app-nav-menu></app-nav-menu>
+      <app-nav-menu />
 
       <!--------- SIDEBAR LOGO ----------->
       <div class="logo-container" *ngIf="isExpanded">
+        <!-- Insert your company website link here -->
         <a href="#">
-          <!-- Insert your company website link here -->
           <img
             src="assets/imgs/logo_placeholder.png"
             title="Insert your company website link"
@@ -32,10 +31,5 @@ import { NavMenuComponent } from '../nav-menu/nav-menu.component';
   `,
 })
 export class SidebarComponent {
-  isMobileView$: Observable<boolean>;
   @Input() isExpanded!: boolean;
-
-  constructor(private viewDetectorService: ViewDetectorService) {
-    this.isMobileView$ = this.viewDetectorService.getMobileView();
-  }
 }
