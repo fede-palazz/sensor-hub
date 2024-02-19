@@ -61,17 +61,17 @@
           (camerasNotFound)="camerasNotFound.hidden = false"
         ></zxing-scanner>
         <p #scanError hidden>
-          Errore imprevisto: chiudere questa schermata e riprovare
+          Unexpected error: Close this screen and try again
         </p>
-        <p #camerasNotFound hidden>Errore: fotocamera non rilevata</p>
+        <p #camerasNotFound hidden>Error: Camera not detected</p>
         <p #permissionError hidden>
-          Errore: consentire l'accesso alla fotocamera per iniziare la scansione
+          Error: Allow camera access to begin scanning
         </p>
       </div>
       } @else {
       <form (ngSubmit)="onSubmit(form)" #form="ngForm" id="form">
         <!-- Node ID -->
-        <label class="label" for="node-id">Codice identificativo</label>
+        <label class="label" for="node-id">Identifier</label>
         <div class="field has-addons">
           <div class="control is-expanded">
             <!-- TODO: Change min/max length according to actual node id length -->
@@ -91,7 +91,7 @@
               "
             />
             @if ((!id.pristine && !id.valid) || (!id.valid && form.submitted)) {
-            <p class="help is-danger">Id non valido</p>
+            <p class="help is-danger">Invalid Identifier</p>
             }
           </div>
           <div class="control">
@@ -109,7 +109,7 @@
 
         <!-- Node Name -->
         <div class="field">
-          <label class="label" for="node-name">Nome</label>
+          <label class="label" for="node-name">Name</label>
           <div class="control">
             <input
               class="input"
@@ -134,14 +134,16 @@
           </div>
           @if ( (!name.pristine && !name.valid) || (!name.valid &&
           form.submitted)) {
-          <p class="help is-danger">Inserire almeno 5 caratteri</p>
+          <p class="help is-danger">Insert at least 5 characters</p>
           }
         </div>
 
         @if (inputData.isSmart) {
         <!-- Standalone node -->
         <div class="field" id="standalone-field">
-          <label class="label" for="node-standalone">Nodo Smart Autonomo</label>
+          <label class="label" for="node-standalone"
+            >Standalone Smart Node</label
+          >
           <div class="control is-flex is-align-content-center">
             <label class="checkbox">
               <input
@@ -151,14 +153,14 @@
                 [(ngModel)]="formData.isStandalone"
                 [ngModelOptions]="{ standalone: true }"
               />
-              Spuntare se il nodo smart non verrà connesso a dei nodi semplici
+              Check if the smart node will NOT be connected to simple nodes
             </label>
           </div>
         </div>
         } @else {
         <!-- Parent Smart Node -->
         <div class="field">
-          <label class="label" for="node-parent">Nodo Smart associato</label>
+          <label class="label" for="node-parent">Parent Smart Node</label>
           <p class="control has-icons-left">
             <span class="select" id="node-parent">
               <select (change)="onParentNodeSelectChange($event)">

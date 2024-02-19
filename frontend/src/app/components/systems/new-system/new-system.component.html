@@ -1,15 +1,15 @@
-<app-title-bar [title]="'Nuovo Impianto'" [buttons]="titleButtons" />
+<app-title-bar [title]="'New place'" [buttons]="titleButtons" />
 
 <div class="container">
   <form (ngSubmit)="onSubmit(form)" #form="ngForm">
     <div class="field">
-      <label class="label">Nome</label>
+      <label class="label">Name</label>
       <div class="control">
         <input
           class="input"
           type="text"
           name="system-name"
-          placeholder="Nome identificativo dell'impianto"
+          placeholder="Place name"
           [minlength]="5"
           [maxLength]="45"
           [(ngModel)]="previewSystem.name"
@@ -21,12 +21,12 @@
         />
       </div>
       @if ((!name.pristine && !name.valid) || (!name.valid && form.submitted)) {
-      <p class="help is-danger">Inserire almeno 5 caratteri</p>
+      <p class="help is-danger">Insert at least 5 characters</p>
       }
     </div>
 
     <div class="field">
-      <label class="label">Icona</label>
+      <label class="label">Icon</label>
       <div class="buttons">
         @for (icon of iconsList; track icon) {
         <button
@@ -44,7 +44,7 @@
     </div>
 
     <div class="field">
-      <label class="label">Colore</label>
+      <label class="label">Color</label>
       <div class="buttons">
         @for (color of colorsList; track color) {
         <button
@@ -62,19 +62,17 @@
       <div class="control">
         <button type="submit" class="button has-text-white">
           <span class="icon"><i class="material-icons">save</i></span>
-          <span>Salva</span>
+          <span>Save</span>
         </button>
       </div>
       <!-- TODO: Display error box dinamically -->
       @if (false) {
-      <p class="help is-danger">
-        Errore durante il salvataggio. Per favore, riprovare
-      </p>
+      <p class="help is-danger">Error during saving. Please try again</p>
       }
     </div>
   </form>
   <div class="preview-container">
-    <label class="label">Anteprima</label>
+    <label class="label">Preview</label>
     <app-system-panel [system]="previewSystem" [isPreview]="true" />
   </div>
 </div>

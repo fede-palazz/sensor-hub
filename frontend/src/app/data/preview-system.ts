@@ -9,29 +9,29 @@ export const PreviewSystem: System = {
   smartNodes: [
     {
       id: '1',
-      name: 'Nodo smart autonomo disattivato',
+      name: 'Standalone smart node deactivated',
       status: NodeStatus.DEACTIVATED,
       isStandalone: true,
     },
     {
       id: '2',
-      name: 'Nodo smart con sensori online',
+      name: 'Smart node with sensors online',
       status: NodeStatus.ONLINE,
       isStandalone: false,
       simpleNodes: [
         {
           id: '11',
-          name: 'Nodo semplice 1 online',
+          name: 'Simple node 1 online',
           status: NodeStatus.ONLINE,
         },
         {
           id: '12',
-          name: 'Nodo semplice 2 offline',
+          name: 'Simple node 2 offline',
           status: NodeStatus.OFFLINE,
         },
         {
           id: '13',
-          name: 'Nodo semplice 3 disattivato',
+          name: 'Simple node 3 deactivated',
           status: NodeStatus.DEACTIVATED,
         },
       ],

@@ -26,7 +26,7 @@ export class NewSystemComponent {
   titleButtons: Button[] = [
     {
       icon: 'arrow_back',
-      text: 'Impianti',
+      text: 'Places',
       color: 'is-primary is-light',
       url: '/systems',
     },

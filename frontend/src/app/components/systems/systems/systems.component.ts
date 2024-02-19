@@ -18,11 +18,11 @@ import { NewNodeComponent } from '../new-node/new-node.component';
   ],
   styleUrls: ['./systems.component.scss'],
   template: `
-    <app-title-bar [title]="'Impianti'" [buttons]="buttons" />
+    <app-title-bar [title]="'Places'" [buttons]="buttons" />
     @if (systems) {
     <div class="columns is-multiline">
       @if (!systems.length) {
-      <span class="subtitle"> Per iniziare crea un nuovo impianto. </span>
+      <span class="subtitle"> To start, create a new place </span>
       } @for(system of systems; track system.id) {
       <app-system-panel
         [system]="system"
@@ -33,7 +33,6 @@ import { NewNodeComponent } from '../new-node/new-node.component';
       />
       } @if (isNewNodeModalActive) {
       <app-new-node
-        *ngIf=""
         [newNodeData]="this.newNodeData"
         (close)="this.isNewNodeModalActive = false"
       />}
@@ -45,9 +44,9 @@ export class SystemsComponent {
   buttons: Button[] = [
     {
       icon: 'add_circle',
-      text: 'Nuovo impianto',
+      text: 'New place',
       color: 'is-primary is-light',
-      url: '/systems/new',
+      url: '/places/new',
     },
   ];
   systems?: System[];
@@ -69,9 +68,9 @@ export class SystemsComponent {
   //   this.isAddNodeModalActive = true;
   // }
 
-  onAddNode(): void {}
+  onAddNode() {}
 
-  onDeleteSystem(id: string): void {
+  onDeleteSystem(id: string) {
     this.systemsDataService.deleteSystem(id).subscribe(() => {
       this.systems = this.systems!.filter((system) => system.id !== id);
     });
@@ -80,7 +79,7 @@ export class SystemsComponent {
   onDeleteNode(
     system: System,
     node: { smartNodeId: string; simpleNodeId?: string }
-  ): void {
+  ) {
     this.systemsDataService
       .deleteNode(system.id, node.smartNodeId, node.simpleNodeId)
       .subscribe((sys) => {

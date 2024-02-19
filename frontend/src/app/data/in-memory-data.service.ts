@@ -9,9 +9,9 @@ import { System } from '../model/system/system';
 
 const systems: System[] = [
   {
-    id: 'system1',
+    id: 'place1',
     icon: 'home',
-    name: 'Impianto Casa',
+    name: 'Home',
     color: 'is-danger',
     smartNodes: [
       {
@@ -41,9 +41,9 @@ const systems: System[] = [
     ],
   },
   {
-    id: 'system2',
+    id: 'place2',
     icon: 'apartment',
-    name: 'Impianto Ufficio',
+    name: 'Office',
     color: 'is-info',
     smartNodes: [
       {
@@ -61,23 +61,23 @@ const systems: System[] = [
     ],
   },
   {
-    id: 'system3',
+    id: 'place3',
     icon: 'warning',
-    name: 'Impianto di test',
+    name: 'Test place',
     color: 'is-success',
     smartNodes: [
       {
         id: 'ueMl2',
-        name: 'Nodo smart standalone',
+        name: 'Standalone Smart Node',
         status: NodeStatus.DEACTIVATED,
         isStandalone: true,
       },
     ],
   },
   {
-    id: 'system5',
+    id: 'place5',
     icon: 'apartment',
-    name: 'Impianto Ufficio',
+    name: 'Office',
     color: 'is-warning',
     smartNodes: [
       {
@@ -95,21 +95,21 @@ const systems: System[] = [
     ],
   },
   {
-    id: 'system6',
+    id: 'place6',
     icon: 'warning',
-    name: 'Impianto di test',
+    name: 'Test place',
     color: 'is-success',
     smartNodes: [],
   },
   {
-    id: 'system7',
+    id: 'place7',
     icon: 'warning',
-    name: 'Impianto di test 2',
+    name: 'Test place 2',
     color: 'is-primary',
     smartNodes: [
       {
         id: 'rMbIE',
-        name: 'Nodo smart non standalone',
+        name: 'Smart Node',
         status: NodeStatus.ONLINE,
         isStandalone: false,
         simpleNodes: [],

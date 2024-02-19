@@ -10,16 +10,16 @@ export const routes: Routes = [
       ),
   },
   {
-    path: 'systems',
-    title: 'Impianti',
+    path: 'places',
+    title: 'Places',
     loadComponent: () =>
       import('./app/components/systems/systems/systems.component').then(
         (c) => c.SystemsComponent
       ),
   },
   {
-    path: 'systems/new',
-    title: 'Nuovo Impianto',
+    path: 'places/new',
+    title: 'New place',
     loadComponent: () =>
       import('./app/components/systems/new-system/new-system.component').then(
         (c) => c.NewSystemComponent

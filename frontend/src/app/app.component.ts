@@ -21,7 +21,7 @@ import { RouterModule } from '@angular/router';
         (isMobileView$ | async) ? '0' : isSidebarExpanded$() ? '200px' : '60px'
       "
     >
-      <router-outlet></router-outlet>
+      <router-outlet />
     </div>
   `,
 })

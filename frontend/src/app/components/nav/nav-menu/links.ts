@@ -5,33 +5,33 @@ export const Links = [
     icon: 'explore',
   },
   {
-    route: '/systems',
-    label: 'Impianti',
+    route: '/places',
+    label: 'Places',
     icon: 'factory',
   },
   {
     route: '/warnings',
-    label: 'Allarmi',
+    label: 'Alarms',
     icon: 'warning',
   },
   {
     route: '/history',
-    label: 'Storico',
+    label: 'History',
     icon: 'bar_chart',
   },
   {
     route: '/threshold',
-    label: 'Soglie',
+    label: 'Threshold',
     icon: 'tune',
   },
   {
     route: '/users',
-    label: 'Utenti',
+    label: 'Users',
     icon: 'people',
   },
-  {
-    route: '/diagnostic',
-    label: 'Diagnostica',
-    icon: 'monitor_heart',
-  },
+  // {
+  //   route: '/diagnostic',
+  //   label: 'Diagnostica',
+  //   icon: 'monitor_heart',
+  // },
 ];
