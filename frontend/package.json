@@ -1,5 +1,8 @@
 {
-  "name": "iot-platform-frontend",
+  "name": "sensor-hub-frontend",
+  "repository": {
+    "url": "https://github.com/fede-palazz/sensor-hub"
+  },
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",

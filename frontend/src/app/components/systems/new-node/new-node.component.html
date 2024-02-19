@@ -48,7 +48,8 @@
 
     <!-- BODY -->
     <section class="modal-card-body">
-      <div class="qr-code-box" *ngIf="isScanning">
+      @if (isScanning) {
+      <div class="qr-code-box">
         <zxing-scanner
           #scanner
           [formats]="scanningFormats"
@@ -67,12 +68,8 @@
           Errore: consentire l'accesso alla fotocamera per iniziare la scansione
         </p>
       </div>
-      <form
-        *ngIf="!isScanning"
-        (ngSubmit)="onSubmit(form)"
-        #form="ngForm"
-        id="form"
-      >
+      } @else {
+      <form (ngSubmit)="onSubmit(form)" #form="ngForm" id="form">
         <!-- Node ID -->
         <label class="label" for="node-id">Codice identificativo</label>
         <div class="field has-addons">
@@ -93,14 +90,9 @@
                 (!id.pristine && !id.valid) || (!id.valid && form.submitted)
               "
             />
-            <p
-              class="help is-danger"
-              *ngIf="
-                (!id.pristine && !id.valid) || (!id.valid && form.submitted)
-              "
-            >
-              Id non valido
-            </p>
+            @if ((!id.pristine && !id.valid) || (!id.valid && form.submitted)) {
+            <p class="help is-danger">Id non valido</p>
+            }
           </div>
           <div class="control">
             <a
@@ -140,18 +132,15 @@
               "
             />
           </div>
-          <p
-            class="help is-danger"
-            *ngIf="
-              (!name.pristine && !name.valid) || (!name.valid && form.submitted)
-            "
-          >
-            Inserire almeno 5 caratteri
-          </p>
+          @if ( (!name.pristine && !name.valid) || (!name.valid &&
+          form.submitted)) {
+          <p class="help is-danger">Inserire almeno 5 caratteri</p>
+          }
         </div>
 
+        @if (inputData.isSmart) {
         <!-- Standalone node -->
-        <div class="field" id="standalone-field" *ngIf="inputData.isSmart">
+        <div class="field" id="standalone-field">
           <label class="label" for="node-standalone">Nodo Smart Autonomo</label>
           <div class="control is-flex is-align-content-center">
             <label class="checkbox">
@@ -166,19 +155,18 @@
             </label>
           </div>
         </div>
-
+        } @else {
         <!-- Parent Smart Node -->
-        <div class="field" *ngIf="!inputData.isSmart">
+        <div class="field">
           <label class="label" for="node-parent">Nodo Smart associato</label>
           <p class="control has-icons-left">
             <span class="select" id="node-parent">
               <select (change)="onParentNodeSelectChange($event)">
-                <option
-                  *ngFor="let smartNode of this.inputData.smartNodes"
-                  [value]="smartNode.id"
-                >
+                @for (smartNode of inputData.smartNodes; track smartNode.id) {
+                <option [value]="smartNode.id">
                   {{ smartNode.name }}
                 </option>
+                }
               </select>
             </span>
             <span class="icon is-left">
@@ -186,12 +174,15 @@
             </span>
           </p>
         </div>
+        }
       </form>
+      }
     </section>
 
     <!-- FOOTER -->
     <footer class="modal-card-foot">
-      <div class="field" *ngIf="!isScanning">
+      @if (!isScanning) {
+      <div class="field">
         <div class="control">
           <button
             type="submit"
@@ -220,7 +211,8 @@
           Errore durante il salvataggio. Per favore, riprovare
         </p>
       </div>
-      <div class="field" *ngIf="isScanning">
+      } @else {
+      <div class="field">
         <button
           class="button"
           [class]="inputData.color"
@@ -232,6 +224,7 @@
           <span>Chiudi</span>
         </button>
       </div>
+      }
     </footer>
   </div>
 </div>

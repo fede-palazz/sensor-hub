@@ -1,7 +1,4 @@
-<app-title-bar
-  [title]="'Nuovo Impianto'"
-  [buttons]="titleButtons"
-></app-title-bar>
+<app-title-bar [title]="'Nuovo Impianto'" [buttons]="titleButtons" />
 
 <div class="container">
   <form (ngSubmit)="onSubmit(form)" #form="ngForm">
@@ -23,44 +20,41 @@
           "
         />
       </div>
-      <p
-        class="help is-danger"
-        *ngIf="
-          (!name.pristine && !name.valid) || (!name.valid && form.submitted)
-        "
-      >
-        Inserire almeno 5 caratteri
-      </p>
+      @if ((!name.pristine && !name.valid) || (!name.valid && form.submitted)) {
+      <p class="help is-danger">Inserire almeno 5 caratteri</p>
+      }
     </div>
 
     <div class="field">
       <label class="label">Icona</label>
       <div class="buttons">
+        @for (icon of iconsList; track icon) {
         <button
           type="button"
           class="button"
-          *ngFor="let icon of iconsList; let i = index"
-          (click)="onIconClick(i)"
-          [class.is-focused]="selectedIconIndex === i"
+          (click)="onIconClick($index)"
+          [class.is-focused]="selectedIconIndex === $index"
         >
           <span class="icon"
             ><i class="material-icons">{{ icon }}</i>
           </span>
         </button>
+        }
       </div>
     </div>
 
     <div class="field">
       <label class="label">Colore</label>
       <div class="buttons">
+        @for (color of colorsList; track color) {
         <button
           type="button"
           class="button is-rounded"
-          *ngFor="let color of colorsList; let i = index"
           [class]="color"
-          (click)="onColorClick(i)"
-          [class.is-focused]="selectedColorIndex === i"
+          (click)="onColorClick($index)"
+          [class.is-focused]="selectedColorIndex === $index"
         ></button>
+        }
       </div>
     </div>
 
@@ -72,16 +66,15 @@
         </button>
       </div>
       <!-- TODO: Display error box dinamically -->
-      <p class="help is-danger" *ngIf="false">
+      @if (false) {
+      <p class="help is-danger">
         Errore durante il salvataggio. Per favore, riprovare
       </p>
+      }
     </div>
   </form>
   <div class="preview-container">
     <label class="label">Anteprima</label>
-    <app-system-panel
-      [system]="previewSystem"
-      [isPreview]="true"
-    ></app-system-panel>
+    <app-system-panel [system]="previewSystem" [isPreview]="true" />
   </div>
 </div>

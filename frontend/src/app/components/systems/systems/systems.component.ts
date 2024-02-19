@@ -18,29 +18,27 @@ import { NewNodeComponent } from '../new-node/new-node.component';
   ],
   styleUrls: ['./systems.component.scss'],
   template: `
-    <app-title-bar [title]="'Impianti'" [buttons]="buttons"></app-title-bar>
-    <div class="columns is-multiline" *ngIf="systems">
-      <span *ngIf="!systems.length" class="subtitle">
-        Per iniziare crea un nuovo impianto.
-      </span>
-      <ng-container *ngFor="let system of systems">
-        <app-system-panel
-          [system]="system"
-          class="column system-panel"
-          (deleteSystem)="onDeleteSystem(system.id)"
-          (deleteNode)="onDeleteNode(system, $event)"
-          (newNode)="
-            this.newNodeData = $event; this.isNewNodeModalActive = true
-          "
-        >
-        </app-system-panel>
-      </ng-container>
+    <app-title-bar [title]="'Impianti'" [buttons]="buttons" />
+    @if (systems) {
+    <div class="columns is-multiline">
+      @if (!systems.length) {
+      <span class="subtitle"> Per iniziare crea un nuovo impianto. </span>
+      } @for(system of systems; track system.id) {
+      <app-system-panel
+        [system]="system"
+        class="column system-panel"
+        (deleteSystem)="onDeleteSystem(system.id)"
+        (deleteNode)="onDeleteNode(system, $event)"
+        (newNode)="this.newNodeData = $event; this.isNewNodeModalActive = true"
+      />
+      } @if (isNewNodeModalActive) {
       <app-new-node
-        *ngIf="isNewNodeModalActive"
+        *ngIf=""
         [newNodeData]="this.newNodeData"
         (close)="this.isNewNodeModalActive = false"
-      ></app-new-node>
+      />}
     </div>
+    }
   `,
 })
 export class SystemsComponent {
